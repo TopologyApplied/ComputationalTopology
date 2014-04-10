@@ -1,0 +1,2167 @@
+(* Content-type: application/vnd.wolfram.mathematica *)
+
+(*** Wolfram Notebook File ***)
+(* http://www.wolfram.com/nb *)
+
+(* CreatedBy='Mathematica 8.0' *)
+
+(*CacheID: 234*)
+(* Internal cache information:
+NotebookFileLineBreakTest
+NotebookFileLineBreakTest
+NotebookDataPosition[       157,          7]
+NotebookDataLength[     70774,       2158]
+NotebookOptionsPosition[     69049,       2094]
+NotebookOutlinePosition[     69395,       2109]
+CellTagsIndexPosition[     69352,       2106]
+WindowFrame->Normal*)
+
+(* Beginning of Notebook Content *)
+Notebook[{
+Cell[BoxData[
+ RowBox[{"Needs", "[", "\"\<GrassmannAlgebra`\>\"", "]"}]], "Input"],
+
+Cell[CellGroupData[{
+
+Cell[BoxData[
+ RowBox[{"DeclareBasis", "[", "2", "]"}]], "Input",
+ CellChangeTimes->{{3.557119123483919*^9, 3.55711912735247*^9}, 
+   3.5571485891993523`*^9}],
+
+Cell[BoxData[
+ RowBox[{"{", 
+  RowBox[{
+   SubscriptBox["e", "1"], ",", 
+   SubscriptBox["e", "2"]}], "}"}]], "Output",
+ CellChangeTimes->{3.557119128159981*^9, 3.5571203571245737`*^9, 
+  3.5571474652967052`*^9, 3.5571485900518637`*^9, 3.5571514129971743`*^9}]
+}, Open  ]],
+
+Cell[CellGroupData[{
+
+Cell[BoxData["BasisPalette"], "Input",
+ CellChangeTimes->{{3.5571195690199065`*^9, 3.5571195690224066`*^9}}],
+
+Cell[BoxData[
+ PanelBox[
+  TagBox[GridBox[{
+     {
+      StyleBox["\<\"Basis Palette\"\>",
+       StripOnInput->False,
+       LineColor->RGBColor[0.5, 0, 0],
+       FrontFaceColor->RGBColor[0.5, 0, 0],
+       BackFaceColor->RGBColor[0.5, 0, 0],
+       GraphicsColor->RGBColor[0.5, 0, 0],
+       FontFamily->"Times",
+       FontSize->14,
+       FontWeight->Bold,
+       FontColor->RGBColor[0.5, 0, 0]]},
+     {
+      TagBox[GridBox[{
+         {
+          ButtonBox[
+           StyleBox[
+            UnderscriptBox["\[CapitalLambda]", "0"],
+            StripOnInput->False,
+            FontFamily->"Times",
+            FontSize->11,
+            FontWeight->Bold,
+            FontColor->RGBColor[0.5, 0, 0]],
+           BaseStyle->"Paste",
+           ButtonData->UnderscriptBox["\[CapitalLambda]", "0"]], 
+          ButtonBox[
+           StyleBox[
+            UnderscriptBox["\[CapitalLambda]", "1"],
+            StripOnInput->False,
+            FontFamily->"Times",
+            FontSize->11,
+            FontWeight->Bold,
+            FontColor->RGBColor[0.5, 0, 0]],
+           BaseStyle->"Paste",
+           ButtonData->UnderscriptBox["\[CapitalLambda]", "1"]], 
+          ButtonBox[
+           StyleBox[
+            UnderscriptBox["\[CapitalLambda]", "2"],
+            StripOnInput->False,
+            FontFamily->"Times",
+            FontSize->11,
+            FontWeight->Bold,
+            FontColor->RGBColor[0.5, 0, 0]],
+           BaseStyle->"Paste",
+           ButtonData->UnderscriptBox["\[CapitalLambda]", "2"]], 
+          ButtonBox[
+           StyleBox[
+            UnderscriptBox["\[CapitalLambda]", "3"],
+            StripOnInput->False,
+            FontFamily->"Times",
+            FontSize->11,
+            FontWeight->Bold,
+            FontColor->RGBColor[0.5, 0, 0]],
+           BaseStyle->"Paste",
+           ButtonData->UnderscriptBox["\[CapitalLambda]", "3"]], 
+          ButtonBox[
+           StyleBox[
+            UnderscriptBox["\[CapitalLambda]", "4"],
+            StripOnInput->False,
+            FontFamily->"Times",
+            FontSize->11,
+            FontWeight->Bold,
+            FontColor->RGBColor[0.5, 0, 0]],
+           BaseStyle->"Paste",
+           ButtonData->UnderscriptBox["\[CapitalLambda]", "4"]], 
+          ButtonBox[
+           StyleBox[
+            UnderscriptBox["\[CapitalLambda]", "5"],
+            StripOnInput->False,
+            FontFamily->"Times",
+            FontSize->11,
+            FontWeight->Bold,
+            FontColor->RGBColor[0.5, 0, 0]],
+           BaseStyle->"Paste",
+           ButtonData->UnderscriptBox["\[CapitalLambda]", "5"]]},
+         {
+          ButtonBox[
+           StyleBox["1",
+            StripOnInput->False,
+            FontFamily->"Courier",
+            FontSize->12,
+            FontWeight->Bold],
+           BaseStyle->"Paste",
+           ButtonData->"1"], 
+          ButtonBox[
+           StyleBox[
+            SubscriptBox["e", "1"],
+            StripOnInput->False,
+            FontFamily->"Courier",
+            FontSize->12,
+            FontWeight->Bold],
+           BaseStyle->"Paste",
+           ButtonData->SubscriptBox["e", "1"]], 
+          ButtonBox[
+           StyleBox[
+            RowBox[{
+             SubscriptBox["e", "1"], "\[Wedge]", 
+             SubscriptBox["e", "2"]}],
+            StripOnInput->False,
+            FontFamily->"Courier",
+            FontSize->12,
+            FontWeight->Bold],
+           BaseStyle->"Paste",
+           ButtonData->RowBox[{
+              SubscriptBox["e", "1"], "\[Wedge]", 
+              SubscriptBox["e", "2"]}]], 
+          ButtonBox[
+           StyleBox[
+            RowBox[{
+             SubscriptBox["e", "1"], "\[Wedge]", 
+             SubscriptBox["e", "2"], "\[Wedge]", 
+             SubscriptBox["e", "3"]}],
+            StripOnInput->False,
+            FontFamily->"Courier",
+            FontSize->12,
+            FontWeight->Bold],
+           BaseStyle->"Paste",
+           ButtonData->RowBox[{
+              SubscriptBox["e", "1"], "\[Wedge]", 
+              SubscriptBox["e", "2"], "\[Wedge]", 
+              SubscriptBox["e", "3"]}]], 
+          ButtonBox[
+           StyleBox[
+            RowBox[{
+             SubscriptBox["e", "1"], "\[Wedge]", 
+             SubscriptBox["e", "2"], "\[Wedge]", 
+             SubscriptBox["e", "3"], "\[Wedge]", 
+             SubscriptBox["e", "4"]}],
+            StripOnInput->False,
+            FontFamily->"Courier",
+            FontSize->12,
+            FontWeight->Bold],
+           BaseStyle->"Paste",
+           ButtonData->RowBox[{
+              SubscriptBox["e", "1"], "\[Wedge]", 
+              SubscriptBox["e", "2"], "\[Wedge]", 
+              SubscriptBox["e", "3"], "\[Wedge]", 
+              SubscriptBox["e", "4"]}]], 
+          ButtonBox[
+           StyleBox[
+            RowBox[{
+             SubscriptBox["e", "1"], "\[Wedge]", 
+             SubscriptBox["e", "2"], "\[Wedge]", 
+             SubscriptBox["e", "3"], "\[Wedge]", 
+             SubscriptBox["e", "4"], "\[Wedge]", 
+             SubscriptBox["e", "5"]}],
+            StripOnInput->False,
+            FontFamily->"Courier",
+            FontSize->12,
+            FontWeight->Bold],
+           BaseStyle->"Paste",
+           ButtonData->RowBox[{
+              SubscriptBox["e", "1"], "\[Wedge]", 
+              SubscriptBox["e", "2"], "\[Wedge]", 
+              SubscriptBox["e", "3"], "\[Wedge]", 
+              SubscriptBox["e", "4"], "\[Wedge]", 
+              SubscriptBox["e", "5"]}]]},
+         {
+          ButtonBox[
+           StyleBox["\<\"\"\>",
+            StripOnInput->False,
+            FontFamily->"Courier",
+            FontSize->12,
+            FontWeight->Bold],
+           BaseStyle->"Paste",
+           ButtonData->"\"\""], 
+          ButtonBox[
+           StyleBox[
+            SubscriptBox["e", "2"],
+            StripOnInput->False,
+            FontFamily->"Courier",
+            FontSize->12,
+            FontWeight->Bold],
+           BaseStyle->"Paste",
+           ButtonData->SubscriptBox["e", "2"]], 
+          ButtonBox[
+           StyleBox[
+            RowBox[{
+             SubscriptBox["e", "1"], "\[Wedge]", 
+             SubscriptBox["e", "3"]}],
+            StripOnInput->False,
+            FontFamily->"Courier",
+            FontSize->12,
+            FontWeight->Bold],
+           BaseStyle->"Paste",
+           ButtonData->RowBox[{
+              SubscriptBox["e", "1"], "\[Wedge]", 
+              SubscriptBox["e", "3"]}]], 
+          ButtonBox[
+           StyleBox[
+            RowBox[{
+             SubscriptBox["e", "1"], "\[Wedge]", 
+             SubscriptBox["e", "2"], "\[Wedge]", 
+             SubscriptBox["e", "4"]}],
+            StripOnInput->False,
+            FontFamily->"Courier",
+            FontSize->12,
+            FontWeight->Bold],
+           BaseStyle->"Paste",
+           ButtonData->RowBox[{
+              SubscriptBox["e", "1"], "\[Wedge]", 
+              SubscriptBox["e", "2"], "\[Wedge]", 
+              SubscriptBox["e", "4"]}]], 
+          ButtonBox[
+           StyleBox[
+            RowBox[{
+             SubscriptBox["e", "1"], "\[Wedge]", 
+             SubscriptBox["e", "2"], "\[Wedge]", 
+             SubscriptBox["e", "3"], "\[Wedge]", 
+             SubscriptBox["e", "5"]}],
+            StripOnInput->False,
+            FontFamily->"Courier",
+            FontSize->12,
+            FontWeight->Bold],
+           BaseStyle->"Paste",
+           ButtonData->RowBox[{
+              SubscriptBox["e", "1"], "\[Wedge]", 
+              SubscriptBox["e", "2"], "\[Wedge]", 
+              SubscriptBox["e", "3"], "\[Wedge]", 
+              SubscriptBox["e", "5"]}]], 
+          ButtonBox[
+           StyleBox["\<\"\"\>",
+            StripOnInput->False,
+            FontFamily->"Courier",
+            FontSize->12,
+            FontWeight->Bold],
+           BaseStyle->"Paste",
+           ButtonData->"\"\""]},
+         {
+          ButtonBox[
+           StyleBox["\<\"\"\>",
+            StripOnInput->False,
+            FontFamily->"Courier",
+            FontSize->12,
+            FontWeight->Bold],
+           BaseStyle->"Paste",
+           ButtonData->"\"\""], 
+          ButtonBox[
+           StyleBox[
+            SubscriptBox["e", "3"],
+            StripOnInput->False,
+            FontFamily->"Courier",
+            FontSize->12,
+            FontWeight->Bold],
+           BaseStyle->"Paste",
+           ButtonData->SubscriptBox["e", "3"]], 
+          ButtonBox[
+           StyleBox[
+            RowBox[{
+             SubscriptBox["e", "1"], "\[Wedge]", 
+             SubscriptBox["e", "4"]}],
+            StripOnInput->False,
+            FontFamily->"Courier",
+            FontSize->12,
+            FontWeight->Bold],
+           BaseStyle->"Paste",
+           ButtonData->RowBox[{
+              SubscriptBox["e", "1"], "\[Wedge]", 
+              SubscriptBox["e", "4"]}]], 
+          ButtonBox[
+           StyleBox[
+            RowBox[{
+             SubscriptBox["e", "1"], "\[Wedge]", 
+             SubscriptBox["e", "2"], "\[Wedge]", 
+             SubscriptBox["e", "5"]}],
+            StripOnInput->False,
+            FontFamily->"Courier",
+            FontSize->12,
+            FontWeight->Bold],
+           BaseStyle->"Paste",
+           ButtonData->RowBox[{
+              SubscriptBox["e", "1"], "\[Wedge]", 
+              SubscriptBox["e", "2"], "\[Wedge]", 
+              SubscriptBox["e", "5"]}]], 
+          ButtonBox[
+           StyleBox[
+            RowBox[{
+             SubscriptBox["e", "1"], "\[Wedge]", 
+             SubscriptBox["e", "2"], "\[Wedge]", 
+             SubscriptBox["e", "4"], "\[Wedge]", 
+             SubscriptBox["e", "5"]}],
+            StripOnInput->False,
+            FontFamily->"Courier",
+            FontSize->12,
+            FontWeight->Bold],
+           BaseStyle->"Paste",
+           ButtonData->RowBox[{
+              SubscriptBox["e", "1"], "\[Wedge]", 
+              SubscriptBox["e", "2"], "\[Wedge]", 
+              SubscriptBox["e", "4"], "\[Wedge]", 
+              SubscriptBox["e", "5"]}]], 
+          ButtonBox[
+           StyleBox["\<\"\"\>",
+            StripOnInput->False,
+            FontFamily->"Courier",
+            FontSize->12,
+            FontWeight->Bold],
+           BaseStyle->"Paste",
+           ButtonData->"\"\""]},
+         {
+          ButtonBox[
+           StyleBox["\<\"\"\>",
+            StripOnInput->False,
+            FontFamily->"Courier",
+            FontSize->12,
+            FontWeight->Bold],
+           BaseStyle->"Paste",
+           ButtonData->"\"\""], 
+          ButtonBox[
+           StyleBox[
+            SubscriptBox["e", "4"],
+            StripOnInput->False,
+            FontFamily->"Courier",
+            FontSize->12,
+            FontWeight->Bold],
+           BaseStyle->"Paste",
+           ButtonData->SubscriptBox["e", "4"]], 
+          ButtonBox[
+           StyleBox[
+            RowBox[{
+             SubscriptBox["e", "1"], "\[Wedge]", 
+             SubscriptBox["e", "5"]}],
+            StripOnInput->False,
+            FontFamily->"Courier",
+            FontSize->12,
+            FontWeight->Bold],
+           BaseStyle->"Paste",
+           ButtonData->RowBox[{
+              SubscriptBox["e", "1"], "\[Wedge]", 
+              SubscriptBox["e", "5"]}]], 
+          ButtonBox[
+           StyleBox[
+            RowBox[{
+             SubscriptBox["e", "1"], "\[Wedge]", 
+             SubscriptBox["e", "3"], "\[Wedge]", 
+             SubscriptBox["e", "4"]}],
+            StripOnInput->False,
+            FontFamily->"Courier",
+            FontSize->12,
+            FontWeight->Bold],
+           BaseStyle->"Paste",
+           ButtonData->RowBox[{
+              SubscriptBox["e", "1"], "\[Wedge]", 
+              SubscriptBox["e", "3"], "\[Wedge]", 
+              SubscriptBox["e", "4"]}]], 
+          ButtonBox[
+           StyleBox[
+            RowBox[{
+             SubscriptBox["e", "1"], "\[Wedge]", 
+             SubscriptBox["e", "3"], "\[Wedge]", 
+             SubscriptBox["e", "4"], "\[Wedge]", 
+             SubscriptBox["e", "5"]}],
+            StripOnInput->False,
+            FontFamily->"Courier",
+            FontSize->12,
+            FontWeight->Bold],
+           BaseStyle->"Paste",
+           ButtonData->RowBox[{
+              SubscriptBox["e", "1"], "\[Wedge]", 
+              SubscriptBox["e", "3"], "\[Wedge]", 
+              SubscriptBox["e", "4"], "\[Wedge]", 
+              SubscriptBox["e", "5"]}]], 
+          ButtonBox[
+           StyleBox["\<\"\"\>",
+            StripOnInput->False,
+            FontFamily->"Courier",
+            FontSize->12,
+            FontWeight->Bold],
+           BaseStyle->"Paste",
+           ButtonData->"\"\""]},
+         {
+          ButtonBox[
+           StyleBox["\<\"\"\>",
+            StripOnInput->False,
+            FontFamily->"Courier",
+            FontSize->12,
+            FontWeight->Bold],
+           BaseStyle->"Paste",
+           ButtonData->"\"\""], 
+          ButtonBox[
+           StyleBox[
+            SubscriptBox["e", "5"],
+            StripOnInput->False,
+            FontFamily->"Courier",
+            FontSize->12,
+            FontWeight->Bold],
+           BaseStyle->"Paste",
+           ButtonData->SubscriptBox["e", "5"]], 
+          ButtonBox[
+           StyleBox[
+            RowBox[{
+             SubscriptBox["e", "2"], "\[Wedge]", 
+             SubscriptBox["e", "3"]}],
+            StripOnInput->False,
+            FontFamily->"Courier",
+            FontSize->12,
+            FontWeight->Bold],
+           BaseStyle->"Paste",
+           ButtonData->RowBox[{
+              SubscriptBox["e", "2"], "\[Wedge]", 
+              SubscriptBox["e", "3"]}]], 
+          ButtonBox[
+           StyleBox[
+            RowBox[{
+             SubscriptBox["e", "1"], "\[Wedge]", 
+             SubscriptBox["e", "3"], "\[Wedge]", 
+             SubscriptBox["e", "5"]}],
+            StripOnInput->False,
+            FontFamily->"Courier",
+            FontSize->12,
+            FontWeight->Bold],
+           BaseStyle->"Paste",
+           ButtonData->RowBox[{
+              SubscriptBox["e", "1"], "\[Wedge]", 
+              SubscriptBox["e", "3"], "\[Wedge]", 
+              SubscriptBox["e", "5"]}]], 
+          ButtonBox[
+           StyleBox[
+            RowBox[{
+             SubscriptBox["e", "2"], "\[Wedge]", 
+             SubscriptBox["e", "3"], "\[Wedge]", 
+             SubscriptBox["e", "4"], "\[Wedge]", 
+             SubscriptBox["e", "5"]}],
+            StripOnInput->False,
+            FontFamily->"Courier",
+            FontSize->12,
+            FontWeight->Bold],
+           BaseStyle->"Paste",
+           ButtonData->RowBox[{
+              SubscriptBox["e", "2"], "\[Wedge]", 
+              SubscriptBox["e", "3"], "\[Wedge]", 
+              SubscriptBox["e", "4"], "\[Wedge]", 
+              SubscriptBox["e", "5"]}]], 
+          ButtonBox[
+           StyleBox["\<\"\"\>",
+            StripOnInput->False,
+            FontFamily->"Courier",
+            FontSize->12,
+            FontWeight->Bold],
+           BaseStyle->"Paste",
+           ButtonData->"\"\""]},
+         {
+          ButtonBox[
+           StyleBox["\<\"\"\>",
+            StripOnInput->False,
+            FontFamily->"Courier",
+            FontSize->12,
+            FontWeight->Bold],
+           BaseStyle->"Paste",
+           ButtonData->"\"\""], 
+          ButtonBox[
+           StyleBox["\<\"\"\>",
+            StripOnInput->False,
+            FontFamily->"Courier",
+            FontSize->12,
+            FontWeight->Bold],
+           BaseStyle->"Paste",
+           ButtonData->"\"\""], 
+          ButtonBox[
+           StyleBox[
+            RowBox[{
+             SubscriptBox["e", "2"], "\[Wedge]", 
+             SubscriptBox["e", "4"]}],
+            StripOnInput->False,
+            FontFamily->"Courier",
+            FontSize->12,
+            FontWeight->Bold],
+           BaseStyle->"Paste",
+           ButtonData->RowBox[{
+              SubscriptBox["e", "2"], "\[Wedge]", 
+              SubscriptBox["e", "4"]}]], 
+          ButtonBox[
+           StyleBox[
+            RowBox[{
+             SubscriptBox["e", "1"], "\[Wedge]", 
+             SubscriptBox["e", "4"], "\[Wedge]", 
+             SubscriptBox["e", "5"]}],
+            StripOnInput->False,
+            FontFamily->"Courier",
+            FontSize->12,
+            FontWeight->Bold],
+           BaseStyle->"Paste",
+           ButtonData->RowBox[{
+              SubscriptBox["e", "1"], "\[Wedge]", 
+              SubscriptBox["e", "4"], "\[Wedge]", 
+              SubscriptBox["e", "5"]}]], 
+          ButtonBox[
+           StyleBox["\<\"\"\>",
+            StripOnInput->False,
+            FontFamily->"Courier",
+            FontSize->12,
+            FontWeight->Bold],
+           BaseStyle->"Paste",
+           ButtonData->"\"\""], 
+          ButtonBox[
+           StyleBox["\<\"\"\>",
+            StripOnInput->False,
+            FontFamily->"Courier",
+            FontSize->12,
+            FontWeight->Bold],
+           BaseStyle->"Paste",
+           ButtonData->"\"\""]},
+         {
+          ButtonBox[
+           StyleBox["\<\"\"\>",
+            StripOnInput->False,
+            FontFamily->"Courier",
+            FontSize->12,
+            FontWeight->Bold],
+           BaseStyle->"Paste",
+           ButtonData->"\"\""], 
+          ButtonBox[
+           StyleBox["\<\"\"\>",
+            StripOnInput->False,
+            FontFamily->"Courier",
+            FontSize->12,
+            FontWeight->Bold],
+           BaseStyle->"Paste",
+           ButtonData->"\"\""], 
+          ButtonBox[
+           StyleBox[
+            RowBox[{
+             SubscriptBox["e", "2"], "\[Wedge]", 
+             SubscriptBox["e", "5"]}],
+            StripOnInput->False,
+            FontFamily->"Courier",
+            FontSize->12,
+            FontWeight->Bold],
+           BaseStyle->"Paste",
+           ButtonData->RowBox[{
+              SubscriptBox["e", "2"], "\[Wedge]", 
+              SubscriptBox["e", "5"]}]], 
+          ButtonBox[
+           StyleBox[
+            RowBox[{
+             SubscriptBox["e", "2"], "\[Wedge]", 
+             SubscriptBox["e", "3"], "\[Wedge]", 
+             SubscriptBox["e", "4"]}],
+            StripOnInput->False,
+            FontFamily->"Courier",
+            FontSize->12,
+            FontWeight->Bold],
+           BaseStyle->"Paste",
+           ButtonData->RowBox[{
+              SubscriptBox["e", "2"], "\[Wedge]", 
+              SubscriptBox["e", "3"], "\[Wedge]", 
+              SubscriptBox["e", "4"]}]], 
+          ButtonBox[
+           StyleBox["\<\"\"\>",
+            StripOnInput->False,
+            FontFamily->"Courier",
+            FontSize->12,
+            FontWeight->Bold],
+           BaseStyle->"Paste",
+           ButtonData->"\"\""], 
+          ButtonBox[
+           StyleBox["\<\"\"\>",
+            StripOnInput->False,
+            FontFamily->"Courier",
+            FontSize->12,
+            FontWeight->Bold],
+           BaseStyle->"Paste",
+           ButtonData->"\"\""]},
+         {
+          ButtonBox[
+           StyleBox["\<\"\"\>",
+            StripOnInput->False,
+            FontFamily->"Courier",
+            FontSize->12,
+            FontWeight->Bold],
+           BaseStyle->"Paste",
+           ButtonData->"\"\""], 
+          ButtonBox[
+           StyleBox["\<\"\"\>",
+            StripOnInput->False,
+            FontFamily->"Courier",
+            FontSize->12,
+            FontWeight->Bold],
+           BaseStyle->"Paste",
+           ButtonData->"\"\""], 
+          ButtonBox[
+           StyleBox[
+            RowBox[{
+             SubscriptBox["e", "3"], "\[Wedge]", 
+             SubscriptBox["e", "4"]}],
+            StripOnInput->False,
+            FontFamily->"Courier",
+            FontSize->12,
+            FontWeight->Bold],
+           BaseStyle->"Paste",
+           ButtonData->RowBox[{
+              SubscriptBox["e", "3"], "\[Wedge]", 
+              SubscriptBox["e", "4"]}]], 
+          ButtonBox[
+           StyleBox[
+            RowBox[{
+             SubscriptBox["e", "2"], "\[Wedge]", 
+             SubscriptBox["e", "3"], "\[Wedge]", 
+             SubscriptBox["e", "5"]}],
+            StripOnInput->False,
+            FontFamily->"Courier",
+            FontSize->12,
+            FontWeight->Bold],
+           BaseStyle->"Paste",
+           ButtonData->RowBox[{
+              SubscriptBox["e", "2"], "\[Wedge]", 
+              SubscriptBox["e", "3"], "\[Wedge]", 
+              SubscriptBox["e", "5"]}]], 
+          ButtonBox[
+           StyleBox["\<\"\"\>",
+            StripOnInput->False,
+            FontFamily->"Courier",
+            FontSize->12,
+            FontWeight->Bold],
+           BaseStyle->"Paste",
+           ButtonData->"\"\""], 
+          ButtonBox[
+           StyleBox["\<\"\"\>",
+            StripOnInput->False,
+            FontFamily->"Courier",
+            FontSize->12,
+            FontWeight->Bold],
+           BaseStyle->"Paste",
+           ButtonData->"\"\""]},
+         {
+          ButtonBox[
+           StyleBox["\<\"\"\>",
+            StripOnInput->False,
+            FontFamily->"Courier",
+            FontSize->12,
+            FontWeight->Bold],
+           BaseStyle->"Paste",
+           ButtonData->"\"\""], 
+          ButtonBox[
+           StyleBox["\<\"\"\>",
+            StripOnInput->False,
+            FontFamily->"Courier",
+            FontSize->12,
+            FontWeight->Bold],
+           BaseStyle->"Paste",
+           ButtonData->"\"\""], 
+          ButtonBox[
+           StyleBox[
+            RowBox[{
+             SubscriptBox["e", "3"], "\[Wedge]", 
+             SubscriptBox["e", "5"]}],
+            StripOnInput->False,
+            FontFamily->"Courier",
+            FontSize->12,
+            FontWeight->Bold],
+           BaseStyle->"Paste",
+           ButtonData->RowBox[{
+              SubscriptBox["e", "3"], "\[Wedge]", 
+              SubscriptBox["e", "5"]}]], 
+          ButtonBox[
+           StyleBox[
+            RowBox[{
+             SubscriptBox["e", "2"], "\[Wedge]", 
+             SubscriptBox["e", "4"], "\[Wedge]", 
+             SubscriptBox["e", "5"]}],
+            StripOnInput->False,
+            FontFamily->"Courier",
+            FontSize->12,
+            FontWeight->Bold],
+           BaseStyle->"Paste",
+           ButtonData->RowBox[{
+              SubscriptBox["e", "2"], "\[Wedge]", 
+              SubscriptBox["e", "4"], "\[Wedge]", 
+              SubscriptBox["e", "5"]}]], 
+          ButtonBox[
+           StyleBox["\<\"\"\>",
+            StripOnInput->False,
+            FontFamily->"Courier",
+            FontSize->12,
+            FontWeight->Bold],
+           BaseStyle->"Paste",
+           ButtonData->"\"\""], 
+          ButtonBox[
+           StyleBox["\<\"\"\>",
+            StripOnInput->False,
+            FontFamily->"Courier",
+            FontSize->12,
+            FontWeight->Bold],
+           BaseStyle->"Paste",
+           ButtonData->"\"\""]},
+         {
+          ButtonBox[
+           StyleBox["\<\"\"\>",
+            StripOnInput->False,
+            FontFamily->"Courier",
+            FontSize->12,
+            FontWeight->Bold],
+           BaseStyle->"Paste",
+           ButtonData->"\"\""], 
+          ButtonBox[
+           StyleBox["\<\"\"\>",
+            StripOnInput->False,
+            FontFamily->"Courier",
+            FontSize->12,
+            FontWeight->Bold],
+           BaseStyle->"Paste",
+           ButtonData->"\"\""], 
+          ButtonBox[
+           StyleBox[
+            RowBox[{
+             SubscriptBox["e", "4"], "\[Wedge]", 
+             SubscriptBox["e", "5"]}],
+            StripOnInput->False,
+            FontFamily->"Courier",
+            FontSize->12,
+            FontWeight->Bold],
+           BaseStyle->"Paste",
+           ButtonData->RowBox[{
+              SubscriptBox["e", "4"], "\[Wedge]", 
+              SubscriptBox["e", "5"]}]], 
+          ButtonBox[
+           StyleBox[
+            RowBox[{
+             SubscriptBox["e", "3"], "\[Wedge]", 
+             SubscriptBox["e", "4"], "\[Wedge]", 
+             SubscriptBox["e", "5"]}],
+            StripOnInput->False,
+            FontFamily->"Courier",
+            FontSize->12,
+            FontWeight->Bold],
+           BaseStyle->"Paste",
+           ButtonData->RowBox[{
+              SubscriptBox["e", "3"], "\[Wedge]", 
+              SubscriptBox["e", "4"], "\[Wedge]", 
+              SubscriptBox["e", "5"]}]], 
+          ButtonBox[
+           StyleBox["\<\"\"\>",
+            StripOnInput->False,
+            FontFamily->"Courier",
+            FontSize->12,
+            FontWeight->Bold],
+           BaseStyle->"Paste",
+           ButtonData->"\"\""], 
+          ButtonBox[
+           StyleBox["\<\"\"\>",
+            StripOnInput->False,
+            FontFamily->"Courier",
+            FontSize->12,
+            FontWeight->Bold],
+           BaseStyle->"Paste",
+           ButtonData->"\"\""]}
+        },
+        AutoDelete->False,
+        GridBoxItemSize->{"Columns" -> {{All}}, "Rows" -> {{All}}},
+        GridBoxSpacings->{"Columns" -> {{0.15}}, "Rows" -> {{0.15}}}],
+       "Grid"]}
+    },
+    GridBoxAlignment->{"Columns" -> {{Left}}},
+    GridBoxItemSize->{"Columns" -> {{Automatic}}, "Rows" -> {{Automatic}}}],
+   "Column"]]], "Output",
+ CellChangeTimes->{3.5571195712059383`*^9}]
+}, Open  ]],
+
+Cell[CellGroupData[{
+
+Cell[BoxData["ComplementPalette"], "Input",
+ CellChangeTimes->{{3.557119710918825*^9, 3.5571197109213247`*^9}}],
+
+Cell[BoxData[
+ PanelBox[
+  TagBox[GridBox[{
+     {
+      StyleBox["\<\"Complement Palette\"\>",
+       StripOnInput->False,
+       LineColor->RGBColor[0.5, 0, 0],
+       FrontFaceColor->RGBColor[0.5, 0, 0],
+       BackFaceColor->RGBColor[0.5, 0, 0],
+       GraphicsColor->RGBColor[0.5, 0, 0],
+       FontFamily->"Times",
+       FontSize->14,
+       FontWeight->Bold,
+       FontColor->RGBColor[0.5, 0, 0]]},
+     {
+      TagBox[GridBox[{
+         {
+          ButtonBox[
+           StyleBox["\<\"Basis\"\>",
+            StripOnInput->False,
+            LineColor->RGBColor[0.5, 0, 0],
+            FrontFaceColor->RGBColor[0.5, 0, 0],
+            BackFaceColor->RGBColor[0.5, 0, 0],
+            GraphicsColor->RGBColor[0.5, 0, 0],
+            FontFamily->"Times",
+            FontSize->12,
+            FontWeight->Bold,
+            FontColor->RGBColor[0.5, 0, 0]],
+           BaseStyle->"Paste"], 
+          ButtonBox[
+           StyleBox["\<\"Complement\"\>",
+            StripOnInput->False,
+            LineColor->RGBColor[0.5, 0, 0],
+            FrontFaceColor->RGBColor[0.5, 0, 0],
+            BackFaceColor->RGBColor[0.5, 0, 0],
+            GraphicsColor->RGBColor[0.5, 0, 0],
+            FontFamily->"Times",
+            FontSize->12,
+            FontWeight->Bold,
+            FontColor->RGBColor[0.5, 0, 0]],
+           BaseStyle->"Paste"]},
+         {
+          ButtonBox[
+           StyleBox["1",
+            StripOnInput->False,
+            FontFamily->"Courier",
+            FontSize->12,
+            FontWeight->Bold],
+           BaseStyle->"Paste",
+           ButtonData->"1"], 
+          ButtonBox[
+           StyleBox[
+            RowBox[{
+             SubscriptBox["e", "1"], "\[Wedge]", 
+             SubscriptBox["e", "2"], "\[Wedge]", 
+             SubscriptBox["e", "3"], "\[Wedge]", 
+             SubscriptBox["e", "4"], "\[Wedge]", 
+             SubscriptBox["e", "5"]}],
+            StripOnInput->False,
+            FontFamily->"Courier",
+            FontSize->12,
+            FontWeight->Bold],
+           BaseStyle->"Paste",
+           ButtonData->RowBox[{
+              SubscriptBox["e", "1"], "\[Wedge]", 
+              SubscriptBox["e", "2"], "\[Wedge]", 
+              SubscriptBox["e", "3"], "\[Wedge]", 
+              SubscriptBox["e", "4"], "\[Wedge]", 
+              SubscriptBox["e", "5"]}]]},
+         {
+          ButtonBox[
+           StyleBox[
+            SubscriptBox["e", "1"],
+            StripOnInput->False,
+            FontFamily->"Courier",
+            FontSize->12,
+            FontWeight->Bold],
+           BaseStyle->"Paste",
+           ButtonData->SubscriptBox["e", "1"]], 
+          ButtonBox[
+           StyleBox[
+            RowBox[{
+             SubscriptBox["e", "2"], "\[Wedge]", 
+             SubscriptBox["e", "3"], "\[Wedge]", 
+             SubscriptBox["e", "4"], "\[Wedge]", 
+             SubscriptBox["e", "5"]}],
+            StripOnInput->False,
+            FontFamily->"Courier",
+            FontSize->12,
+            FontWeight->Bold],
+           BaseStyle->"Paste",
+           ButtonData->RowBox[{
+              SubscriptBox["e", "2"], "\[Wedge]", 
+              SubscriptBox["e", "3"], "\[Wedge]", 
+              SubscriptBox["e", "4"], "\[Wedge]", 
+              SubscriptBox["e", "5"]}]]},
+         {
+          ButtonBox[
+           StyleBox[
+            SubscriptBox["e", "2"],
+            StripOnInput->False,
+            FontFamily->"Courier",
+            FontSize->12,
+            FontWeight->Bold],
+           BaseStyle->"Paste",
+           ButtonData->SubscriptBox["e", "2"]], 
+          ButtonBox[
+           StyleBox[
+            RowBox[{"-", 
+             RowBox[{"(", 
+              RowBox[{
+               SubscriptBox["e", "1"], "\[Wedge]", 
+               SubscriptBox["e", "3"], "\[Wedge]", 
+               SubscriptBox["e", "4"], "\[Wedge]", 
+               SubscriptBox["e", "5"]}], ")"}]}],
+            StripOnInput->False,
+            FontFamily->"Courier",
+            FontSize->12,
+            FontWeight->Bold],
+           BaseStyle->"Paste",
+           ButtonData->RowBox[{"-", 
+              RowBox[{"(", 
+                RowBox[{
+                  SubscriptBox["e", "1"], "\[Wedge]", 
+                  SubscriptBox["e", "3"], "\[Wedge]", 
+                  SubscriptBox["e", "4"], "\[Wedge]", 
+                  SubscriptBox["e", "5"]}], ")"}]}]]},
+         {
+          ButtonBox[
+           StyleBox[
+            SubscriptBox["e", "3"],
+            StripOnInput->False,
+            FontFamily->"Courier",
+            FontSize->12,
+            FontWeight->Bold],
+           BaseStyle->"Paste",
+           ButtonData->SubscriptBox["e", "3"]], 
+          ButtonBox[
+           StyleBox[
+            RowBox[{
+             SubscriptBox["e", "1"], "\[Wedge]", 
+             SubscriptBox["e", "2"], "\[Wedge]", 
+             SubscriptBox["e", "4"], "\[Wedge]", 
+             SubscriptBox["e", "5"]}],
+            StripOnInput->False,
+            FontFamily->"Courier",
+            FontSize->12,
+            FontWeight->Bold],
+           BaseStyle->"Paste",
+           ButtonData->RowBox[{
+              SubscriptBox["e", "1"], "\[Wedge]", 
+              SubscriptBox["e", "2"], "\[Wedge]", 
+              SubscriptBox["e", "4"], "\[Wedge]", 
+              SubscriptBox["e", "5"]}]]},
+         {
+          ButtonBox[
+           StyleBox[
+            SubscriptBox["e", "4"],
+            StripOnInput->False,
+            FontFamily->"Courier",
+            FontSize->12,
+            FontWeight->Bold],
+           BaseStyle->"Paste",
+           ButtonData->SubscriptBox["e", "4"]], 
+          ButtonBox[
+           StyleBox[
+            RowBox[{"-", 
+             RowBox[{"(", 
+              RowBox[{
+               SubscriptBox["e", "1"], "\[Wedge]", 
+               SubscriptBox["e", "2"], "\[Wedge]", 
+               SubscriptBox["e", "3"], "\[Wedge]", 
+               SubscriptBox["e", "5"]}], ")"}]}],
+            StripOnInput->False,
+            FontFamily->"Courier",
+            FontSize->12,
+            FontWeight->Bold],
+           BaseStyle->"Paste",
+           ButtonData->RowBox[{"-", 
+              RowBox[{"(", 
+                RowBox[{
+                  SubscriptBox["e", "1"], "\[Wedge]", 
+                  SubscriptBox["e", "2"], "\[Wedge]", 
+                  SubscriptBox["e", "3"], "\[Wedge]", 
+                  SubscriptBox["e", "5"]}], ")"}]}]]},
+         {
+          ButtonBox[
+           StyleBox[
+            SubscriptBox["e", "5"],
+            StripOnInput->False,
+            FontFamily->"Courier",
+            FontSize->12,
+            FontWeight->Bold],
+           BaseStyle->"Paste",
+           ButtonData->SubscriptBox["e", "5"]], 
+          ButtonBox[
+           StyleBox[
+            RowBox[{
+             SubscriptBox["e", "1"], "\[Wedge]", 
+             SubscriptBox["e", "2"], "\[Wedge]", 
+             SubscriptBox["e", "3"], "\[Wedge]", 
+             SubscriptBox["e", "4"]}],
+            StripOnInput->False,
+            FontFamily->"Courier",
+            FontSize->12,
+            FontWeight->Bold],
+           BaseStyle->"Paste",
+           ButtonData->RowBox[{
+              SubscriptBox["e", "1"], "\[Wedge]", 
+              SubscriptBox["e", "2"], "\[Wedge]", 
+              SubscriptBox["e", "3"], "\[Wedge]", 
+              SubscriptBox["e", "4"]}]]},
+         {
+          ButtonBox[
+           StyleBox[
+            RowBox[{
+             SubscriptBox["e", "1"], "\[Wedge]", 
+             SubscriptBox["e", "2"]}],
+            StripOnInput->False,
+            FontFamily->"Courier",
+            FontSize->12,
+            FontWeight->Bold],
+           BaseStyle->"Paste",
+           ButtonData->RowBox[{
+              SubscriptBox["e", "1"], "\[Wedge]", 
+              SubscriptBox["e", "2"]}]], 
+          ButtonBox[
+           StyleBox[
+            RowBox[{
+             SubscriptBox["e", "3"], "\[Wedge]", 
+             SubscriptBox["e", "4"], "\[Wedge]", 
+             SubscriptBox["e", "5"]}],
+            StripOnInput->False,
+            FontFamily->"Courier",
+            FontSize->12,
+            FontWeight->Bold],
+           BaseStyle->"Paste",
+           ButtonData->RowBox[{
+              SubscriptBox["e", "3"], "\[Wedge]", 
+              SubscriptBox["e", "4"], "\[Wedge]", 
+              SubscriptBox["e", "5"]}]]},
+         {
+          ButtonBox[
+           StyleBox[
+            RowBox[{
+             SubscriptBox["e", "1"], "\[Wedge]", 
+             SubscriptBox["e", "3"]}],
+            StripOnInput->False,
+            FontFamily->"Courier",
+            FontSize->12,
+            FontWeight->Bold],
+           BaseStyle->"Paste",
+           ButtonData->RowBox[{
+              SubscriptBox["e", "1"], "\[Wedge]", 
+              SubscriptBox["e", "3"]}]], 
+          ButtonBox[
+           StyleBox[
+            RowBox[{"-", 
+             RowBox[{"(", 
+              RowBox[{
+               SubscriptBox["e", "2"], "\[Wedge]", 
+               SubscriptBox["e", "4"], "\[Wedge]", 
+               SubscriptBox["e", "5"]}], ")"}]}],
+            StripOnInput->False,
+            FontFamily->"Courier",
+            FontSize->12,
+            FontWeight->Bold],
+           BaseStyle->"Paste",
+           ButtonData->RowBox[{"-", 
+              RowBox[{"(", 
+                RowBox[{
+                  SubscriptBox["e", "2"], "\[Wedge]", 
+                  SubscriptBox["e", "4"], "\[Wedge]", 
+                  SubscriptBox["e", "5"]}], ")"}]}]]},
+         {
+          ButtonBox[
+           StyleBox[
+            RowBox[{
+             SubscriptBox["e", "1"], "\[Wedge]", 
+             SubscriptBox["e", "4"]}],
+            StripOnInput->False,
+            FontFamily->"Courier",
+            FontSize->12,
+            FontWeight->Bold],
+           BaseStyle->"Paste",
+           ButtonData->RowBox[{
+              SubscriptBox["e", "1"], "\[Wedge]", 
+              SubscriptBox["e", "4"]}]], 
+          ButtonBox[
+           StyleBox[
+            RowBox[{
+             SubscriptBox["e", "2"], "\[Wedge]", 
+             SubscriptBox["e", "3"], "\[Wedge]", 
+             SubscriptBox["e", "5"]}],
+            StripOnInput->False,
+            FontFamily->"Courier",
+            FontSize->12,
+            FontWeight->Bold],
+           BaseStyle->"Paste",
+           ButtonData->RowBox[{
+              SubscriptBox["e", "2"], "\[Wedge]", 
+              SubscriptBox["e", "3"], "\[Wedge]", 
+              SubscriptBox["e", "5"]}]]},
+         {
+          ButtonBox[
+           StyleBox[
+            RowBox[{
+             SubscriptBox["e", "1"], "\[Wedge]", 
+             SubscriptBox["e", "5"]}],
+            StripOnInput->False,
+            FontFamily->"Courier",
+            FontSize->12,
+            FontWeight->Bold],
+           BaseStyle->"Paste",
+           ButtonData->RowBox[{
+              SubscriptBox["e", "1"], "\[Wedge]", 
+              SubscriptBox["e", "5"]}]], 
+          ButtonBox[
+           StyleBox[
+            RowBox[{"-", 
+             RowBox[{"(", 
+              RowBox[{
+               SubscriptBox["e", "2"], "\[Wedge]", 
+               SubscriptBox["e", "3"], "\[Wedge]", 
+               SubscriptBox["e", "4"]}], ")"}]}],
+            StripOnInput->False,
+            FontFamily->"Courier",
+            FontSize->12,
+            FontWeight->Bold],
+           BaseStyle->"Paste",
+           ButtonData->RowBox[{"-", 
+              RowBox[{"(", 
+                RowBox[{
+                  SubscriptBox["e", "2"], "\[Wedge]", 
+                  SubscriptBox["e", "3"], "\[Wedge]", 
+                  SubscriptBox["e", "4"]}], ")"}]}]]},
+         {
+          ButtonBox[
+           StyleBox[
+            RowBox[{
+             SubscriptBox["e", "2"], "\[Wedge]", 
+             SubscriptBox["e", "3"]}],
+            StripOnInput->False,
+            FontFamily->"Courier",
+            FontSize->12,
+            FontWeight->Bold],
+           BaseStyle->"Paste",
+           ButtonData->RowBox[{
+              SubscriptBox["e", "2"], "\[Wedge]", 
+              SubscriptBox["e", "3"]}]], 
+          ButtonBox[
+           StyleBox[
+            RowBox[{
+             SubscriptBox["e", "1"], "\[Wedge]", 
+             SubscriptBox["e", "4"], "\[Wedge]", 
+             SubscriptBox["e", "5"]}],
+            StripOnInput->False,
+            FontFamily->"Courier",
+            FontSize->12,
+            FontWeight->Bold],
+           BaseStyle->"Paste",
+           ButtonData->RowBox[{
+              SubscriptBox["e", "1"], "\[Wedge]", 
+              SubscriptBox["e", "4"], "\[Wedge]", 
+              SubscriptBox["e", "5"]}]]},
+         {
+          ButtonBox[
+           StyleBox[
+            RowBox[{
+             SubscriptBox["e", "2"], "\[Wedge]", 
+             SubscriptBox["e", "4"]}],
+            StripOnInput->False,
+            FontFamily->"Courier",
+            FontSize->12,
+            FontWeight->Bold],
+           BaseStyle->"Paste",
+           ButtonData->RowBox[{
+              SubscriptBox["e", "2"], "\[Wedge]", 
+              SubscriptBox["e", "4"]}]], 
+          ButtonBox[
+           StyleBox[
+            RowBox[{"-", 
+             RowBox[{"(", 
+              RowBox[{
+               SubscriptBox["e", "1"], "\[Wedge]", 
+               SubscriptBox["e", "3"], "\[Wedge]", 
+               SubscriptBox["e", "5"]}], ")"}]}],
+            StripOnInput->False,
+            FontFamily->"Courier",
+            FontSize->12,
+            FontWeight->Bold],
+           BaseStyle->"Paste",
+           ButtonData->RowBox[{"-", 
+              RowBox[{"(", 
+                RowBox[{
+                  SubscriptBox["e", "1"], "\[Wedge]", 
+                  SubscriptBox["e", "3"], "\[Wedge]", 
+                  SubscriptBox["e", "5"]}], ")"}]}]]},
+         {
+          ButtonBox[
+           StyleBox[
+            RowBox[{
+             SubscriptBox["e", "2"], "\[Wedge]", 
+             SubscriptBox["e", "5"]}],
+            StripOnInput->False,
+            FontFamily->"Courier",
+            FontSize->12,
+            FontWeight->Bold],
+           BaseStyle->"Paste",
+           ButtonData->RowBox[{
+              SubscriptBox["e", "2"], "\[Wedge]", 
+              SubscriptBox["e", "5"]}]], 
+          ButtonBox[
+           StyleBox[
+            RowBox[{
+             SubscriptBox["e", "1"], "\[Wedge]", 
+             SubscriptBox["e", "3"], "\[Wedge]", 
+             SubscriptBox["e", "4"]}],
+            StripOnInput->False,
+            FontFamily->"Courier",
+            FontSize->12,
+            FontWeight->Bold],
+           BaseStyle->"Paste",
+           ButtonData->RowBox[{
+              SubscriptBox["e", "1"], "\[Wedge]", 
+              SubscriptBox["e", "3"], "\[Wedge]", 
+              SubscriptBox["e", "4"]}]]},
+         {
+          ButtonBox[
+           StyleBox[
+            RowBox[{
+             SubscriptBox["e", "3"], "\[Wedge]", 
+             SubscriptBox["e", "4"]}],
+            StripOnInput->False,
+            FontFamily->"Courier",
+            FontSize->12,
+            FontWeight->Bold],
+           BaseStyle->"Paste",
+           ButtonData->RowBox[{
+              SubscriptBox["e", "3"], "\[Wedge]", 
+              SubscriptBox["e", "4"]}]], 
+          ButtonBox[
+           StyleBox[
+            RowBox[{
+             SubscriptBox["e", "1"], "\[Wedge]", 
+             SubscriptBox["e", "2"], "\[Wedge]", 
+             SubscriptBox["e", "5"]}],
+            StripOnInput->False,
+            FontFamily->"Courier",
+            FontSize->12,
+            FontWeight->Bold],
+           BaseStyle->"Paste",
+           ButtonData->RowBox[{
+              SubscriptBox["e", "1"], "\[Wedge]", 
+              SubscriptBox["e", "2"], "\[Wedge]", 
+              SubscriptBox["e", "5"]}]]},
+         {
+          ButtonBox[
+           StyleBox[
+            RowBox[{
+             SubscriptBox["e", "3"], "\[Wedge]", 
+             SubscriptBox["e", "5"]}],
+            StripOnInput->False,
+            FontFamily->"Courier",
+            FontSize->12,
+            FontWeight->Bold],
+           BaseStyle->"Paste",
+           ButtonData->RowBox[{
+              SubscriptBox["e", "3"], "\[Wedge]", 
+              SubscriptBox["e", "5"]}]], 
+          ButtonBox[
+           StyleBox[
+            RowBox[{"-", 
+             RowBox[{"(", 
+              RowBox[{
+               SubscriptBox["e", "1"], "\[Wedge]", 
+               SubscriptBox["e", "2"], "\[Wedge]", 
+               SubscriptBox["e", "4"]}], ")"}]}],
+            StripOnInput->False,
+            FontFamily->"Courier",
+            FontSize->12,
+            FontWeight->Bold],
+           BaseStyle->"Paste",
+           ButtonData->RowBox[{"-", 
+              RowBox[{"(", 
+                RowBox[{
+                  SubscriptBox["e", "1"], "\[Wedge]", 
+                  SubscriptBox["e", "2"], "\[Wedge]", 
+                  SubscriptBox["e", "4"]}], ")"}]}]]},
+         {
+          ButtonBox[
+           StyleBox[
+            RowBox[{
+             SubscriptBox["e", "4"], "\[Wedge]", 
+             SubscriptBox["e", "5"]}],
+            StripOnInput->False,
+            FontFamily->"Courier",
+            FontSize->12,
+            FontWeight->Bold],
+           BaseStyle->"Paste",
+           ButtonData->RowBox[{
+              SubscriptBox["e", "4"], "\[Wedge]", 
+              SubscriptBox["e", "5"]}]], 
+          ButtonBox[
+           StyleBox[
+            RowBox[{
+             SubscriptBox["e", "1"], "\[Wedge]", 
+             SubscriptBox["e", "2"], "\[Wedge]", 
+             SubscriptBox["e", "3"]}],
+            StripOnInput->False,
+            FontFamily->"Courier",
+            FontSize->12,
+            FontWeight->Bold],
+           BaseStyle->"Paste",
+           ButtonData->RowBox[{
+              SubscriptBox["e", "1"], "\[Wedge]", 
+              SubscriptBox["e", "2"], "\[Wedge]", 
+              SubscriptBox["e", "3"]}]]},
+         {
+          ButtonBox[
+           StyleBox[
+            RowBox[{
+             SubscriptBox["e", "1"], "\[Wedge]", 
+             SubscriptBox["e", "2"], "\[Wedge]", 
+             SubscriptBox["e", "3"]}],
+            StripOnInput->False,
+            FontFamily->"Courier",
+            FontSize->12,
+            FontWeight->Bold],
+           BaseStyle->"Paste",
+           ButtonData->RowBox[{
+              SubscriptBox["e", "1"], "\[Wedge]", 
+              SubscriptBox["e", "2"], "\[Wedge]", 
+              SubscriptBox["e", "3"]}]], 
+          ButtonBox[
+           StyleBox[
+            RowBox[{
+             SubscriptBox["e", "4"], "\[Wedge]", 
+             SubscriptBox["e", "5"]}],
+            StripOnInput->False,
+            FontFamily->"Courier",
+            FontSize->12,
+            FontWeight->Bold],
+           BaseStyle->"Paste",
+           ButtonData->RowBox[{
+              SubscriptBox["e", "4"], "\[Wedge]", 
+              SubscriptBox["e", "5"]}]]},
+         {
+          ButtonBox[
+           StyleBox[
+            RowBox[{
+             SubscriptBox["e", "1"], "\[Wedge]", 
+             SubscriptBox["e", "2"], "\[Wedge]", 
+             SubscriptBox["e", "4"]}],
+            StripOnInput->False,
+            FontFamily->"Courier",
+            FontSize->12,
+            FontWeight->Bold],
+           BaseStyle->"Paste",
+           ButtonData->RowBox[{
+              SubscriptBox["e", "1"], "\[Wedge]", 
+              SubscriptBox["e", "2"], "\[Wedge]", 
+              SubscriptBox["e", "4"]}]], 
+          ButtonBox[
+           StyleBox[
+            RowBox[{"-", 
+             RowBox[{"(", 
+              RowBox[{
+               SubscriptBox["e", "3"], "\[Wedge]", 
+               SubscriptBox["e", "5"]}], ")"}]}],
+            StripOnInput->False,
+            FontFamily->"Courier",
+            FontSize->12,
+            FontWeight->Bold],
+           BaseStyle->"Paste",
+           ButtonData->RowBox[{"-", 
+              RowBox[{"(", 
+                RowBox[{
+                  SubscriptBox["e", "3"], "\[Wedge]", 
+                  SubscriptBox["e", "5"]}], ")"}]}]]},
+         {
+          ButtonBox[
+           StyleBox[
+            RowBox[{
+             SubscriptBox["e", "1"], "\[Wedge]", 
+             SubscriptBox["e", "2"], "\[Wedge]", 
+             SubscriptBox["e", "5"]}],
+            StripOnInput->False,
+            FontFamily->"Courier",
+            FontSize->12,
+            FontWeight->Bold],
+           BaseStyle->"Paste",
+           ButtonData->RowBox[{
+              SubscriptBox["e", "1"], "\[Wedge]", 
+              SubscriptBox["e", "2"], "\[Wedge]", 
+              SubscriptBox["e", "5"]}]], 
+          ButtonBox[
+           StyleBox[
+            RowBox[{
+             SubscriptBox["e", "3"], "\[Wedge]", 
+             SubscriptBox["e", "4"]}],
+            StripOnInput->False,
+            FontFamily->"Courier",
+            FontSize->12,
+            FontWeight->Bold],
+           BaseStyle->"Paste",
+           ButtonData->RowBox[{
+              SubscriptBox["e", "3"], "\[Wedge]", 
+              SubscriptBox["e", "4"]}]]},
+         {
+          ButtonBox[
+           StyleBox[
+            RowBox[{
+             SubscriptBox["e", "1"], "\[Wedge]", 
+             SubscriptBox["e", "3"], "\[Wedge]", 
+             SubscriptBox["e", "4"]}],
+            StripOnInput->False,
+            FontFamily->"Courier",
+            FontSize->12,
+            FontWeight->Bold],
+           BaseStyle->"Paste",
+           ButtonData->RowBox[{
+              SubscriptBox["e", "1"], "\[Wedge]", 
+              SubscriptBox["e", "3"], "\[Wedge]", 
+              SubscriptBox["e", "4"]}]], 
+          ButtonBox[
+           StyleBox[
+            RowBox[{
+             SubscriptBox["e", "2"], "\[Wedge]", 
+             SubscriptBox["e", "5"]}],
+            StripOnInput->False,
+            FontFamily->"Courier",
+            FontSize->12,
+            FontWeight->Bold],
+           BaseStyle->"Paste",
+           ButtonData->RowBox[{
+              SubscriptBox["e", "2"], "\[Wedge]", 
+              SubscriptBox["e", "5"]}]]},
+         {
+          ButtonBox[
+           StyleBox[
+            RowBox[{
+             SubscriptBox["e", "1"], "\[Wedge]", 
+             SubscriptBox["e", "3"], "\[Wedge]", 
+             SubscriptBox["e", "5"]}],
+            StripOnInput->False,
+            FontFamily->"Courier",
+            FontSize->12,
+            FontWeight->Bold],
+           BaseStyle->"Paste",
+           ButtonData->RowBox[{
+              SubscriptBox["e", "1"], "\[Wedge]", 
+              SubscriptBox["e", "3"], "\[Wedge]", 
+              SubscriptBox["e", "5"]}]], 
+          ButtonBox[
+           StyleBox[
+            RowBox[{"-", 
+             RowBox[{"(", 
+              RowBox[{
+               SubscriptBox["e", "2"], "\[Wedge]", 
+               SubscriptBox["e", "4"]}], ")"}]}],
+            StripOnInput->False,
+            FontFamily->"Courier",
+            FontSize->12,
+            FontWeight->Bold],
+           BaseStyle->"Paste",
+           ButtonData->RowBox[{"-", 
+              RowBox[{"(", 
+                RowBox[{
+                  SubscriptBox["e", "2"], "\[Wedge]", 
+                  SubscriptBox["e", "4"]}], ")"}]}]]},
+         {
+          ButtonBox[
+           StyleBox[
+            RowBox[{
+             SubscriptBox["e", "1"], "\[Wedge]", 
+             SubscriptBox["e", "4"], "\[Wedge]", 
+             SubscriptBox["e", "5"]}],
+            StripOnInput->False,
+            FontFamily->"Courier",
+            FontSize->12,
+            FontWeight->Bold],
+           BaseStyle->"Paste",
+           ButtonData->RowBox[{
+              SubscriptBox["e", "1"], "\[Wedge]", 
+              SubscriptBox["e", "4"], "\[Wedge]", 
+              SubscriptBox["e", "5"]}]], 
+          ButtonBox[
+           StyleBox[
+            RowBox[{
+             SubscriptBox["e", "2"], "\[Wedge]", 
+             SubscriptBox["e", "3"]}],
+            StripOnInput->False,
+            FontFamily->"Courier",
+            FontSize->12,
+            FontWeight->Bold],
+           BaseStyle->"Paste",
+           ButtonData->RowBox[{
+              SubscriptBox["e", "2"], "\[Wedge]", 
+              SubscriptBox["e", "3"]}]]},
+         {
+          ButtonBox[
+           StyleBox[
+            RowBox[{
+             SubscriptBox["e", "2"], "\[Wedge]", 
+             SubscriptBox["e", "3"], "\[Wedge]", 
+             SubscriptBox["e", "4"]}],
+            StripOnInput->False,
+            FontFamily->"Courier",
+            FontSize->12,
+            FontWeight->Bold],
+           BaseStyle->"Paste",
+           ButtonData->RowBox[{
+              SubscriptBox["e", "2"], "\[Wedge]", 
+              SubscriptBox["e", "3"], "\[Wedge]", 
+              SubscriptBox["e", "4"]}]], 
+          ButtonBox[
+           StyleBox[
+            RowBox[{"-", 
+             RowBox[{"(", 
+              RowBox[{
+               SubscriptBox["e", "1"], "\[Wedge]", 
+               SubscriptBox["e", "5"]}], ")"}]}],
+            StripOnInput->False,
+            FontFamily->"Courier",
+            FontSize->12,
+            FontWeight->Bold],
+           BaseStyle->"Paste",
+           ButtonData->RowBox[{"-", 
+              RowBox[{"(", 
+                RowBox[{
+                  SubscriptBox["e", "1"], "\[Wedge]", 
+                  SubscriptBox["e", "5"]}], ")"}]}]]},
+         {
+          ButtonBox[
+           StyleBox[
+            RowBox[{
+             SubscriptBox["e", "2"], "\[Wedge]", 
+             SubscriptBox["e", "3"], "\[Wedge]", 
+             SubscriptBox["e", "5"]}],
+            StripOnInput->False,
+            FontFamily->"Courier",
+            FontSize->12,
+            FontWeight->Bold],
+           BaseStyle->"Paste",
+           ButtonData->RowBox[{
+              SubscriptBox["e", "2"], "\[Wedge]", 
+              SubscriptBox["e", "3"], "\[Wedge]", 
+              SubscriptBox["e", "5"]}]], 
+          ButtonBox[
+           StyleBox[
+            RowBox[{
+             SubscriptBox["e", "1"], "\[Wedge]", 
+             SubscriptBox["e", "4"]}],
+            StripOnInput->False,
+            FontFamily->"Courier",
+            FontSize->12,
+            FontWeight->Bold],
+           BaseStyle->"Paste",
+           ButtonData->RowBox[{
+              SubscriptBox["e", "1"], "\[Wedge]", 
+              SubscriptBox["e", "4"]}]]},
+         {
+          ButtonBox[
+           StyleBox[
+            RowBox[{
+             SubscriptBox["e", "2"], "\[Wedge]", 
+             SubscriptBox["e", "4"], "\[Wedge]", 
+             SubscriptBox["e", "5"]}],
+            StripOnInput->False,
+            FontFamily->"Courier",
+            FontSize->12,
+            FontWeight->Bold],
+           BaseStyle->"Paste",
+           ButtonData->RowBox[{
+              SubscriptBox["e", "2"], "\[Wedge]", 
+              SubscriptBox["e", "4"], "\[Wedge]", 
+              SubscriptBox["e", "5"]}]], 
+          ButtonBox[
+           StyleBox[
+            RowBox[{"-", 
+             RowBox[{"(", 
+              RowBox[{
+               SubscriptBox["e", "1"], "\[Wedge]", 
+               SubscriptBox["e", "3"]}], ")"}]}],
+            StripOnInput->False,
+            FontFamily->"Courier",
+            FontSize->12,
+            FontWeight->Bold],
+           BaseStyle->"Paste",
+           ButtonData->RowBox[{"-", 
+              RowBox[{"(", 
+                RowBox[{
+                  SubscriptBox["e", "1"], "\[Wedge]", 
+                  SubscriptBox["e", "3"]}], ")"}]}]]},
+         {
+          ButtonBox[
+           StyleBox[
+            RowBox[{
+             SubscriptBox["e", "3"], "\[Wedge]", 
+             SubscriptBox["e", "4"], "\[Wedge]", 
+             SubscriptBox["e", "5"]}],
+            StripOnInput->False,
+            FontFamily->"Courier",
+            FontSize->12,
+            FontWeight->Bold],
+           BaseStyle->"Paste",
+           ButtonData->RowBox[{
+              SubscriptBox["e", "3"], "\[Wedge]", 
+              SubscriptBox["e", "4"], "\[Wedge]", 
+              SubscriptBox["e", "5"]}]], 
+          ButtonBox[
+           StyleBox[
+            RowBox[{
+             SubscriptBox["e", "1"], "\[Wedge]", 
+             SubscriptBox["e", "2"]}],
+            StripOnInput->False,
+            FontFamily->"Courier",
+            FontSize->12,
+            FontWeight->Bold],
+           BaseStyle->"Paste",
+           ButtonData->RowBox[{
+              SubscriptBox["e", "1"], "\[Wedge]", 
+              SubscriptBox["e", "2"]}]]},
+         {
+          ButtonBox[
+           StyleBox[
+            RowBox[{
+             SubscriptBox["e", "1"], "\[Wedge]", 
+             SubscriptBox["e", "2"], "\[Wedge]", 
+             SubscriptBox["e", "3"], "\[Wedge]", 
+             SubscriptBox["e", "4"]}],
+            StripOnInput->False,
+            FontFamily->"Courier",
+            FontSize->12,
+            FontWeight->Bold],
+           BaseStyle->"Paste",
+           ButtonData->RowBox[{
+              SubscriptBox["e", "1"], "\[Wedge]", 
+              SubscriptBox["e", "2"], "\[Wedge]", 
+              SubscriptBox["e", "3"], "\[Wedge]", 
+              SubscriptBox["e", "4"]}]], 
+          ButtonBox[
+           StyleBox[
+            SubscriptBox["e", "5"],
+            StripOnInput->False,
+            FontFamily->"Courier",
+            FontSize->12,
+            FontWeight->Bold],
+           BaseStyle->"Paste",
+           ButtonData->SubscriptBox["e", "5"]]},
+         {
+          ButtonBox[
+           StyleBox[
+            RowBox[{
+             SubscriptBox["e", "1"], "\[Wedge]", 
+             SubscriptBox["e", "2"], "\[Wedge]", 
+             SubscriptBox["e", "3"], "\[Wedge]", 
+             SubscriptBox["e", "5"]}],
+            StripOnInput->False,
+            FontFamily->"Courier",
+            FontSize->12,
+            FontWeight->Bold],
+           BaseStyle->"Paste",
+           ButtonData->RowBox[{
+              SubscriptBox["e", "1"], "\[Wedge]", 
+              SubscriptBox["e", "2"], "\[Wedge]", 
+              SubscriptBox["e", "3"], "\[Wedge]", 
+              SubscriptBox["e", "5"]}]], 
+          ButtonBox[
+           StyleBox[
+            RowBox[{"-", 
+             SubscriptBox["e", "4"]}],
+            StripOnInput->False,
+            FontFamily->"Courier",
+            FontSize->12,
+            FontWeight->Bold],
+           BaseStyle->"Paste",
+           ButtonData->RowBox[{"-", 
+              SubscriptBox["e", "4"]}]]},
+         {
+          ButtonBox[
+           StyleBox[
+            RowBox[{
+             SubscriptBox["e", "1"], "\[Wedge]", 
+             SubscriptBox["e", "2"], "\[Wedge]", 
+             SubscriptBox["e", "4"], "\[Wedge]", 
+             SubscriptBox["e", "5"]}],
+            StripOnInput->False,
+            FontFamily->"Courier",
+            FontSize->12,
+            FontWeight->Bold],
+           BaseStyle->"Paste",
+           ButtonData->RowBox[{
+              SubscriptBox["e", "1"], "\[Wedge]", 
+              SubscriptBox["e", "2"], "\[Wedge]", 
+              SubscriptBox["e", "4"], "\[Wedge]", 
+              SubscriptBox["e", "5"]}]], 
+          ButtonBox[
+           StyleBox[
+            SubscriptBox["e", "3"],
+            StripOnInput->False,
+            FontFamily->"Courier",
+            FontSize->12,
+            FontWeight->Bold],
+           BaseStyle->"Paste",
+           ButtonData->SubscriptBox["e", "3"]]},
+         {
+          ButtonBox[
+           StyleBox[
+            RowBox[{
+             SubscriptBox["e", "1"], "\[Wedge]", 
+             SubscriptBox["e", "3"], "\[Wedge]", 
+             SubscriptBox["e", "4"], "\[Wedge]", 
+             SubscriptBox["e", "5"]}],
+            StripOnInput->False,
+            FontFamily->"Courier",
+            FontSize->12,
+            FontWeight->Bold],
+           BaseStyle->"Paste",
+           ButtonData->RowBox[{
+              SubscriptBox["e", "1"], "\[Wedge]", 
+              SubscriptBox["e", "3"], "\[Wedge]", 
+              SubscriptBox["e", "4"], "\[Wedge]", 
+              SubscriptBox["e", "5"]}]], 
+          ButtonBox[
+           StyleBox[
+            RowBox[{"-", 
+             SubscriptBox["e", "2"]}],
+            StripOnInput->False,
+            FontFamily->"Courier",
+            FontSize->12,
+            FontWeight->Bold],
+           BaseStyle->"Paste",
+           ButtonData->RowBox[{"-", 
+              SubscriptBox["e", "2"]}]]},
+         {
+          ButtonBox[
+           StyleBox[
+            RowBox[{
+             SubscriptBox["e", "2"], "\[Wedge]", 
+             SubscriptBox["e", "3"], "\[Wedge]", 
+             SubscriptBox["e", "4"], "\[Wedge]", 
+             SubscriptBox["e", "5"]}],
+            StripOnInput->False,
+            FontFamily->"Courier",
+            FontSize->12,
+            FontWeight->Bold],
+           BaseStyle->"Paste",
+           ButtonData->RowBox[{
+              SubscriptBox["e", "2"], "\[Wedge]", 
+              SubscriptBox["e", "3"], "\[Wedge]", 
+              SubscriptBox["e", "4"], "\[Wedge]", 
+              SubscriptBox["e", "5"]}]], 
+          ButtonBox[
+           StyleBox[
+            SubscriptBox["e", "1"],
+            StripOnInput->False,
+            FontFamily->"Courier",
+            FontSize->12,
+            FontWeight->Bold],
+           BaseStyle->"Paste",
+           ButtonData->SubscriptBox["e", "1"]]},
+         {
+          ButtonBox[
+           StyleBox[
+            RowBox[{
+             SubscriptBox["e", "1"], "\[Wedge]", 
+             SubscriptBox["e", "2"], "\[Wedge]", 
+             SubscriptBox["e", "3"], "\[Wedge]", 
+             SubscriptBox["e", "4"], "\[Wedge]", 
+             SubscriptBox["e", "5"]}],
+            StripOnInput->False,
+            FontFamily->"Courier",
+            FontSize->12,
+            FontWeight->Bold],
+           BaseStyle->"Paste",
+           ButtonData->RowBox[{
+              SubscriptBox["e", "1"], "\[Wedge]", 
+              SubscriptBox["e", "2"], "\[Wedge]", 
+              SubscriptBox["e", "3"], "\[Wedge]", 
+              SubscriptBox["e", "4"], "\[Wedge]", 
+              SubscriptBox["e", "5"]}]], 
+          ButtonBox[
+           StyleBox["1",
+            StripOnInput->False,
+            FontFamily->"Courier",
+            FontSize->12,
+            FontWeight->Bold],
+           BaseStyle->"Paste",
+           ButtonData->"1"]}
+        },
+        AutoDelete->False,
+        GridBoxItemSize->{"Columns" -> {{All}}, "Rows" -> {{All}}},
+        GridBoxSpacings->{"Columns" -> {{0.15}}, "Rows" -> {{0.15}}}],
+       "Grid"]}
+    },
+    GridBoxAlignment->{"Columns" -> {{Left}}},
+    GridBoxItemSize->{"Columns" -> {{Automatic}}, "Rows" -> {{Automatic}}}],
+   "Column"]]], "Output",
+ CellChangeTimes->{3.557119715176382*^9}]
+}, Open  ]],
+
+Cell[CellGroupData[{
+
+Cell[BoxData["Basis"], "Input"],
+
+Cell[BoxData[
+ RowBox[{"{", 
+  RowBox[{
+   SubscriptBox["e", "1"], ",", 
+   SubscriptBox["e", "2"]}], "}"}]], "Output",
+ CellChangeTimes->{3.5571199658682423`*^9, 3.5571203654096823`*^9, 
+  3.5571485955719385`*^9}]
+}, Open  ]],
+
+Cell[CellGroupData[{
+
+Cell[BoxData["\[FivePointedStar]b"], "Input"],
+
+Cell[BoxData[
+ RowBox[{"{", 
+  RowBox[{
+   SubscriptBox["e", "1"], ",", 
+   SubscriptBox["e", "2"], ",", 
+   SubscriptBox["e", "3"]}], "}"}]], "Output",
+ CellChangeTimes->{3.5571199733608465`*^9, 3.5571203449199085`*^9}]
+}, Open  ]],
+
+Cell[CellGroupData[{
+
+Cell[BoxData["DefaultBasis"], "Input",
+ CellChangeTimes->{{3.5571199824844723`*^9, 3.5571199885570545`*^9}}],
+
+Cell[BoxData[
+ RowBox[{"{", 
+  RowBox[{
+   SubscriptBox["e", "1"], ",", 
+   SubscriptBox["e", "2"], ",", 
+   SubscriptBox["e", "3"]}], "}"}]], "Output",
+ CellChangeTimes->{3.5571199899220724`*^9}]
+}, Open  ]],
+
+Cell[BoxData[
+ RowBox[{"Basis\[CapitalLambda]", "[", "\[Placeholder]", "]"}]], "Input"],
+
+Cell[CellGroupData[{
+
+Cell[BoxData[
+ RowBox[{"\[FivePointedStar]b", ";", "\[CapitalLambda]Basis"}]], "Input",
+ CellChangeTimes->{3.5571203307847204`*^9}],
+
+Cell[BoxData[
+ RowBox[{"{", 
+  RowBox[{
+   RowBox[{"{", "1", "}"}], ",", 
+   RowBox[{"{", 
+    RowBox[{
+     SubscriptBox["e", "1"], ",", 
+     SubscriptBox["e", "2"], ",", 
+     SubscriptBox["e", "3"], ",", 
+     SubscriptBox["e", "4"], ",", 
+     SubscriptBox["e", "5"]}], "}"}], ",", 
+   RowBox[{"{", 
+    RowBox[{
+     RowBox[{
+      SubscriptBox["e", "1"], "\[Wedge]", 
+      SubscriptBox["e", "2"]}], ",", 
+     RowBox[{
+      SubscriptBox["e", "1"], "\[Wedge]", 
+      SubscriptBox["e", "3"]}], ",", 
+     RowBox[{
+      SubscriptBox["e", "1"], "\[Wedge]", 
+      SubscriptBox["e", "4"]}], ",", 
+     RowBox[{
+      SubscriptBox["e", "1"], "\[Wedge]", 
+      SubscriptBox["e", "5"]}], ",", 
+     RowBox[{
+      SubscriptBox["e", "2"], "\[Wedge]", 
+      SubscriptBox["e", "3"]}], ",", 
+     RowBox[{
+      SubscriptBox["e", "2"], "\[Wedge]", 
+      SubscriptBox["e", "4"]}], ",", 
+     RowBox[{
+      SubscriptBox["e", "2"], "\[Wedge]", 
+      SubscriptBox["e", "5"]}], ",", 
+     RowBox[{
+      SubscriptBox["e", "3"], "\[Wedge]", 
+      SubscriptBox["e", "4"]}], ",", 
+     RowBox[{
+      SubscriptBox["e", "3"], "\[Wedge]", 
+      SubscriptBox["e", "5"]}], ",", 
+     RowBox[{
+      SubscriptBox["e", "4"], "\[Wedge]", 
+      SubscriptBox["e", "5"]}]}], "}"}], ",", 
+   RowBox[{"{", 
+    RowBox[{
+     RowBox[{
+      SubscriptBox["e", "1"], "\[Wedge]", 
+      SubscriptBox["e", "2"], "\[Wedge]", 
+      SubscriptBox["e", "3"]}], ",", 
+     RowBox[{
+      SubscriptBox["e", "1"], "\[Wedge]", 
+      SubscriptBox["e", "2"], "\[Wedge]", 
+      SubscriptBox["e", "4"]}], ",", 
+     RowBox[{
+      SubscriptBox["e", "1"], "\[Wedge]", 
+      SubscriptBox["e", "2"], "\[Wedge]", 
+      SubscriptBox["e", "5"]}], ",", 
+     RowBox[{
+      SubscriptBox["e", "1"], "\[Wedge]", 
+      SubscriptBox["e", "3"], "\[Wedge]", 
+      SubscriptBox["e", "4"]}], ",", 
+     RowBox[{
+      SubscriptBox["e", "1"], "\[Wedge]", 
+      SubscriptBox["e", "3"], "\[Wedge]", 
+      SubscriptBox["e", "5"]}], ",", 
+     RowBox[{
+      SubscriptBox["e", "1"], "\[Wedge]", 
+      SubscriptBox["e", "4"], "\[Wedge]", 
+      SubscriptBox["e", "5"]}], ",", 
+     RowBox[{
+      SubscriptBox["e", "2"], "\[Wedge]", 
+      SubscriptBox["e", "3"], "\[Wedge]", 
+      SubscriptBox["e", "4"]}], ",", 
+     RowBox[{
+      SubscriptBox["e", "2"], "\[Wedge]", 
+      SubscriptBox["e", "3"], "\[Wedge]", 
+      SubscriptBox["e", "5"]}], ",", 
+     RowBox[{
+      SubscriptBox["e", "2"], "\[Wedge]", 
+      SubscriptBox["e", "4"], "\[Wedge]", 
+      SubscriptBox["e", "5"]}], ",", 
+     RowBox[{
+      SubscriptBox["e", "3"], "\[Wedge]", 
+      SubscriptBox["e", "4"], "\[Wedge]", 
+      SubscriptBox["e", "5"]}]}], "}"}], ",", 
+   RowBox[{"{", 
+    RowBox[{
+     RowBox[{
+      SubscriptBox["e", "1"], "\[Wedge]", 
+      SubscriptBox["e", "2"], "\[Wedge]", 
+      SubscriptBox["e", "3"], "\[Wedge]", 
+      SubscriptBox["e", "4"]}], ",", 
+     RowBox[{
+      SubscriptBox["e", "1"], "\[Wedge]", 
+      SubscriptBox["e", "2"], "\[Wedge]", 
+      SubscriptBox["e", "3"], "\[Wedge]", 
+      SubscriptBox["e", "5"]}], ",", 
+     RowBox[{
+      SubscriptBox["e", "1"], "\[Wedge]", 
+      SubscriptBox["e", "2"], "\[Wedge]", 
+      SubscriptBox["e", "4"], "\[Wedge]", 
+      SubscriptBox["e", "5"]}], ",", 
+     RowBox[{
+      SubscriptBox["e", "1"], "\[Wedge]", 
+      SubscriptBox["e", "3"], "\[Wedge]", 
+      SubscriptBox["e", "4"], "\[Wedge]", 
+      SubscriptBox["e", "5"]}], ",", 
+     RowBox[{
+      SubscriptBox["e", "2"], "\[Wedge]", 
+      SubscriptBox["e", "3"], "\[Wedge]", 
+      SubscriptBox["e", "4"], "\[Wedge]", 
+      SubscriptBox["e", "5"]}]}], "}"}], ",", 
+   RowBox[{"{", 
+    RowBox[{
+     SubscriptBox["e", "1"], "\[Wedge]", 
+     SubscriptBox["e", "2"], "\[Wedge]", 
+     SubscriptBox["e", "3"], "\[Wedge]", 
+     SubscriptBox["e", "4"], "\[Wedge]", 
+     SubscriptBox["e", "5"]}], "}"}]}], "}"}]], "Output",
+ CellChangeTimes->{{3.5571203228596115`*^9, 3.5571203326072445`*^9}, 
+   3.557120369665742*^9}]
+}, Open  ]],
+
+Cell[CellGroupData[{
+
+Cell[BoxData[
+ RowBox[{"Flatten", "[", "\[CapitalLambda]Basis", "]"}]], "Input",
+ CellChangeTimes->{{3.557120523011763*^9, 3.5571205262768073`*^9}}],
+
+Cell[BoxData[
+ RowBox[{"{", 
+  RowBox[{"1", ",", 
+   SubscriptBox["e", "1"], ",", 
+   SubscriptBox["e", "2"], ",", 
+   RowBox[{
+    SubscriptBox["e", "1"], "\[Wedge]", 
+    SubscriptBox["e", "2"]}]}], "}"}]], "Output",
+ CellChangeTimes->{3.557120411621808*^9, 3.55712052788183*^9, 
+  3.5571486131406746`*^9}]
+}, Open  ]],
+
+Cell[CellGroupData[{
+
+Cell[BoxData[
+ RowBox[{
+  RowBox[{
+   RowBox[{"GrassmannSimplify", "[", 
+    RowBox[{"(", 
+     RowBox[{
+      SubscriptBox["e", "1"], "\[Wedge]", "#"}], ")"}], "]"}], "&"}], "/@", 
+  RowBox[{"Flatten", "[", "\[CapitalLambda]Basis", "]"}]}]], "Input",
+ CellChangeTimes->{{3.5571205598722515`*^9, 3.557120636991799*^9}, {
+   3.557120782087791*^9, 3.5571207873513656`*^9}, 3.557148651392688*^9}],
+
+Cell[BoxData[
+ RowBox[{"{", 
+  RowBox[{
+   SubscriptBox["e", "1"], ",", "0", ",", 
+   RowBox[{
+    SubscriptBox["e", "1"], "\[Wedge]", 
+    SubscriptBox["e", "2"]}], ",", "0"}], "}"}]], "Output",
+ CellChangeTimes->{3.5571206056333714`*^9, 3.5571206387093244`*^9, 
+  3.5571208004800496`*^9, 3.557148618133242*^9}]
+}, Open  ]],
+
+Cell[CellGroupData[{
+
+Cell[BoxData[
+ RowBox[{
+  RowBox[{
+   StyleBox[
+    StyleBox["ExtractCoefficients", "Input"], "Input",
+    FontWeight->"Plain"], "[", "\[CapitalLambda]Basis", "]"}], "[", 
+  SubscriptBox["e", "1"], "]"}]], "Input",
+ CellChangeTimes->{{3.557147539646699*^9, 3.5571475511013536`*^9}, {
+  3.557147709342001*^9, 3.5571477126095448`*^9}, {3.557147775103384*^9, 
+  3.557147837757721*^9}, {3.557148051529599*^9, 3.557148098868225*^9}, {
+  3.557148180148281*^9, 3.557148216045772*^9}}],
+
+Cell[BoxData[
+ RowBox[{"{", 
+  RowBox[{"1", ",", "0", ",", "0"}], "}"}]], "Output",
+ CellChangeTimes->{
+  3.5571475529363775`*^9, 3.5571477138945627`*^9, {3.557147777095909*^9, 
+   3.557147839500245*^9}, {3.5571480931971474`*^9, 3.5571480995057335`*^9}, {
+   3.557148187355877*^9, 3.5571482171232843`*^9}, 3.5571486222867994`*^9}]
+}, Open  ]],
+
+Cell[CellGroupData[{
+
+Cell[BoxData[
+ RowBox[{"GrassmannSimplify", "[", 
+  RowBox[{"D", "[", 
+   RowBox[{
+    RowBox[{
+     SubscriptBox["e", "1"], "\[Wedge]", 
+     SubscriptBox["e", "2"]}], ",", 
+    SubscriptBox["e", "1"]}], "]"}], "]"}]], "Input",
+ CellChangeTimes->{{3.5571514528436537`*^9, 3.557151475182434*^9}}],
+
+Cell[BoxData[
+ RowBox[{
+  SuperscriptBox["Wedge", 
+   TagBox[
+    RowBox[{"(", 
+     RowBox[{"1", ",", "0"}], ")"}],
+    Derivative],
+   MultilineFunction->None], "[", 
+  RowBox[{
+   SubscriptBox["e", "1"], ",", 
+   SubscriptBox["e", "2"]}], "]"}]], "Output",
+ CellChangeTimes->{3.5571514762149463`*^9}]
+}, Open  ]],
+
+Cell[BoxData[""], "Input",
+ CellChangeTimes->{3.5571175483138285`*^9}],
+
+Cell[CellGroupData[{
+
+Cell[BoxData[
+ RowBox[{"GrassmannSimplify", "[", 
+  RowBox[{"x", "\[Wedge]", "x"}], "]"}]], "Input",
+ CellChangeTimes->{3.557118213255776*^9}],
+
+Cell[BoxData["0"], "Output",
+ CellChangeTimes->{3.55711818262237*^9, 3.557118213740783*^9}]
+}, Open  ]],
+
+Cell[BoxData[
+ RowBox[{
+  RowBox[{"A", "[", "32", "]"}], "="}]], "Input",
+ CellChangeTimes->{{3.557118924685729*^9, 3.5571189488245597`*^9}}]
+},
+WindowSize->{707, 787},
+WindowMargins->{{Automatic, 188}, {Automatic, 33}},
+FrontEndVersion->"8.0 for Microsoft Windows (64-bit) (February 23, 2011)",
+StyleDefinitions->"Default.nb"
+]
+(* End of Notebook Content *)
+
+(* Internal cache information *)
+(*CellTagsOutline
+CellTagsIndex->{}
+*)
+(*CellTagsIndex
+CellTagsIndex->{}
+*)
+(*NotebookFileOutline
+Notebook[{
+Cell[557, 20, 82, 1, 31, "Input"],
+Cell[CellGroupData[{
+Cell[664, 25, 158, 3, 31, "Input"],
+Cell[825, 30, 260, 6, 30, "Output"]
+}, Open  ]],
+Cell[CellGroupData[{
+Cell[1122, 41, 108, 1, 31, "Input"],
+Cell[1233, 44, 25104, 757, 305, "Output"]
+}, Open  ]],
+Cell[CellGroupData[{
+Cell[26374, 806, 111, 1, 31, "Input"],
+Cell[26488, 809, 34142, 1000, 781, "Output"]
+}, Open  ]],
+Cell[CellGroupData[{
+Cell[60667, 1814, 31, 0, 31, "Input"],
+Cell[60701, 1816, 214, 6, 30, "Output"]
+}, Open  ]],
+Cell[CellGroupData[{
+Cell[60952, 1827, 45, 0, 31, "Input"],
+Cell[61000, 1829, 220, 6, 30, "Output"]
+}, Open  ]],
+Cell[CellGroupData[{
+Cell[61257, 1840, 108, 1, 31, "Input"],
+Cell[61368, 1843, 196, 6, 30, "Output"]
+}, Open  ]],
+Cell[61579, 1852, 87, 1, 31, "Input"],
+Cell[CellGroupData[{
+Cell[61691, 1857, 131, 2, 31, "Input"],
+Cell[61825, 1861, 3991, 120, 126, "Output"]
+}, Open  ]],
+Cell[CellGroupData[{
+Cell[65853, 1986, 148, 2, 31, "Input"],
+Cell[66004, 1990, 308, 9, 30, "Output"]
+}, Open  ]],
+Cell[CellGroupData[{
+Cell[66349, 2004, 393, 9, 31, "Input"],
+Cell[66745, 2015, 312, 8, 30, "Output"]
+}, Open  ]],
+Cell[CellGroupData[{
+Cell[67094, 2028, 477, 10, 31, "Input"],
+Cell[67574, 2040, 330, 6, 30, "Output"]
+}, Open  ]],
+Cell[CellGroupData[{
+Cell[67941, 2051, 296, 8, 31, "Input"],
+Cell[68240, 2061, 303, 11, 30, "Output"]
+}, Open  ]],
+Cell[68558, 2075, 70, 1, 31, "Input"],
+Cell[CellGroupData[{
+Cell[68653, 2080, 142, 3, 31, "Input"],
+Cell[68798, 2085, 91, 1, 30, "Output"]
+}, Open  ]],
+Cell[68904, 2089, 141, 3, 31, "Input"]
+}
+]
+*)
+
+(* End of internal cache information *)

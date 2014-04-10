@@ -1,0 +1,348 @@
+(* Content-type: application/mathematica *)
+
+(*** Wolfram Notebook File ***)
+(* http://www.wolfram.com/nb *)
+
+(* CreatedBy='Mathematica 7.0' *)
+
+(*CacheID: 234*)
+(* Internal cache information:
+NotebookFileLineBreakTest
+NotebookFileLineBreakTest
+NotebookDataPosition[       145,          7]
+NotebookDataLength[     10744,        339]
+NotebookOptionsPosition[      9489,        293]
+NotebookOutlinePosition[      9834,        308]
+CellTagsIndexPosition[      9791,        305]
+WindowFrame->Normal*)
+
+(* Beginning of Notebook Content *)
+Notebook[{
+
+Cell[CellGroupData[{
+Cell[BoxData[
+ RowBox[{"Get", "[", 
+  "\"\<E:\\\\Research\\\\Gamma\\\\UlfGran\\\\GAMMAV20_M7.m\>\"", 
+  "]"}]], "Input",
+ CellChangeTimes->{{3.505065338545786*^9, 3.5050653522205677`*^9}, {
+  3.5060872991292763`*^9, 3.5060873118440037`*^9}}],
+
+Cell[BoxData[
+ RowBox[{
+  StyleBox[
+   RowBox[{"General", "::", "compat"}], "MessageName"], 
+  RowBox[{
+  ":", " "}], "\<\"Combinatorica Graph and Permutations functionality has \
+been superseded by preloaded functionaliy. The package now being loaded may \
+conflict with this. Please see the Compatibility Guide for details.\"\>"}]], \
+"Message", "MSG",
+ CellChangeTimes->{3.5122487420939713`*^9}],
+
+Cell[CellGroupData[{
+
+Cell[BoxData["\<\"GAMMA Version 2.0\[Beta]\"\>"], "Print",
+ CellChangeTimes->{3.5050653530206137`*^9, 3.5052030900103464`*^9, 
+  3.505203789387349*^9, 3.5060873187784*^9, 3.5060993676215544`*^9, 
+  3.5060994119980927`*^9, 3.512248613978644*^9, 3.512248743150032*^9}],
+
+Cell[BoxData["\<\"16 August 2009\"\>"], "Print",
+ CellChangeTimes->{3.5050653530206137`*^9, 3.5052030900103464`*^9, 
+  3.505203789387349*^9, 3.5060873187784*^9, 3.5060993676215544`*^9, 
+  3.5060994119980927`*^9, 3.512248613978644*^9, 3.512248743168033*^9}],
+
+Cell[BoxData["\<\"\[Copyright] Ulf Gran, 2001\"\>"], "Print",
+ CellChangeTimes->{3.5050653530206137`*^9, 3.5052030900103464`*^9, 
+  3.505203789387349*^9, 3.5060873187784*^9, 3.5060993676215544`*^9, 
+  3.5060994119980927`*^9, 3.512248613978644*^9, 3.512248743171033*^9}]
+}, Open  ]]
+}, Open  ]],
+
+Cell[BoxData[
+ RowBox[{"(*", " ", 
+  RowBox[{
+   RowBox[{
+   "Set", " ", "the", " ", "spacetime", " ", "dimension", " ", "to", " ", 
+    "10"}], ",", " ", 
+   RowBox[{"the", " ", "spinor", " ", "dimension", " ", "to", " ", "16"}], 
+   ",", " ", 
+   RowBox[{
+   "and", " ", "indicate", " ", "that", " ", "the", " ", "spinors", " ", 
+    "are", " ", 
+    RowBox[{"chiral", "."}]}]}], " ", "*)"}]], "Input"],
+
+Cell[BoxData[{
+ RowBox[{"SetDim", "[", "11", "]"}], "\[IndentingNewLine]", 
+ RowBox[{"SetSpinorDim", "[", "32", "]"}], "\n", 
+ RowBox[{
+  RowBox[{"(*", 
+   RowBox[{"SetChiralSpinors", "[", "True", "]"}], "*)"}]}]}], "Input",
+ CellChangeTimes->{
+  3.5060930591487303`*^9, {3.5122485964196396`*^9, 3.5122486050691347`*^9}}],
+
+Cell[BoxData[
+ RowBox[{"(*", " ", 
+  RowBox[{
+   RowBox[{
+    RowBox[{
+    "To", " ", "prove", " ", "the", " ", "identities", " ", "we", " ", "need",
+      " ", "to", " ", "contract", " ", "two", " ", "of", " ", "the", " ", 
+     "symmetric", " ", "spinor", " ", "indices", " ", "by", " ", "a", " ", 
+     "basis", " ", "of", " ", "symmetric", " ", "\[CapitalGamma]"}], "-", 
+    "matrices"}], ",", " ", 
+   RowBox[{"in", " ", "the", " ", "case", " ", "of", " ", "IIB", " ", 
+    SuperscriptBox["\[CapitalGamma]", 
+     RowBox[{"(", "1", ")"}]], " ", "and", " ", 
+    RowBox[{
+     SuperscriptBox["\[CapitalGamma]", 
+      RowBox[{"(", "5", ")"}]], ".", " ", "This"}], " ", "is", " ", "most", 
+    " ", "easily", " ", "done", " ", "by", " ", "defining", " ", "the", " ", 
+    "structure", " ", "ind", " ", 
+    RowBox[{"(", 
+     RowBox[{"see", " ", "below"}], ")"}]}], ",", " ", 
+   RowBox[{
+   "where", " ", "X", " ", "is", " ", "the", " ", "basis", " ", "element", 
+    " ", "we", " ", "contract", " ", 
+    RowBox[{"with", "."}]}]}], " ", "*)"}]], "Input",
+ CellChangeTimes->{{3.5056419033625803`*^9, 3.505641976173629*^9}, {
+  3.5056424379015408`*^9, 3.505642477076325*^9}, {3.5060956437235594`*^9, 
+  3.506095653735132*^9}}],
+
+Cell[BoxData[
+ RowBox[{"(*", 
+  RowBox[{
+   RowBox[{
+    RowBox[{"**", " ", "d"}], " ", 
+    SuperscriptBox["H", 
+     RowBox[{"3", ",", "1"}]]}], " ", "\[Equal]", " ", "0"}], " ", 
+  "***)"}]], "Input",
+ CellChangeTimes->{{3.5060956769574604`*^9, 3.506095716741736*^9}, {
+  3.5060957753710895`*^9, 3.5060958229078083`*^9}}],
+
+Cell[BoxData[{
+ RowBox[{
+  RowBox[{"ind", "=", 
+   RowBox[{"HoldForm", "[", 
+    RowBox[{
+     RowBox[{
+      FractionBox["1", "3"], 
+      RowBox[{"tr", "[", 
+       RowBox[{"P", "**", "X"}], "]"}], "Q"}], "+", 
+     RowBox[{
+      FractionBox["2", "3"], 
+      RowBox[{"P", "**", "X", "**", "Q"}]}]}], "]"}]}], 
+  ";"}], "\[IndentingNewLine]", 
+ RowBox[{
+  RowBox[{"P", "=", 
+   SubscriptBox["\[CapitalGamma]", "M"]}], ";"}], "\[IndentingNewLine]", 
+ RowBox[{
+  RowBox[{"Q", "=", 
+   SubscriptBox["\[CapitalGamma]", "M"]}], ";"}]}], "Input",
+ CellChangeTimes->{{3.505642027236603*^9, 3.5056420573987103`*^9}}],
+
+Cell[BoxData[
+ RowBox[{"(*", " ", 
+  RowBox[{
+   RowBox[{"Contract", " ", "with", " ", 
+    SuperscriptBox["\[CapitalGamma]", 
+     RowBox[{"(", "1", ")"}]]}], ",", " ", 
+   RowBox[{
+    RowBox[{
+     RowBox[{"i", ".", "e", ".", " ", "a"}], " ", "\[CapitalGamma]"}], "-", 
+    RowBox[{"matrix", " ", "with", " ", "one", " ", "index"}]}]}], " ", 
+  "*)"}]], "Input",
+ CellChangeTimes->{{3.5056424804559526`*^9, 3.505642511926693*^9}}],
+
+Cell[CellGroupData[{
+
+Cell[BoxData[
+ RowBox[{"expr1", "=", 
+  RowBox[{
+   RowBox[{"ind", "/.", 
+    RowBox[{"X", "\[Rule]", 
+     SubscriptBox["\[CapitalGamma]", "N"]}]}], "//", 
+   "ReleaseHold"}]}]], "Input",
+ CellChangeTimes->{{3.505642013690394*^9, 3.505642015661117*^9}, {
+  3.505642061948545*^9, 3.505642092486353*^9}, {3.5056421975747347`*^9, 
+  3.505642208537098*^9}}],
+
+Cell[BoxData[
+ RowBox[{
+  RowBox[{
+   FractionBox["2", "3"], " ", 
+   RowBox[{"(", 
+    TagBox[
+     RowBox[{
+      SubsuperscriptBox["\[CapitalGamma]", "M", "2"], " ", 
+      SubscriptBox["\[CapitalGamma]", "N"]}],
+     DisplayForm], ")"}]}], "+", 
+  RowBox[{
+   FractionBox["1", "3"], " ", 
+   TagBox[
+    SubscriptBox["\[CapitalGamma]", "M"],
+    DisplayForm], " ", 
+   RowBox[{"tr", "[", 
+    TagBox[
+     RowBox[{
+      SubscriptBox["\[CapitalGamma]", "M"], " ", 
+      SubscriptBox["\[CapitalGamma]", "N"]}],
+     DisplayForm], "]"}]}]}]], "Output",
+ CellChangeTimes->{{3.505642083914542*^9, 3.5056420932208347`*^9}, 
+   3.505642179619618*^9, 3.5056422096327477`*^9, 3.506093480387824*^9, 
+   3.5122487979121647`*^9}]
+}, Open  ]],
+
+Cell[CellGroupData[{
+
+Cell[BoxData[
+ RowBox[{
+  RowBox[{
+   RowBox[{"expr1", "/.", 
+    RowBox[{"tr", "\[Rule]", "GammaTrace"}]}], "//", "GammaExpand"}], "//", 
+  "GammaExpand"}]], "Input",
+ CellChangeTimes->{{3.50564211857087*^9, 3.505642173386929*^9}, {
+  3.505642212413306*^9, 3.5056422248494*^9}}],
+
+Cell[BoxData[
+ FractionBox[
+  RowBox[{"14", " ", 
+   TagBox[
+    SubscriptBox["\[CapitalGamma]", "N"],
+    DisplayForm]}], "3"]], "Output",
+ CellChangeTimes->{{3.505642151025535*^9, 3.505642173886602*^9}, {
+   3.5056422146465797`*^9, 3.505642225258402*^9}, 3.506093485166097*^9, 
+   3.512248800846332*^9}]
+}, Open  ]],
+
+Cell[BoxData[
+ RowBox[{"(*", " ", "ok", " ", "*)"}]], "Input",
+ CellChangeTimes->{{3.505642514614504*^9, 3.505642517100732*^9}}],
+
+Cell[BoxData[
+ RowBox[{"(*", " ", 
+  RowBox[{
+   RowBox[{
+   "Contract", " ", "with", " ", "the", " ", "2", "nd", " ", "basis", " ", 
+    "element"}], ",", " ", 
+   RowBox[{
+    RowBox[{
+     RowBox[{"i", ".", "e", ".", " ", "a"}], " ", "\[CapitalGamma]"}], "-", 
+    RowBox[{"matrix", " ", "with", " ", "2", " ", 
+     RowBox[{"indices", "."}]}]}]}], " ", "*)"}]], "Input",
+ CellChangeTimes->{{3.505642519109138*^9, 3.505642547364196*^9}, {
+  3.5060933982281246`*^9, 3.506093400904278*^9}, {3.506094565299877*^9, 
+  3.506094569406112*^9}}],
+
+Cell[CellGroupData[{
+
+Cell[BoxData[
+ RowBox[{"expr2", "=", 
+  RowBox[{
+   RowBox[{"ind", "/.", 
+    RowBox[{"X", "\[Rule]", 
+     SubscriptBox["\[CapitalGamma]", 
+      RowBox[{"N1", " ", "N2", " ", "N3", " ", "N4", " ", "N5"}]]}]}], "//", 
+   "ReleaseHold"}]}]], "Input",
+ CellChangeTimes->{{3.50564223342596*^9, 3.505642243662837*^9}, 
+   3.506093214026589*^9, 3.5060945732603326`*^9}],
+
+Cell[BoxData[
+ RowBox[{
+  RowBox[{
+   FractionBox["2", "3"], " ", 
+   RowBox[{"(", 
+    TagBox[
+     RowBox[{
+      SubsuperscriptBox["\[CapitalGamma]", "M", "2"], " ", 
+      SubscriptBox["\[CapitalGamma]", 
+       RowBox[{"N1", "N2", "N3", "N4", "N5"}]]}],
+     DisplayForm], ")"}]}], "+", 
+  RowBox[{
+   FractionBox["1", "3"], " ", 
+   TagBox[
+    SubscriptBox["\[CapitalGamma]", "M"],
+    DisplayForm], " ", 
+   RowBox[{"tr", "[", 
+    TagBox[
+     RowBox[{
+      SubscriptBox["\[CapitalGamma]", "M"], " ", 
+      SubscriptBox["\[CapitalGamma]", 
+       RowBox[{"N1", "N2", "N3", "N4", "N5"}]]}],
+     DisplayForm], "]"}]}]}]], "Output",
+ CellChangeTimes->{3.5056422480527897`*^9}]
+}, Open  ]],
+
+Cell[CellGroupData[{
+
+Cell[BoxData[
+ RowBox[{
+  RowBox[{
+   RowBox[{
+    RowBox[{"expr2", "/.", 
+     RowBox[{"tr", "\[Rule]", "GammaTrace"}]}], "//", "GammaExpand"}], "//", 
+   "GammaExpand"}], "//", "Expand"}]], "Input",
+ CellChangeTimes->{{3.5056422562128067`*^9, 3.505642286162753*^9}, 
+   3.5060932160807066`*^9, 3.506094575699472*^9}],
+
+Cell[BoxData["0"], "Output",
+ CellChangeTimes->{{3.50564225681047*^9, 3.505642286680051*^9}}]
+}, Open  ]],
+
+Cell[BoxData[
+ RowBox[{"(*", " ", "ok", " ", "*)"}]], "Input",
+ CellChangeTimes->{{3.505642550576741*^9, 3.5056425539886723`*^9}}]
+},
+WindowSize->{607, 750},
+WindowMargins->{{Automatic, 77}, {63, Automatic}},
+FrontEndVersion->"8.0 for Microsoft Windows (64-bit) (February 23, 2011)",
+StyleDefinitions->"Default.nb"
+]
+(* End of Notebook Content *)
+
+(* Internal cache information *)
+(*CellTagsOutline
+CellTagsIndex->{}
+*)
+(*CellTagsIndex
+CellTagsIndex->{}
+*)
+(*NotebookFileOutline
+Notebook[{
+Cell[CellGroupData[{
+Cell[567, 22, 241, 5, 31, "Input"],
+Cell[811, 29, 398, 9, 73, "Message"],
+Cell[CellGroupData[{
+Cell[1234, 42, 266, 3, 23, "Print"],
+Cell[1503, 47, 256, 3, 23, "Print"],
+Cell[1762, 52, 269, 3, 23, "Print"]
+}, Open  ]]
+}, Open  ]],
+Cell[2058, 59, 404, 11, 52, "Input"],
+Cell[2465, 72, 321, 7, 72, "Input"],
+Cell[2789, 81, 1230, 26, 112, "Input"],
+Cell[4022, 109, 324, 9, 31, "Input"],
+Cell[4349, 120, 611, 19, 88, "Input"],
+Cell[4963, 141, 433, 11, 31, "Input"],
+Cell[CellGroupData[{
+Cell[5421, 156, 354, 9, 31, "Input"],
+Cell[5778, 167, 723, 23, 47, "Output"]
+}, Open  ]],
+Cell[CellGroupData[{
+Cell[6538, 195, 279, 7, 31, "Input"],
+Cell[6820, 204, 305, 8, 47, "Output"]
+}, Open  ]],
+Cell[7140, 215, 128, 2, 31, "Input"],
+Cell[7271, 219, 540, 13, 52, "Input"],
+Cell[CellGroupData[{
+Cell[7836, 236, 365, 9, 31, "Input"],
+Cell[8204, 247, 685, 23, 47, "Output"]
+}, Open  ]],
+Cell[CellGroupData[{
+Cell[8926, 275, 318, 8, 31, "Input"],
+Cell[9247, 285, 93, 1, 30, "Output"]
+}, Open  ]],
+Cell[9355, 289, 130, 2, 31, "Input"]
+}
+]
+*)
+
+(* End of internal cache information *)

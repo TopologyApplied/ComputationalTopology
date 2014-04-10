@@ -1,0 +1,718 @@
+(************** Content-type: application/mathematica **************
+                     CreatedBy='Mathematica 5.2'
+
+                    Mathematica-Compatible Notebook
+
+This notebook can be used with any Mathematica-compatible
+application, such as Mathematica, MathReader or Publicon. The data
+for the notebook starts with the line containing stars above.
+
+To get the notebook into a Mathematica-compatible application, do
+one of the following:
+
+* Save the data starting with the line of stars above into a file
+  with a name ending in .nb, then open the file inside the
+  application;
+
+* Copy the data starting with the line of stars above to the
+  clipboard, then use the Paste menu command inside the application.
+
+Data for notebooks contains only printable 7-bit ASCII and can be
+sent directly in email or through ftp in text mode.  Newlines can be
+CR, LF or CRLF (Unix, Macintosh or MS-DOS style).
+
+NOTE: If you modify the data for this notebook not in a Mathematica-
+compatible application, you must delete the line below containing
+the word CacheID, otherwise Mathematica-compatible applications may
+try to use invalid cache data.
+
+For more information on notebooks and Mathematica-compatible 
+applications, contact Wolfram Research:
+  web: http://www.wolfram.com
+  email: info@wolfram.com
+  phone: +1-217-398-0700 (U.S.)
+
+Notebook reader applications are available free of charge from 
+Wolfram Research.
+*******************************************************************)
+
+(*CacheID: 232*)
+
+
+(*NotebookFileLineBreakTest
+NotebookFileLineBreakTest*)
+(*NotebookOptionsPosition[     20102,        548]*)
+(*NotebookOutlinePosition[     20746,        570]*)
+(*  CellTagsIndexPosition[     20702,        566]*)
+(*WindowFrame->Normal*)
+
+
+
+Notebook[{
+Cell[BoxData[
+    \(P[n_, k_] := \[Sum]\+\(m = 1\)\%n m\^k\)], "Input"],
+
+Cell[BoxData[
+    \(\(\(e[n_, 1] := P[n, 1];\)\(\[IndentingNewLine]\)
+    \)\)], "Input"],
+
+Cell[BoxData[
+    \(\(\(e[n_, k_] := 
+      Factor[\(1\/k\) \((\[Sum]\+\(j = 1\)\%\(k - 1\)\(\((\(-1\))\)\^\(j - 
+                        1\)\) e[n, k - j]*
+                  P[n, j] + \(\((\(-1\))\)\^\(k - 1\)\) 
+                P[n, k])\)]\)\(\[IndentingNewLine]\)
+    \)\)], "Input"],
+
+Cell[CellGroupData[{
+
+Cell[BoxData[
+    \(e[n, 5]\)], "Input"],
+
+Cell[BoxData[
+    \(\(\((\(-4\) + n)\)\ \((\(-3\) + n)\)\ \((\(-2\) + n)\)\ \((\(-1\) + \
+n)\)\ n\^2\ \((1 + n)\)\^2\ \((\(-6\) - n + 3\ n\^2)\)\)\/11520\)], "Output"]
+}, Open  ]],
+
+Cell[CellGroupData[{
+
+Cell[BoxData[
+    \(e[g - 1, 1]\)], "Input"],
+
+Cell[BoxData[
+    \(1\/2\ \((\(-1\) + g)\)\ g\)], "Output"]
+}, Open  ]],
+
+Cell[CellGroupData[{
+
+Cell[BoxData[
+    \(\[Omega]\_\(1, 1\) = 
+      Simplify[\((e[g - 1, 1]*\[Omega] - \[CapitalLambda]\_1)\)\^2 - \((e[
+                  g - 1, 2] \[Omega]\^2 - 
+              e[g - 1, 
+                  1]*\[Omega]*\[CapitalLambda]\_1 + \
+\[CapitalLambda]\_2)\)]\)], "Input"],
+
+Cell[BoxData[
+    \(\(-\(1\/2\)\)\ \((\(-1\) + 
+            g)\)\ g\ \[Omega]\ \[CapitalLambda]\_1 + \[CapitalLambda]\_1\%2 + 
+      1\/24\ \((g\ \((2 - 3\ g - 2\ g\^2 + 3\ g\^3)\)\ \[Omega]\^2 - 
+            24\ \[CapitalLambda]\_2)\)\)], "Output"]
+}, Open  ]],
+
+Cell[CellGroupData[{
+
+Cell[BoxData[
+    \(\[Omega]\_2 = 
+      e[g + 1, 2] \[Omega]\^2 - 
+        e[g + 1, 
+            1] \[Omega]*\[CapitalLambda]\_1 + \[CapitalLambda]\_2\)], "Input"],
+
+Cell[BoxData[
+    \(1\/24\ g\ \((1 + g)\)\ \((2 + g)\)\ \((5 + 3\ g)\)\ \[Omega]\^2 - 
+      1\/2\ \((1 + g)\)\ \((2 + 
+            g)\)\ \[Omega]\ \[CapitalLambda]\_1 + \[CapitalLambda]\_2\)], \
+"Output"]
+}, Open  ]],
+
+Cell[CellGroupData[{
+
+Cell[BoxData[
+    \(Simplify[\[Omega]\_\(1, 1\) + \[Omega]\_2]\)], "Input"],
+
+Cell[BoxData[
+    \(1\/4\ \((g\ \((2 + 3\ g + 2\ g\^2 + g\^3)\)\ \[Omega]\^2 - 
+          4\ \((1 + g + g\^2)\)\ \[Omega]\ \[CapitalLambda]\_1 + 
+          4\ \[CapitalLambda]\_1\%2)\)\)], "Output"]
+}, Open  ]],
+
+Cell[CellGroupData[{
+
+Cell[BoxData[
+    \(\[Omega]\_1 = e[g, 1] \[Omega] - \[CapitalLambda]\_1\)], "Input"],
+
+Cell[BoxData[
+    \(1\/2\ g\ \((1 + g)\)\ \[Omega] - \[CapitalLambda]\_1\)], "Output"]
+}, Open  ]],
+
+Cell[CellGroupData[{
+
+Cell[BoxData[
+    \(Simplify[\[Omega]\_\(1, 1\) + \[Omega]\_2 - \[Omega]\_1*\((\[Omega]\_1 \
++ \[Omega])\)]\)], "Input"],
+
+Cell[BoxData[
+    \(0\)], "Output"],
+
+Cell[BoxData[
+    \(0\)], "Output",
+  GeneratedCell->False,
+  CellAutoOverwrite->False]
+}, Open  ]],
+
+Cell[CellGroupData[{
+
+Cell[BoxData[
+    \(0\)], "Input",
+  GeneratedCell->False,
+  CellAutoOverwrite->False],
+
+Cell[BoxData[
+    \(0\)], "Output"]
+}, Open  ]],
+
+Cell[BoxData[{
+    \(\(Chern[N_, 
+          r_] := \[Sum]\+\(j = 1\)\%r\((\(-1\))\)\^\(r - j\)*
+              e[N + 1, 
+                j]*\[Omega]\^j*\[CapitalLambda]\_\(r - j\) + \
+\(\((\(-1\))\)\^r\) \[CapitalLambda]\_r;\)\), "\[IndentingNewLine]", 
+    \(Ch[N_, r_] := If[r < 0, 0, Chern[N, r]]\), "\[IndentingNewLine]", 
+    \(\(\[CapitalLambda]\_0 = 1;\)\)}], "Input"],
+
+Cell[BoxData[
+    \(w[r_] := Ch[r - 2 + g, r]\)], "Input"],
+
+Cell[CellGroupData[{
+
+Cell[BoxData[
+    \(w[3]\)], "Input"],
+
+Cell[BoxData[
+    \(1\/48\ g\ \((1 + g)\)\ \((2 + g)\)\^2\ \((3 + g)\)\^2\ \[Omega]\^3 - 
+      1\/24\ \((1 + g)\)\ \((2 + g)\)\ \((3 + g)\)\ \((8 + 
+            3\ g)\)\ \[Omega]\^2\ \[CapitalLambda]\_1 + 
+      1\/2\ \((2 + g)\)\ \((3 + 
+            g)\)\ \[Omega]\ \[CapitalLambda]\_2 - \[CapitalLambda]\_3\)], \
+"Output"]
+}, Open  ]],
+
+Cell[CellGroupData[{
+
+Cell[BoxData[
+    \(Simplify[\[Omega]\_\(1, 1\) + \[Omega]\_2 - 
+        w[1]*\((w[1] + \[Omega])\)]\)], "Input"],
+
+Cell[BoxData[
+    \(0\)], "Output"]
+}, Open  ]],
+
+Cell[CellGroupData[{
+
+Cell[BoxData[
+    \(\[Omega]\_\(2, 1\) = 
+      Simplify[Ch[g, 2]*Ch[g - 2, 1] - Ch[g, 3]]\)], "Input"],
+
+Cell[BoxData[
+    \(1\/24\ \((2\ g\ \[Omega]\^3 - g\^2\ \[Omega]\^3 - 
+          5\ g\^3\ \[Omega]\^3 + 3\ g\^5\ \[Omega]\^3 + g\^6\ \[Omega]\^3 + 
+          12\ \((2 + 3\ g + g\^2)\)\ \[Omega]\ \[CapitalLambda]\_1\%2 - 
+          24\ \((\[Omega] + 2\ g\ \[Omega])\)\ \[CapitalLambda]\_2 - 
+          6\ \[CapitalLambda]\_1\ \((g\ \((\(-2\) - g + 2\ g\^2 + 
+                      g\^3)\)\ \[Omega]\^2 + 4\ \[CapitalLambda]\_2)\) + 
+          24\ \[CapitalLambda]\_3)\)\)], "Output"]
+}, Open  ]],
+
+Cell[CellGroupData[{
+
+Cell[BoxData[
+    \(\[Omega]\_3 = w[3]\)], "Input"],
+
+Cell[BoxData[
+    \(1\/48\ g\ \((1 + g)\)\ \((2 + g)\)\^2\ \((3 + g)\)\^2\ \[Omega]\^3 - 
+      1\/24\ \((1 + g)\)\ \((2 + g)\)\ \((3 + g)\)\ \((8 + 
+            3\ g)\)\ \[Omega]\^2\ \[CapitalLambda]\_1 + 
+      1\/2\ \((2 + g)\)\ \((3 + 
+            g)\)\ \[Omega]\ \[CapitalLambda]\_2 - \[CapitalLambda]\_3\)], \
+"Output"]
+}, Open  ]],
+
+Cell[BoxData[
+    \(a[i_, j_] := Ch[g - 3, 1 - i + j]\)], "Input"],
+
+Cell[CellGroupData[{
+
+Cell[BoxData[
+    \(A = Table[a[i, j], {i, 1, 3}, {j, 1, 3}]\)], "Input"],
+
+Cell[BoxData[
+    \({{1\/2\ \((\(-2\) + g)\)\ \((\(-1\) + 
+                g)\)\ \[Omega] - \[CapitalLambda]\_1, 
+        1\/24\ \((\(-3\) + g)\)\ \((\(-2\) + g)\)\ \((\(-1\) + 
+                g)\)\ \((\(-4\) + 3\ g)\)\ \[Omega]\^2 - 
+          1\/2\ \((\(-2\) + g)\)\ \((\(-1\) + 
+                g)\)\ \[Omega]\ \[CapitalLambda]\_1 + \[CapitalLambda]\_2, 
+        1\/48\ \((\(-4\) + g)\)\ \((\(-3\) + 
+                g)\)\ \((\(-2\) + g)\)\^2\ \((\(-1\) + g)\)\^2\ \[Omega]\^3 - 
+          1\/24\ \((\(-3\) + g)\)\ \((\(-2\) + g)\)\ \((\(-1\) + 
+                g)\)\ \((\(-4\) + 3\ g)\)\ \[Omega]\^2\ \[CapitalLambda]\_1 + 
+          1\/2\ \((\(-2\) + g)\)\ \((\(-1\) + 
+                g)\)\ \[Omega]\ \[CapitalLambda]\_2 - \[CapitalLambda]\_3}, \
+{1, 1\/2\ \((\(-2\) + g)\)\ \((\(-1\) + g)\)\ \[Omega] - \[CapitalLambda]\_1, 
+        1\/24\ \((\(-3\) + g)\)\ \((\(-2\) + g)\)\ \((\(-1\) + 
+                g)\)\ \((\(-4\) + 3\ g)\)\ \[Omega]\^2 - 
+          1\/2\ \((\(-2\) + g)\)\ \((\(-1\) + 
+                g)\)\ \[Omega]\ \[CapitalLambda]\_1 + \[CapitalLambda]\_2}, \
+{0, 1, 1\/2\ \((\(-2\) + g)\)\ \((\(-1\) + 
+                g)\)\ \[Omega] - \[CapitalLambda]\_1}}\)], "Output"]
+}, Open  ]],
+
+Cell[CellGroupData[{
+
+Cell[BoxData[
+    \(\[Omega]\_\(1, 1, 1\) = Simplify[Det[A]]\)], "Input"],
+
+Cell[BoxData[
+    \(1\/48\ \((4\ g\ \[Omega]\^3 - 8\ g\^2\ \[Omega]\^3 + 
+          g\^3\ \[Omega]\^3 + 7\ g\^4\ \[Omega]\^3 - 5\ g\^5\ \[Omega]\^3 + 
+          g\^6\ \[Omega]\^3 + 
+          24\ \((2 - 3\ g + g\^2)\)\ \[Omega]\ \[CapitalLambda]\_1\%2 - 
+          48\ \[CapitalLambda]\_1\%3 - 
+          24\ \((2 - 3\ g + 
+                g\^2)\)\ \[Omega]\ \[CapitalLambda]\_2 + \[CapitalLambda]\_1\ \
+\((2\ g\ \((10 - 21\ g + 14\ g\^2 - 3\ g\^3)\)\ \[Omega]\^2 + 
+                96\ \[CapitalLambda]\_2)\) - 
+          48\ \[CapitalLambda]\_3)\)\)], "Output"]
+}, Open  ]],
+
+Cell[CellGroupData[{
+
+Cell[BoxData[
+    \(Simplify[\[Omega]\_3 + \[Omega]\_\(2, 1\) - \[Omega]\_2*\((\[Omega]\_1 \
++ 2  \[Omega])\)]\)], "Input"],
+
+Cell[BoxData[
+    \(0\)], "Output"]
+}, Open  ]],
+
+Cell[CellGroupData[{
+
+Cell[BoxData[
+    \(Simplify[\[Omega]\_\(2, 1\) + \[Omega]\_\(1, 1, 1\) - \[Omega]\_\(1, \
+1\)*\((\[Omega]\_1 + 2  \[Omega])\)]\)], "Input"],
+
+Cell[BoxData[
+    \(0\)], "Output"]
+}, Open  ]],
+
+Cell[CellGroupData[{
+
+Cell[BoxData[
+    \(\[Omega]\_4 = w[4]\)], "Input"],
+
+Cell[BoxData[
+    \(\(g\ \((1 + g)\)\ \((2 + g)\)\ \((3 + g)\)\ \((4 + g)\)\ \((502 + 485\ \
+g + 150\ g\^2 + 15\ g\^3)\)\ \[Omega]\^4\)\/5760 - 
+      1\/48\ \((1 + g)\)\ \((2 + 
+            g)\)\ \((3 + g)\)\^2\ \((4 + g)\)\^2\ \[Omega]\^3\ \
+\[CapitalLambda]\_1 + 
+      1\/24\ \((2 + g)\)\ \((3 + g)\)\ \((4 + g)\)\ \((11 + 
+            3\ g)\)\ \[Omega]\^2\ \[CapitalLambda]\_2 - 
+      1\/2\ \((3 + g)\)\ \((4 + 
+            g)\)\ \[Omega]\ \[CapitalLambda]\_3 + \[CapitalLambda]\_4\)], \
+"Output"]
+}, Open  ]],
+
+Cell[CellGroupData[{
+
+Cell[BoxData[
+    \(\[Omega]\_\(3, 1\) = 
+      Simplify[Ch[g + 1, 3]*Ch[g - 2, 1] - Ch[g + 1, 4]]\)], "Input"],
+
+Cell[BoxData[
+    \(\(-\(\(\((\(-1\) + g)\)\ g\ \((1 + g)\)\ \((2 + g)\)\ \((3 + 
+                  g)\)\ \((152 + 230\ g + 105\ g\^2 + 
+                  15\ g\^3)\)\ \[Omega]\^4\)\/5760\)\) + 
+      1\/48\ g\ \((1 + 
+            g)\)\ \((2 + g)\)\^2\ \((3 + g)\)\^2\ \[Omega]\^3\ \
+\[CapitalLambda]\_1 - 
+      1\/24\ \((1 + g)\)\ \((2 + g)\)\ \((3 + g)\)\ \((8 + 
+            3\ g)\)\ \[Omega]\^2\ \[CapitalLambda]\_2 + 
+      1\/48\ \((1\/2\ \((\(-1\) + 
+                  g)\)\ g\ \[Omega] - \[CapitalLambda]\_1)\)\ \((g\ \((1 + 
+                  g)\)\ \((2 + g)\)\^2\ \((3 + g)\)\^2\ \[Omega]\^3 - 
+            2\ \((1 + g)\)\ \((2 + g)\)\ \((3 + g)\)\ \((8 + 
+                  3\ g)\)\ \[Omega]\^2\ \[CapitalLambda]\_1 + 
+            24\ \((2 + g)\)\ \((3 + g)\)\ \[Omega]\ \[CapitalLambda]\_2 - 
+            48\ \[CapitalLambda]\_3)\) + 
+      1\/2\ \((2 + g)\)\ \((3 + 
+            g)\)\ \[Omega]\ \[CapitalLambda]\_3 - \[CapitalLambda]\_4\)], \
+"Output"]
+}, Open  ]],
+
+Cell[CellGroupData[{
+
+Cell[BoxData[
+    \(\[Omega]\_\(2, 2\) = 
+      Ch[g - 1, 2]*Ch[g - 1, 2] - Ch[g - 1, 3]*Ch[g - 1, 1]\)], "Input"],
+
+Cell[BoxData[
+    \(\((1\/24\ \((\(-1\) + g)\)\ g\ \((1 + g)\)\ \((2 + 3\ g)\)\ \[Omega]\^2 \
+- 1\/2\ g\ \((1 + g)\)\ \[Omega]\ \[CapitalLambda]\_1 + \
+\[CapitalLambda]\_2)\)\^2 - \((1\/2\ g\ \((1 + 
+                  g)\)\ \[Omega] - \[CapitalLambda]\_1)\)\ \((1\/48\ \
+\((\(-2\) + g)\)\ \((\(-1\) + g)\)\ g\^2\ \((1 + g)\)\^2\ \[Omega]\^3 - 
+            1\/24\ \((\(-1\) + g)\)\ g\ \((1 + g)\)\ \((2 + 
+                  3\ g)\)\ \[Omega]\^2\ \[CapitalLambda]\_1 + 
+            1\/2\ g\ \((1 + 
+                  g)\)\ \[Omega]\ \[CapitalLambda]\_2 - \
+\[CapitalLambda]\_3)\)\)], "Output"]
+}, Open  ]],
+
+Cell[CellGroupData[{
+
+Cell[BoxData[
+    \(A\_\(2, 1, 1\) = {{Ch[g, 2], Ch[g, 3], Ch[g, 4]}, {1, Ch[g - 3, 1], 
+          Ch[g - 3, 2]}, {0, 1, Ch[g - 3, 1]}}\)], "Input"],
+
+Cell[BoxData[
+    \({{1\/24\ g\ \((1 + g)\)\ \((2 + g)\)\ \((5 + 3\ g)\)\ \[Omega]\^2 - 
+          1\/2\ \((1 + g)\)\ \((2 + 
+                g)\)\ \[Omega]\ \[CapitalLambda]\_1 + \[CapitalLambda]\_2, 
+        1\/48\ \((\(-1\) + 
+                g)\)\ g\ \((1 + g)\)\^2\ \((2 + g)\)\^2\ \[Omega]\^3 - 
+          1\/24\ g\ \((1 + g)\)\ \((2 + g)\)\ \((5 + 
+                3\ g)\)\ \[Omega]\^2\ \[CapitalLambda]\_1 + 
+          1\/2\ \((1 + g)\)\ \((2 + 
+                g)\)\ \[Omega]\ \[CapitalLambda]\_2 - \[CapitalLambda]\_3, \(\
+\((\(-2\) + g)\)\ \((\(-1\) + g)\)\ g\ \((1 + g)\)\ \((2 + g)\)\ \((12 + 65\ \
+g + 60\ g\^2 + 15\ g\^3)\)\ \[Omega]\^4\)\/5760 - 
+          1\/48\ \((\(-1\) + 
+                g)\)\ g\ \((1 + g)\)\^2\ \((2 + g)\)\^2\ \[Omega]\^3\ \
+\[CapitalLambda]\_1 + 
+          1\/24\ g\ \((1 + g)\)\ \((2 + g)\)\ \((5 + 
+                3\ g)\)\ \[Omega]\^2\ \[CapitalLambda]\_2 - 
+          1\/2\ \((1 + g)\)\ \((2 + 
+                g)\)\ \[Omega]\ \[CapitalLambda]\_3 + \[CapitalLambda]\_4}, \
+{1, 1\/2\ \((\(-2\) + g)\)\ \((\(-1\) + g)\)\ \[Omega] - \[CapitalLambda]\_1, 
+        1\/24\ \((\(-3\) + g)\)\ \((\(-2\) + g)\)\ \((\(-1\) + 
+                g)\)\ \((\(-4\) + 3\ g)\)\ \[Omega]\^2 - 
+          1\/2\ \((\(-2\) + g)\)\ \((\(-1\) + 
+                g)\)\ \[Omega]\ \[CapitalLambda]\_1 + \[CapitalLambda]\_2}, \
+{0, 1, 1\/2\ \((\(-2\) + g)\)\ \((\(-1\) + 
+                g)\)\ \[Omega] - \[CapitalLambda]\_1}}\)], "Output"]
+}, Open  ]],
+
+Cell[CellGroupData[{
+
+Cell[BoxData[
+    \(\[Omega]\_\(2, 1, 1\) = Det[A\_\(2, 1, 1\)]\)], "Input"],
+
+Cell[BoxData[
+    \(\(11\ g\ \[Omega]\^4\)\/120 - \(25\ g\^2\ \[Omega]\^4\)\/288 - \(5\ \
+g\^3\ \[Omega]\^4\)\/32 + \(161\ g\^4\ \[Omega]\^4\)\/1152 + \(3\ g\^5\ \
+\[Omega]\^4\)\/40 - \(35\ g\^6\ \[Omega]\^4\)\/576 - \(g\^7\ \
+\[Omega]\^4\)\/96 + \(g\^8\ \[Omega]\^4\)\/128 + 
+      5\/12\ g\ \[Omega]\^3\ \[CapitalLambda]\_1 - 
+      1\/4\ g\^2\ \[Omega]\^3\ \[CapitalLambda]\_1 - 
+      25\/48\ g\^3\ \[Omega]\^3\ \[CapitalLambda]\_1 + 
+      5\/16\ g\^4\ \[Omega]\^3\ \[CapitalLambda]\_1 + 
+      5\/48\ g\^5\ \[Omega]\^3\ \[CapitalLambda]\_1 - 
+      1\/16\ g\^6\ \[Omega]\^3\ \[CapitalLambda]\_1 + \[Omega]\^2\ \
+\[CapitalLambda]\_1\%2 - 5\/4\ g\^2\ \[Omega]\^2\ \[CapitalLambda]\_1\%2 + 
+      1\/4\ g\^4\ \[Omega]\^2\ \[CapitalLambda]\_1\%2 - \[Omega]\ \
+\[CapitalLambda]\_1\%3 - 3\/2\ g\ \[Omega]\ \[CapitalLambda]\_1\%3 - 
+      1\/2\ g\^2\ \[Omega]\ \[CapitalLambda]\_1\%3 - \[Omega]\^2\ \
+\[CapitalLambda]\_2 - 5\/12\ g\ \[Omega]\^2\ \[CapitalLambda]\_2 + 
+      17\/8\ g\^2\ \[Omega]\^2\ \[CapitalLambda]\_2 - 
+      7\/12\ g\^3\ \[Omega]\^2\ \[CapitalLambda]\_2 - 
+      1\/8\ g\^4\ \[Omega]\^2\ \[CapitalLambda]\_2 + \[Omega]\ \
+\[CapitalLambda]\_1\ \[CapitalLambda]\_2 + 
+      9\/2\ g\ \[Omega]\ \[CapitalLambda]\_1\ \[CapitalLambda]\_2 + 
+      1\/2\ g\^2\ \[Omega]\ \[CapitalLambda]\_1\ \[CapitalLambda]\_2 + \
+\[CapitalLambda]\_1\%2\ \[CapitalLambda]\_2 - \[CapitalLambda]\_2\%2 - 
+      3\ g\ \[Omega]\ \[CapitalLambda]\_3 - \[CapitalLambda]\_1\ \
+\[CapitalLambda]\_3 + \[CapitalLambda]\_4\)], "Output"]
+}, Open  ]],
+
+Cell[CellGroupData[{
+
+Cell[BoxData[
+    \(A\_\(1, 1, 1, 1\) = 
+      Table[Ch[g - 4, 1 - i + j], {i, 1, 4}, {j, 1, 4}]\)], "Input"],
+
+Cell[BoxData[
+    \({{1\/2\ \((\(-3\) + g)\)\ \((\(-2\) + 
+                g)\)\ \[Omega] - \[CapitalLambda]\_1, 
+        1\/24\ \((\(-4\) + g)\)\ \((\(-3\) + g)\)\ \((\(-2\) + 
+                g)\)\ \((\(-7\) + 3\ g)\)\ \[Omega]\^2 - 
+          1\/2\ \((\(-3\) + g)\)\ \((\(-2\) + 
+                g)\)\ \[Omega]\ \[CapitalLambda]\_1 + \[CapitalLambda]\_2, 
+        1\/48\ \((\(-5\) + g)\)\ \((\(-4\) + 
+                g)\)\ \((\(-3\) + g)\)\^2\ \((\(-2\) + g)\)\^2\ \[Omega]\^3 - 
+          1\/24\ \((\(-4\) + g)\)\ \((\(-3\) + g)\)\ \((\(-2\) + 
+                g)\)\ \((\(-7\) + 3\ g)\)\ \[Omega]\^2\ \[CapitalLambda]\_1 + 
+          1\/2\ \((\(-3\) + g)\)\ \((\(-2\) + 
+                g)\)\ \[Omega]\ \[CapitalLambda]\_2 - \[CapitalLambda]\_3, \(\
+\((\(-6\) + g)\)\ \((\(-5\) + g)\)\ \((\(-4\) + g)\)\ \((\(-3\) + g)\)\ \
+\((\(-2\) + g)\)\ \((\(-248\) + 305\ g - 120\ g\^2 + 15\ g\^3)\)\ \[Omega]\^4\
+\)\/5760 - 
+          1\/48\ \((\(-5\) + g)\)\ \((\(-4\) + 
+                g)\)\ \((\(-3\) + g)\)\^2\ \((\(-2\) + g)\)\^2\ \[Omega]\^3\ \
+\[CapitalLambda]\_1 + 
+          1\/24\ \((\(-4\) + g)\)\ \((\(-3\) + g)\)\ \((\(-2\) + 
+                g)\)\ \((\(-7\) + 3\ g)\)\ \[Omega]\^2\ \[CapitalLambda]\_2 - 
+          1\/2\ \((\(-3\) + g)\)\ \((\(-2\) + 
+                g)\)\ \[Omega]\ \[CapitalLambda]\_3 + \[CapitalLambda]\_4}, \
+{1, 1\/2\ \((\(-3\) + g)\)\ \((\(-2\) + g)\)\ \[Omega] - \[CapitalLambda]\_1, 
+        1\/24\ \((\(-4\) + g)\)\ \((\(-3\) + g)\)\ \((\(-2\) + 
+                g)\)\ \((\(-7\) + 3\ g)\)\ \[Omega]\^2 - 
+          1\/2\ \((\(-3\) + g)\)\ \((\(-2\) + 
+                g)\)\ \[Omega]\ \[CapitalLambda]\_1 + \[CapitalLambda]\_2, 
+        1\/48\ \((\(-5\) + g)\)\ \((\(-4\) + 
+                g)\)\ \((\(-3\) + g)\)\^2\ \((\(-2\) + g)\)\^2\ \[Omega]\^3 - 
+          1\/24\ \((\(-4\) + g)\)\ \((\(-3\) + g)\)\ \((\(-2\) + 
+                g)\)\ \((\(-7\) + 3\ g)\)\ \[Omega]\^2\ \[CapitalLambda]\_1 + 
+          1\/2\ \((\(-3\) + g)\)\ \((\(-2\) + 
+                g)\)\ \[Omega]\ \[CapitalLambda]\_2 - \[CapitalLambda]\_3}, \
+{0, 1, 1\/2\ \((\(-3\) + g)\)\ \((\(-2\) + 
+                g)\)\ \[Omega] - \[CapitalLambda]\_1, 
+        1\/24\ \((\(-4\) + g)\)\ \((\(-3\) + g)\)\ \((\(-2\) + 
+                g)\)\ \((\(-7\) + 3\ g)\)\ \[Omega]\^2 - 
+          1\/2\ \((\(-3\) + g)\)\ \((\(-2\) + 
+                
+                g)\)\ \[Omega]\ \[CapitalLambda]\_1 + \[CapitalLambda]\_2}, \
+{0, 0, 1, 
+        1\/2\ \((\(-3\) + g)\)\ \((\(-2\) + 
+                g)\)\ \[Omega] - \[CapitalLambda]\_1}}\)], "Output"]
+}, Open  ]],
+
+Cell[CellGroupData[{
+
+Cell[BoxData[
+    \(\[Omega]\_\(1, 1, 1, 1\) = Det[A\_\(1, 1, 1, 1\)]\)], "Input"],
+
+Cell[BoxData[
+    \(\(19\ g\ \[Omega]\^4\)\/120 - \(107\ g\^2\ \[Omega]\^4\)\/288 + \(17\ g\
+\^3\ \[Omega]\^4\)\/96 + \(259\ g\^4\ \[Omega]\^4\)\/1152 - \(73\ g\^5\ \
+\[Omega]\^4\)\/240 + \(83\ g\^6\ \[Omega]\^4\)\/576 - \(g\^7\ \
+\[Omega]\^4\)\/32 + \(g\^8\ \[Omega]\^4\)\/384 + 
+      3\/4\ g\ \[Omega]\^3\ \[CapitalLambda]\_1 - 
+      2\ g\^2\ \[Omega]\^3\ \[CapitalLambda]\_1 + 
+      97\/48\ g\^3\ \[Omega]\^3\ \[CapitalLambda]\_1 - 
+      47\/48\ g\^4\ \[Omega]\^3\ \[CapitalLambda]\_1 + 
+      11\/48\ g\^5\ \[Omega]\^3\ \[CapitalLambda]\_1 - 
+      1\/48\ g\^6\ \[Omega]\^3\ \[CapitalLambda]\_1 + 
+      2\ \[Omega]\^2\ \[CapitalLambda]\_1\%2 - 
+      53\/12\ g\ \[Omega]\^2\ \[CapitalLambda]\_1\%2 + 
+      27\/8\ g\^2\ \[Omega]\^2\ \[CapitalLambda]\_1\%2 - 
+      13\/12\ g\^3\ \[Omega]\^2\ \[CapitalLambda]\_1\%2 + 
+      1\/8\ g\^4\ \[Omega]\^2\ \[CapitalLambda]\_1\%2 - 
+      3\ \[Omega]\ \[CapitalLambda]\_1\%3 + 
+      5\/2\ g\ \[Omega]\ \[CapitalLambda]\_1\%3 - 
+      1\/2\ g\^2\ \[Omega]\ \[CapitalLambda]\_1\%3 + \[CapitalLambda]\_1\%4 - 
+      2\ \[Omega]\^2\ \[CapitalLambda]\_2 + 
+      53\/12\ g\ \[Omega]\^2\ \[CapitalLambda]\_2 - 
+      27\/8\ g\^2\ \[Omega]\^2\ \[CapitalLambda]\_2 + 
+      13\/12\ g\^3\ \[Omega]\^2\ \[CapitalLambda]\_2 - 
+      1\/8\ g\^4\ \[Omega]\^2\ \[CapitalLambda]\_2 + 
+      6\ \[Omega]\ \[CapitalLambda]\_1\ \[CapitalLambda]\_2 - 
+      5\ g\ \[Omega]\ \[CapitalLambda]\_1\ \[CapitalLambda]\_2 + 
+      g\^2\ \[Omega]\ \[CapitalLambda]\_1\ \[CapitalLambda]\_2 - 
+      3\ \[CapitalLambda]\_1\%2\ \[CapitalLambda]\_2 + \[CapitalLambda]\_2\%2 \
+- 3\ \[Omega]\ \[CapitalLambda]\_3 + 5\/2\ g\ \[Omega]\ \[CapitalLambda]\_3 - 
+      1\/2\ g\^2\ \[Omega]\ \[CapitalLambda]\_3 + 
+      2\ \[CapitalLambda]\_1\ \[CapitalLambda]\_3 - \[CapitalLambda]\_4\)], \
+"Output"]
+}, Open  ]],
+
+Cell[CellGroupData[{
+
+Cell[BoxData[
+    \(Simplify[\[Omega]\_4 + \[Omega]\_\(3, 1\) - \[Omega]\_3*\((\[Omega]\_1 \
++ 3  \[Omega])\)]\)], "Input"],
+
+Cell[BoxData[
+    \(0\)], "Output"]
+}, Open  ]],
+
+Cell[CellGroupData[{
+
+Cell[BoxData[
+    \(Simplify[\[Omega]\_\(3, 1\) + \[Omega]\_\(2, 2\) + \[Omega]\_\(2, 1, \
+1\) - \[Omega]\_\(2, 1\)*\((\[Omega]\_1 + 3  \[Omega])\)]\)], "Input"],
+
+Cell[BoxData[
+    \(0\)], "Output"]
+}, Open  ]],
+
+Cell[CellGroupData[{
+
+Cell[BoxData[
+    \(Simplify[\[Omega]\_\(2, 1, 1\) + \[Omega]\_\(1, 1, 1, 1\) - \
+\[Omega]\_\(1, 1, 1\)*\((\[Omega]\_1 + 3  \[Omega])\)]\)], "Input"],
+
+Cell[BoxData[
+    \(0\)], "Output"]
+}, Open  ]]
+},
+FrontEndVersion->"5.2 for Microsoft Windows",
+ScreenRectangle->{{0, 1024}, {0, 671}},
+WindowSize->{1008, 633},
+WindowMargins->{{0, Automatic}, {Automatic, 0}}
+]
+
+(*******************************************************************
+Cached data follows.  If you edit this Notebook file directly, not
+using Mathematica, you must remove the line containing CacheID at
+the top of  the file.  The cache data will then be recreated when
+you save this file from within Mathematica.
+*******************************************************************)
+
+(*CellTagsOutline
+CellTagsIndex->{}
+*)
+
+(*CellTagsIndex
+CellTagsIndex->{}
+*)
+
+(*NotebookFileOutline
+Notebook[{
+Cell[1754, 51, 71, 1, 49, "Input"],
+Cell[1828, 54, 89, 2, 50, "Input"],
+Cell[1920, 58, 286, 6, 76, "Input"],
+
+Cell[CellGroupData[{
+Cell[2231, 68, 40, 1, 30, "Input"],
+Cell[2274, 71, 167, 2, 45, "Output"]
+}, Open  ]],
+
+Cell[CellGroupData[{
+Cell[2478, 78, 44, 1, 30, "Input"],
+Cell[2525, 81, 59, 1, 42, "Output"]
+}, Open  ]],
+
+Cell[CellGroupData[{
+Cell[2621, 87, 274, 6, 31, "Input"],
+Cell[2898, 95, 249, 4, 42, "Output"]
+}, Open  ]],
+
+Cell[CellGroupData[{
+Cell[3184, 104, 164, 4, 30, "Input"],
+Cell[3351, 110, 205, 4, 42, "Output"]
+}, Open  ]],
+
+Cell[CellGroupData[{
+Cell[3593, 119, 75, 1, 30, "Input"],
+Cell[3671, 122, 198, 3, 42, "Output"]
+}, Open  ]],
+
+Cell[CellGroupData[{
+Cell[3906, 130, 85, 1, 30, "Input"],
+Cell[3994, 133, 86, 1, 42, "Output"]
+}, Open  ]],
+
+Cell[CellGroupData[{
+Cell[4117, 139, 120, 2, 30, "Input"],
+Cell[4240, 143, 35, 1, 29, "Output"],
+Cell[4278, 146, 87, 3, 29, "Output"]
+}, Open  ]],
+
+Cell[CellGroupData[{
+Cell[4402, 154, 86, 3, 30, "Input"],
+Cell[4491, 159, 35, 1, 29, "Output"]
+}, Open  ]],
+Cell[4541, 163, 374, 7, 93, "Input"],
+Cell[4918, 172, 58, 1, 30, "Input"],
+
+Cell[CellGroupData[{
+Cell[5001, 177, 37, 1, 30, "Input"],
+Cell[5041, 180, 325, 6, 42, "Output"]
+}, Open  ]],
+
+Cell[CellGroupData[{
+Cell[5403, 191, 113, 2, 30, "Input"],
+Cell[5519, 195, 35, 1, 29, "Output"]
+}, Open  ]],
+
+Cell[CellGroupData[{
+Cell[5591, 201, 103, 2, 30, "Input"],
+Cell[5697, 205, 482, 7, 42, "Output"]
+}, Open  ]],
+
+Cell[CellGroupData[{
+Cell[6216, 217, 51, 1, 30, "Input"],
+Cell[6270, 220, 325, 6, 42, "Output"]
+}, Open  ]],
+Cell[6610, 229, 66, 1, 30, "Input"],
+
+Cell[CellGroupData[{
+Cell[6701, 234, 73, 1, 30, "Input"],
+Cell[6777, 237, 1192, 19, 110, "Output"]
+}, Open  ]],
+
+Cell[CellGroupData[{
+Cell[8006, 261, 73, 1, 30, "Input"],
+Cell[8082, 264, 563, 10, 62, "Output"]
+}, Open  ]],
+
+Cell[CellGroupData[{
+Cell[8682, 279, 123, 2, 30, "Input"],
+Cell[8808, 283, 35, 1, 29, "Output"]
+}, Open  ]],
+
+Cell[CellGroupData[{
+Cell[8880, 289, 140, 2, 30, "Input"],
+Cell[9023, 293, 35, 1, 29, "Output"]
+}, Open  ]],
+
+Cell[CellGroupData[{
+Cell[9095, 299, 51, 1, 30, "Input"],
+Cell[9149, 302, 503, 10, 79, "Output"]
+}, Open  ]],
+
+Cell[CellGroupData[{
+Cell[9689, 317, 111, 2, 30, "Input"],
+Cell[9803, 321, 966, 18, 113, "Output"]
+}, Open  ]],
+
+Cell[CellGroupData[{
+Cell[10806, 344, 114, 2, 30, "Input"],
+Cell[10923, 348, 591, 10, 77, "Output"]
+}, Open  ]],
+
+Cell[CellGroupData[{
+Cell[11551, 363, 148, 2, 30, "Input"],
+Cell[11702, 367, 1456, 25, 181, "Output"]
+}, Open  ]],
+
+Cell[CellGroupData[{
+Cell[13195, 397, 76, 1, 30, "Input"],
+Cell[13274, 400, 1523, 24, 113, "Output"]
+}, Open  ]],
+
+Cell[CellGroupData[{
+Cell[14834, 429, 109, 2, 30, "Input"],
+Cell[14946, 433, 2546, 43, 249, "Output"]
+}, Open  ]],
+
+Cell[CellGroupData[{
+Cell[17529, 481, 82, 1, 30, "Input"],
+Cell[17614, 484, 1814, 31, 113, "Output"]
+}, Open  ]],
+
+Cell[CellGroupData[{
+Cell[19465, 520, 123, 2, 30, "Input"],
+Cell[19591, 524, 35, 1, 29, "Output"]
+}, Open  ]],
+
+Cell[CellGroupData[{
+Cell[19663, 530, 161, 2, 30, "Input"],
+Cell[19827, 534, 35, 1, 29, "Output"]
+}, Open  ]],
+
+Cell[CellGroupData[{
+Cell[19899, 540, 149, 2, 30, "Input"],
+Cell[20051, 544, 35, 1, 29, "Output"]
+}, Open  ]]
+}
+]
+*)
+
+
+
+(*******************************************************************
+End of Mathematica Notebook file.
+*******************************************************************)
+

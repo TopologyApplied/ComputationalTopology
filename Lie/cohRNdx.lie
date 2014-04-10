@@ -1,0 +1,394 @@
+##### line break required to define a new function #####
+##### Setting the parameters for D=6 #####
+# maxobjects 30000000
+maxobjects 10000000
+#on monitor
+#monfil result_coh.log
+# initialize the types of variables #
+Nsusy=1
+dimD=13
+dimDsub=13
+dimx=dimD%8
+rank=dimD/2
+Nt=0
+#Ncomplexify=1
+s=X []
+v=X []
+ssusy=[]
+vsusy=null(Nsusy-1)
+dimvadd=1
+gsusy=T0
+  if dimDsub>dimD/2 then dimDsub=dimD-dimDsub; fi;
+### Lie group of SO(D) ###
+sod(int d)=
+{
+loc gn=4-2*(d-d/2*2);
+loc rankd=d/2;
+loc sogroup=T0;
+ if d>4 then sogroup=Lie_group(gn,rankd) else
+   if d==4 then sogroup=A1A1 else
+       if d==3 then sogroup=A1 else
+            if d==2 then sogroup=T1 else
+                  sogroup=T0;
+            fi;
+      fi;
+   fi;
+fi;
+sogroup
+}
+if Nsusy>1 then 
+  gsusy=Lie_group(1,Nsusy-1);
+  ssusy=null(Nsusy-2);
+  fi;
+# note any torus will be moved to the end #
+setdefault sod(dimD-dimDsub)*sod(dimDsub)*gsusy
+if dimx==1 || dimx==2 || dimx==3 then
+   Nt=0; 
+   #dimvadd=Nsusy+1;
+   if Nsusy==1 then
+         s= X (null(rank-1)+1);
+         v= X (1+null(rank-1));
+   else
+         s= X ((null(rank-1)+1)^(1+ssusy)) + X ((null(rank-1)+1)^(ssusy+1));
+         v= X ((1+null(rank-1))^vsusy);
+   fi;
+#   if dimD>3 then setdefault Lie_group(gn,rank)*gsusy else
+     if dimD==3 then 
+ #       setdefault A1*gsusy; 
+        v= X ([2]^vsusy);
+        fi;
+#    fi;
+# Note that LiE rearrange the torus to the end of other simple groups #
+else if dimx==4 || dimx==0 then
+   Nt=0; 
+   #if Nsusy>1 then 
+       #ssusy=null(Nsusy-1);
+      # vsusy=null(Nsusy-1);
+    #fi;
+   # s=1X ((null(rank-1)+1+1)^ssusy)+ 1X ((null(rank-2)+1+0+1)^ssusy);
+   # v=1X ((1+null(rank-1)+2)^vsusy);
+   # s=1X ((null(rank-1)+1)^ssusy+1)+ 1X ((null(rank-2)+1+0)^ssusy+1);
+   # v=1X ((1+null(rank-1))^vsusy+2);
+      v=1X ((1+null(rank-1))^vsusy);
+   if Nsusy==1 then
+       s=X(null(rank-1)+1)+X (null(rank-2)+1+0);
+   else
+      s=1X ((null(rank-1)+1)^(1+ssusy))+ 1X ((null(rank-2)+1+0)^(ssusy+1));
+   fi;
+#   if dimD>4 then setdefault Lie_group(gn,rank)*gsusy else
+         if dimD==4 then
+#        setdefault A1A1*gsusy;
+        #v=X([1,1,2]^vsusy); # v=X([1,1]^vsusy+2);
+        v=X([1,1]^vsusy);
+          fi;
+ #    fi;
+#   fi;
+else
+# if dimx==5 || dimx==6 || dimx==7 then
+   Nt=1; 
+   #dimvadd=Nsusy+1;
+   if Nsusy==1 then
+        s= X (null(rank-1)+1+1);
+        v= X(1+null(rank));
+    else
+        s= X ((null(rank-1)+1+1)^(1+ssusy))+X ((null(rank-1)+1+1)^(ssusy+1));
+        v= X((1+null(rank))^vsusy);
+     fi;
+   setdefault sod(dimD-dimDsub)*sod(dimDsub)*A1*gsusy;
+fi;
+fi;
+rank=rank+Nt+Nsusy-1
+##### calculate content of superfields #####
+r(int m,n)=
+{
+if n<0 then poly_null(rank) else
+        if m<0 then poly_null(rank) else
+                if n==0 then sym_tensor(m,s) else
+                        tensor(sym_tensor(m,s),alt_tensor(n,v))
+                fi;
+        fi;
+fi;
+}
+##### set negative multiplicities to zero #####
+pos_pol(pol p)=
+{loc q=p;
+for i=1 to length(p) do
+        if coef(p,i)<0 then q=q-p[i];
+        fi;
+od;
+q}
+##### subtract multiplicities propagating from the left ######
+left(int m,n)=
+{
+loc t=poly_null(rank);
+loc n0=0;
+if m-2<0 then
+        r(m,n);
+else
+        k=m+2*n;
+        if k<2*dimD then n0=k/2 else
+                if k>=2*dimD then  n0=dimD
+                fi;
+        fi;
+        t=r(k-2*n0,n0);
+        for i=n0-1 downto n do
+                t=pos_pol(r(k-2*i,i)-t);
+        od;
+        t;
+fi
+}
+##### subtract multiplicities propagating to the right #####
+right(int m,n)=
+{
+loc t=poly_null(rank);
+if n-1<0 then
+        r(m,n);
+else
+        k=m+2*n;
+        t=r(k,0);
+        for i=1 to n do
+                t=pos_pol(r(k-2*i,i)-t);
+        od;
+        t;
+# r(m,n)-Ker(m,n);
+fi
+}
+##### calculate candidate cohomologies per differentials #####
+# h(int m, n)=pos_pol(r(m,n)-left(m-2,n+1)-right(m+2,n-1))
+h(int m, n)=pos_pol(r(m,n)-left(m-2,n+1)-r(m+2,n-1))
+# h(int m, n)=
+# {
+# loc h0=poly_null(rank);
+# loc hleft=poly_null(rank);
+# loc hvec=null(rank);
+# loc rcoef=0;
+# loc rrcoef=0;
+# hleft=pos_pol(r(m,n)-left(m-2,n+1));
+# lenghleft=length(hleft);
+# h0=hleft;
+# for i=1 to lenghleft do
+#       hvec=expon(hleft,i);
+#       rcoef=r(m+2,n-1)|hvec;
+#       rrcoef=r(m+4,n-2)|hvec;
+#       if rcoef>0 && rrcoef>0 then
+#             h0=pos_pol(h0-rcoef X hvec);
+#       else
+#       
+# od;
+# }
+##### calculate candidate cohomologies #####
+coh(int k)=
+{
+loc t=poly_null(rank);
+iMax=k/2;
+if k>2*dimD then iMax=dimD; fi;
+for i=0 to iMax do
+        t=t+h(k-2*i, i);
+        od;
+        t;
+}
+### The cohomology generators assuming maximal propagation ###
+hgen(int m, n)=pos_pol(h(m,n)-tensor(s,h(m-1,n)))
+hgenlist(int maxk)=
+{
+print("The cohomology generators assuming maximal propagation when D="+dimD+", N="+Nsusy+":");
+print("H^"+1+","+0+"=");
+print(h(1,0)); 
+for ikk=2 to maxk do
+  #print("k="+ikk+":");
+  iMax=ikk/2;
+  if ikk>2*dimD then iMax=dimD; fi;
+  for i=0 to iMax do
+	if coef(hgen(ikk-2*i,i),1)!=0 then 
+	print("H^"+ikk+","+i+"=");
+	print(hgen(ikk-2*i,i)); 
+	#print("H^"+ikk+","+i+"="+(hgen(ikk-2*i,i))); 
+	fi;
+  od;
+od;
+}
+hgenlist()=hgenlist(dimD+4)
+### The general formulation guess of the cohomology generators ###
+hh()=
+{
+loc ik=dimD+3;
+loc kn=(dimD+1)/2;
+loc lenhk=0;
+loc hk="";
+loc cohk="";
+loc epsil=null(kn,rank);
+print("The graded components of cohomologies:");
+#for i=0 to kn do
+   lenhk=length(h(ik+2,i));
+   epsil=null(lenhk,rank);
+#   for j=1 to lenhk do
+      epsil[j]=expon(h(ik+2,i),1)-expon(h(ik+1,i),1);
+}
+### Test if the representations for the spinor and the vector is all right? ###
+susytest()=
+{
+#if coef(r(0,1)-h(0,1),1)!=0 && dim(v)==dimD && (r(2,1)/(all_one(rank-1)+(Nt*10^9+1)))|null(rank)>0 then print("Good choice of representations of the spinor s and the vector v!") else 
+if coef(r(0,1)-h(0,1),1)>0 && dim(v)==dimD*dimvadd && r(2,1)|null(rank)>0 then print("Good choice of representations of the spinor s and the vector v!") else 
+   print("Bad choice of representations of the spinor s or the vector v!?");
+   print("coef(r(0,1)-h(0,1),1)>0?  "+(coef(r(0,1)-h(0,1),1)));
+   print("dim(v)==dimD*dimvadd?  "+(dim(v)));
+   print("r(2,1)|null(rank)>0?  "+(r(2,1)|null(rank)));
+   fi;
+}
+susytest
+##### Prove the maximal propagation #####
+### different variable name kk ########
+# sed -e :a -e '$!N;s/\n[[:space:]]*\\//g;s/\\\n[[:space:]]*//g;s/==>+/==>/g;ta' -e 'P;D' result.txt >result_formated.txt#
+# sed -e '{s/\ //g; s/\\//g;}' result.txt |awk '{printf"%s",$0}' |sed -e 's/==>+/\n==>/g;s/:/:\n/g;'#
+maxprop(int kk)=
+{
+iMax=kk/2;
+if kk>2*dimD then iMax=dimD; fi;
+# if kk>4*(rank-Nt) then iMax=2*(rank-Nt); fi;
+print("k="+kk+":");
+loc mincoef=0;
+loc rB=poly_null(rank);
+loc rH=poly_null(rank);
+loc HH=poly_null(rank);
+loc cc="";
+loc list_SxTensor=0;
+if list_SxTensor==1 then
+  for i=iMax downto 0 do
+      SxH=tensor(s,h(kk-1-2*i, i));
+      for j=1 to length(h(kk-1-2*i, i)) do
+         cc=(coef(h(kk-1-2*i,i),j))+"Sx"+(expon(h(kk-1-2*i,i),j))+"_H"+(i)+"=";
+         #print("Sx\");
+         #print(h(kk-1-2*i,i)[j]);
+         #print("\_H_"+(i)+"=\");
+         print(cc);
+         print(SxH);
+      od;
+#      B_lowk=pos_pol(r(kk-1-2*i,i)-h(kk-1-2*i,i)-r(kk-1-2*(i-1),i-1));
+      B_lowk=left(kk-1-2*i,i)-h(kk-1-2*i,i);
+      SxB=tensor(s,B_lowk);
+      for j=1 to length(B_lowk) do
+         SB=tensor(s,B_lowk[j]);
+         cc=(coef(B_lowk,j))+"Sx"+(expon(B_lowk,j))+"_PB"+(i)+"=";
+        ### PB here denote the preimage of boundaries ###
+         # print("Sx\");
+         # print(B_lowk[j]);
+         # print("\_B_"+(i)+"=\");
+         print(cc);
+         print(SB);
+      od;
+ od;
+fi;
+print("");print("The chain complex when k="+kk+", D="+dimD+", Nsusy="+Nsusy+":");
+print("0==>") ;
+for i=iMax downto 0 do
+      cc="==>";
+#      SxH=tensor(s,h(kk-1-2*i, i));
+#      B_lowk=pos_pol(r(kk-1-2*i,i)-h(kk-1-2*i,i)-r(kk-1-2*(i-1),i-1));
+### Assume maximal propagation for low k ###
+#      B_lowk=right(kk-1-2*(i-1),i-1)-h(kk-1-2*(i-1),i-1);
+      B_lowk=left(kk-1-2*i,i)-h(kk-1-2*i,i);
+      SxB=tensor(s,B_lowk);
+       # print("==>");
+      for j=1 to length(rB) do
+        cc=cc+" +"+(coef(rB,j))+(expon(rB,j))+"_B"+(i+1);
+        # print("\+\");
+        # print(rB[j]);
+        # print("\_B_"+(i+1));
+      od;
+### supersymmetry condition ###
+#   if kk<=2*dimD && i*2==kk then
+#       rB=r(0,kk/2); 
+#       rH=poly_null(rank);
+#   else
+      rHrB=r(kk-2*i,i)-rB;
+      rB=poly_null(rank);
+      for j=1 to length(rHrB) do
+         if coef(rHrB,j)<=r(kk-2*(i-1),i-1)|expon(rHrB,j) then mincoef=coef(rHrB,j) else mincoef=r(kk-2*(i-1),i-1)|expon(rHrB,j); fi;
+         if (kk>2*dimD || i*2!=kk) && mincoef>SxB|expon(rHrB,j) then mincoef=SxB|expon(rHrB,j); fi;
+#         if !kk<=2*dimD && !i*2==kk && mincoef>SxB|expon(rHrB,j) then mincoef=SxB|expon(rHrB,j); fi;
+#           if mincoef>SxB|expon(rHrB,j) then mincoef=SxB|expon(rHrB,j); fi;
+         rB=rB+mincoef X expon(rHrB,j);
+      od;
+      rH=rHrB-rB;
+#   fi;
+      HH=HH+rH;
+      for j=1 to length(rB) do
+         cc=cc+" +"+(coef(rB,j))+(expon(rB,j))+"_PB"+(i);
+         # print("\+\");
+         # print(rB[j]);
+         ### B here denote the boundaries###
+         # print("\_B_"+(i));
+       od;
+      for j=1 to length(rH) do
+         cc=cc+" +"+(coef(rH,j))+(expon(rH,j))+"_H"+(i);
+         # print("\+\");
+         # print(rH[j]);
+         ### H here denote the cohomologies###
+         # print("\_H_"+(i));
+       od;
+       print(cc);
+  od;
+print("==>0");
+print("where _H, _B, _PB denote the cohomology, boundary, and preimage of boundary, respectively.");
+print("Cohomology:");
+print(HH);
+if HH==coh(kk) then 
+   print("Bingle! Our cohomology formula is verified.");
+else
+   print("The maximal propagation principle might be not sufficient here!")
+fi;
+}
+### Sx[a,b,c,d,e], [a,b,c,d,e]x\wedge^nV ###
+# NO if else if fi, BUT if else fi, OR if else if fi;fi; #
+xsv(int n; vec iv)={
+	loc aRep=6*rank*all_one(rank);
+	loc isv=poly_null(rank);
+	if n==0 then isv=tensor(s, 1 X aRep) else
+		if n>=1 then isv=tensor(1 X aRep, r(0,n)) fi;
+		fi;
+	loc lensv=length(isv);
+	loc epsi=null(lensv, rank);
+	loc sv=poly_null(rank);
+	loc av=null(rank);
+	loc avt="[";
+	for i=1 to rank do
+	  avt=avt+"a"+i+",";
+	 od;
+ 	if n==0 then print("Sx"+avt+"]=") else
+	if n>=1 then print(avt+"] x \wedge^"+(n)+"V="); fi;
+#	if n==0 then print("Sx[a,b,c,d,e]=") else
+#		if n>=1 then print("[a,b,c,d,e] x \wedge^"+(n)+"V="); fi;
+	fi;
+	for i=1 to lensv do
+	    im=1;
+	    avtx="X[";
+	    for j=1 to rank do
+	        epsi[i,j]=expon(isv,i)[j]-aRep[j];
+	        if epsi[i,j]>=0 then
+	           avtx=avtx+" a"+j+"+"+(epsi[i,j])+","
+	          else avtx=avtx+" a"+j+(epsi[i,j])+","; 
+	         fi;
+	        av[j]=iv[j]+epsi[i,j];
+	        if av[j]<0 then im=0; fi;
+	     od;
+	     print("+"+(coef(isv,i))+avtx+"]");
+	    # print("+"+(coef(isv,i))+"X[a+"+(epsi[i,1])+",b+"+(epsi[i,2])+",c+"+(epsi[i,3])+",d+"+(epsi[i,4])+",e+"+(epsi[i,5])+"]");
+	    if im==1 then
+	      	sv=sv+coef(isv,i) X av;
+	   fi;
+	 od;
+	 print("epsilon=");
+	 print(epsi);
+	 print(sv);
+	 if n==0 then print("The result above differed with Sx"+(iv)+":");
+	 else
+	    print("The result above differed with "+(iv)+"x\wedge^"+n+"V:");
+	 fi;
+	 if n==0 then print(sv-tensor(s,1 X iv)) else
+	 	if n>=1 then print(sv-tensor(1 X iv, r(0,n))) fi;
+	 	fi;
+}
+#scalarsearch(int d)=
+#{
+# for i=1 to 2*dimD do
+#}

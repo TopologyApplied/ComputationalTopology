@@ -1,0 +1,59 @@
+> p_tensor(2,[0,1],A2)
+     1X[0,2] +1X[1,0]
+> p_tensor(3,[0,1],A2)
+     1X[0,0] +1X[0,3] +2X[1,1]
+> tensor(p_tensor(2,[0,1],A2),p_tensor(1,[0,1],A2),A2)
+     1X[0,0] +1X[0,3] +2X[1,1]
+coef(powweight,1)
+
+>>>>>>>
+igroup=A3
+powindex=[4,0,0]
+powrep=[[1,0,0],[0,1,0],[0,0,1]]
+
+powweight=poly_one(size(powindex));
+for i=1 to size(powindex) do
+powweight=tensor(p_tensor(powindex[i],powrep[i],igroup),powweight,igroup)
+od
+powweight
+powweight|null(size(powindex))
+
+> powweight
+     1X[0,0,0] +2X[0,2,0] +3X[1,0,1] +3X[2,1,0] +1X[4,0,0]
+> powweight|null(size(powindex))
+     1
+
+igroup=A2
+powindex=[1,1]
+powrep=[[1,0],[0,1]]
+
+powweight=poly_one(size(powindex));
+for i=1 to size(powindex) do
+powweight=tensor(p_tensor(powindex[i],powrep[i],igroup),powweight,igroup)
+od
+powweight
+powweight|null(size(powindex))
+
+
+>>>>>>>>Character
+#branch(lambda, Tr, id(r))
+#char(vec lambda)=branch(lambda, Lie_group(0,rank), id(rank))
+#char(vec lambda) = Demazure(lambda)
+char(vec lambda) = W_orbit(dom_char(lambda))
+> setdefault A3; char ([1, 0, 0])
+     1X[-1, 1, 0] +1X[ 0,-1, 1] +1X[ 0, 0,-1] +1X[ 1, 0, 0]
+> setdefault A3; char ([0, 1, 0])
+     1X[-1, 0, 1] +1X[-1, 1,-1] +1X[ 0,-1, 0] +1X[ 0, 1, 0] +
+     1X[ 1,-1, 1] +1X[ 1, 0,-1]
+> setdefault A3; char ([0, 0, 1])
+     1X[-1, 0, 0] +1X[ 0, 0, 1] +1X[ 0, 1,-1] +1X[ 1,-1, 0]
+from_eps(vec lambda)=from_part(lambda) + sum(lambda)
+from_eps(pol p)=loc s=poly_null(n_vars(p));
+	for i=1 to length(p) do s+=coef(p,i) X from_eps(expon(p,i)) od; s
+to_eps(vec wt)=loc n=size(wt); loc v=to_part(wt-n);
+	v+(wt[n]-sum(v))/n*all_one(n)
+to_eps(pol p)=loc s=poly_null(n_vars(p));
+	for i=1 to length(p) do s+=coef(p,i)X to_eps(expon(p,i)) od; s
+	
+	
+setdefault A3T1; char([1, 0, 0, 1])

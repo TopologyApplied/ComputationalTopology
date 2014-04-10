@@ -1,0 +1,52 @@
+##### definitions for D=10 SYM #####
+maxobjects 1000000
+setdefault D5
+rank=5
+r(int n)=1X[0,0,0,n,0]
+s=[0,0,0,1,0]
+##### calculate content of superfields #####
+r(int m,n)=
+{if n==0 then r(m) else
+if n<0 then poly_null(rank) else
+if m<0 then poly_null(rank) else
+tensor(r(m),alt_tensor(n,s))
+fi;
+fi;
+fi;
+}
+##### set negative multiplicities to zero #####
+pos_pol(pol p)=
+{loc q=p;
+for i=1 to length(p) do
+if coef(p,i)<0 then q=q-p[i];
+fi;
+od;
+q}
+##### subtract multiplicities from the left #####
+left(int m,n)=
+{loc t=poly_null(rank);
+if m-1<0 then
+r(m,n);
+else
+t=r(0,m+n);
+for k=1 to m do
+t=pos_pol(r(k,m+n-k)-t);
+od;
+t;
+fi
+}
+##### subtract multiplicities from the right #####
+right(int m,n)=
+{loc t=poly_null(rank);
+if n-1<0 then
+r(m,n);
+else
+t=r(m+n,0);
+for k=1 to n do
+t=pos_pol(r(m+n-k,k)-t);
+od;
+t;
+fi
+}
+##### calculate candidate cohomologies #####
+h(int m,n)=pos_pol(r(m,n)-right(m+1,n-1)-left(m-1,n+1))

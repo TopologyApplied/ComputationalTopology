@@ -1,0 +1,73 @@
+#####line break required to define a new function#####
+##### definitions for D=4 SYM #####
+maxobjects 10000000
+setdefault A1
+rank=1
+s=X[1]
+v=X[2]
+##### calculate content of superfields #####
+r(int m,n)=
+{
+if n<0 then poly_null(rank) else
+	if m<0 then poly_null(rank) else
+		if n==0 then sym_tensor(m,s) else
+			tensor(sym_tensor(m,s),alt_tensor(n,v))
+		fi;
+	fi;
+fi;
+}
+##### set negative multiplicities to zero #####
+pos_pol(pol p)=
+{loc q=p;
+for i=1 to length(p) do
+	if coef(p,i)<0 then q=q-p[i];
+	fi;
+od;
+q}
+##### subtract multiplicities from the left # #####
+left(int m,n)=
+{
+loc t=poly_null(rank);
+loc n0=0;
+if m-2<0 then
+	r(m,n);
+else
+	k=m+2*n;
+        if k<4*rank then n0=k/2 else
+        	if k>=4*rank then  n0=2*rank
+        	fi;
+        fi;
+	t=r(k-2*n0,n0);
+        for i=n0-1 downto n do
+        	t=pos_pol(r(k-2*i,i)-t);
+        od;
+        t;	
+fi
+}
+##### subtract multiplicities from the right #####
+right(int m,n)=
+{
+loc t=poly_null(rank);
+if n-1<0 then
+	r(m,n);
+else
+	k=m+2*n;
+	t=r(k,0);
+        for i=1 to n do
+        	t=pos_pol(r(k-2*i,i)-t);
+        od;
+        t;
+# r(m,n)-Ker(m,n);
+fi
+}
+##### calculate candidate cohomologies per differentials#####
+h(int m, n)=pos_pol(r(m,n)-left(m-2,n+1)-right(m+2,n-1))
+#####calculate candidate cohomologies #####
+coh(int k)=
+{
+loc t=poly_null(rank);
+for i=0 to k/2 do
+	t=t+h(k-2*i, i);
+	od;
+	t;
+}

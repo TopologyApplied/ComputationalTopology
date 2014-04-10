@@ -1,0 +1,41 @@
+#####line break required to define a new function#####
+##### definitions for D=10 SYM #####
+maxobjects 10000000
+setdefault D5
+rank=5
+#r(int n)=1X[0,0,0,n,0]
+s=X[0,0,0,1,0]
+v=X[1,0,0,0,0]
+##### calculate content of superfields #####
+r(int m,n)=
+{
+if n<0 then poly_null(rank) else
+	if m<0 then poly_null(rank) else
+		if n==0 then sym_tensor(m,s) else
+			tensor(sym_tensor(m,s),alt_tensor(n,v))
+		fi;
+	fi;
+fi;
+}
+###decomposition of the irrep of Sym^m S \otimes \wedge^n V###
+decompk(int k)=
+{print(""); print("k="+k);
+for i=0 to k/2 do
+	print("Sym^"+(k-2*i)+"S \wedge^"+i+"V:");
+	print(r(k-2*i,i));
+od;
+}
+###Sym^mS \otimes Sym^nS -->Sym^{m+n}S to find the minimal basis ###
+sym2sym(int k)=
+{b=sym_tensor(k,s);
+print(""); print("k="+k);
+print("Sym^"+k+"S:");
+print(b);
+for i=1 to k-1 do
+	a=tensor(sym_tensor(i,s),sym_tensor(k-i,s));
+	print("Sym^"+i+"SxSym^"+(k-i)+"S:");
+	print(a);
+	print("Sym^"+i+"SxSym^"+(k-i)+"S - Sym^"+k+"S:");
+	print(a-b);
+od;
+}

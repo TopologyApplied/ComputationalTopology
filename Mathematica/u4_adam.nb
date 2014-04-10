@@ -1,0 +1,439 @@
+(* Content-type: application/mathematica *)
+
+(*** Wolfram Notebook File ***)
+(* http://www.wolfram.com/nb *)
+
+(* CreatedBy='Mathematica 7.0' *)
+
+(*CacheID: 234*)
+(* Internal cache information:
+NotebookFileLineBreakTest
+NotebookFileLineBreakTest
+NotebookDataPosition[       145,          7]
+NotebookDataLength[     12796,        430]
+NotebookOptionsPosition[     11466,        380]
+NotebookOutlinePosition[     12032,        401]
+CellTagsIndexPosition[     11989,        398]
+WindowFrame->Normal*)
+
+(* Beginning of Notebook Content *)
+Notebook[{
+
+Cell[CellGroupData[{
+Cell[BoxData[
+ RowBox[{"SymmetricReduction", "[", 
+  RowBox[{
+   RowBox[{"Numerator", "[", 
+    RowBox[{"Sum", "[", 
+     RowBox[{
+      RowBox[{
+       RowBox[{"(", 
+        RowBox[{
+         RowBox[{"u1", "^", "n"}], "+", 
+         RowBox[{"u2", "^", "n"}], "+", 
+         RowBox[{"u3", "^", "n"}], "+", 
+         RowBox[{"u4", "^", "n"}]}], ")"}], " ", 
+       RowBox[{"t", "^", "n"}]}], ",", 
+      RowBox[{"{", 
+       RowBox[{"n", ",", "0", ",", "Infinity"}], "}"}]}], "]"}], "]"}], ",", 
+   RowBox[{"{", 
+    RowBox[{"u1", ",", "u2", ",", "u3", ",", "u4"}], "}"}], ",", 
+   RowBox[{"{", 
+    RowBox[{"e1", ",", "e2", ",", "e3", ",", "e4"}], "}"}]}], "]"}]], "Input"],
+
+Cell[BoxData[
+ RowBox[{"{", 
+  RowBox[{
+   RowBox[{"4", "-", 
+    RowBox[{"3", " ", "e1", " ", "t"}], "+", 
+    RowBox[{"2", " ", "e2", " ", 
+     SuperscriptBox["t", "2"]}], "-", 
+    RowBox[{"e3", " ", 
+     SuperscriptBox["t", "3"]}]}], ",", "0"}], "}"}]], "Output",
+ CellChangeTimes->{3.473474686463291*^9}]
+}, Open  ]],
+
+Cell[CellGroupData[{
+
+Cell[BoxData[
+ RowBox[{"SymmetricReduction", "[", 
+  RowBox[{
+   RowBox[{"Denominator", "[", 
+    RowBox[{"Sum", "[", 
+     RowBox[{
+      RowBox[{
+       RowBox[{"(", 
+        RowBox[{
+         RowBox[{"u1", "^", "n"}], "+", 
+         RowBox[{"u2", "^", "n"}], "+", 
+         RowBox[{"u3", "^", "n"}], "+", 
+         RowBox[{"u4", "^", "n"}]}], ")"}], " ", 
+       RowBox[{"t", "^", "n"}]}], ",", 
+      RowBox[{"{", 
+       RowBox[{"n", ",", "0", ",", "Infinity"}], "}"}]}], "]"}], "]"}], ",", 
+   RowBox[{"{", 
+    RowBox[{"u1", ",", "u2", ",", "u3", ",", "u4"}], "}"}], ",", 
+   RowBox[{"{", 
+    RowBox[{"e1", ",", "e2", ",", "e3", ",", "e4"}], "}"}]}], "]"}]], "Input"],
+
+Cell[BoxData[
+ RowBox[{"{", 
+  RowBox[{
+   RowBox[{"1", "-", 
+    RowBox[{"e1", " ", "t"}], "+", 
+    RowBox[{"e2", " ", 
+     SuperscriptBox["t", "2"]}], "-", 
+    RowBox[{"e3", " ", 
+     SuperscriptBox["t", "3"]}], "+", 
+    RowBox[{"e4", " ", 
+     SuperscriptBox["t", "4"]}]}], ",", "0"}], "}"}]], "Output",
+ CellChangeTimes->{3.473474849821236*^9}]
+}, Open  ]],
+
+Cell[CellGroupData[{
+
+Cell[BoxData[
+ RowBox[{"SymmetricReduction", "[", 
+  RowBox[{
+   RowBox[{"Numerator", "[", 
+    RowBox[{"Sum", "[", 
+     RowBox[{
+      RowBox[{
+       RowBox[{"(", 
+        RowBox[{
+         RowBox[{
+          RowBox[{"u1", "^", "n"}], " ", 
+          RowBox[{"u2", "^", "n"}]}], "+", 
+         RowBox[{
+          RowBox[{"u1", "^", "n"}], " ", 
+          RowBox[{"u3", "^", "n"}]}], "+", 
+         RowBox[{
+          RowBox[{"u1", "^", "n"}], " ", 
+          RowBox[{"u4", "^", "n"}]}], "+", 
+         RowBox[{
+          RowBox[{"u2", "^", "n"}], " ", 
+          RowBox[{"u3", "^", "n"}]}], "+", 
+         RowBox[{
+          RowBox[{"u2", "^", "n"}], " ", 
+          RowBox[{"u4", "^", "n"}]}], "+", 
+         RowBox[{
+          RowBox[{"u3", "^", "n"}], " ", 
+          RowBox[{"u4", "^", "n"}]}]}], ")"}], " ", 
+       RowBox[{"t", "^", "n"}]}], ",", 
+      RowBox[{"{", 
+       RowBox[{"n", ",", "0", ",", "Infinity"}], "}"}]}], "]"}], "]"}], ",", 
+   RowBox[{"{", 
+    RowBox[{"u1", ",", "u2", ",", "u3", ",", "u4"}], "}"}], ",", 
+   RowBox[{"{", 
+    RowBox[{"e1", ",", "e2", ",", "e3", ",", "e4"}], "}"}]}], "]"}]], "Input"],
+
+Cell[BoxData[
+ RowBox[{"{", 
+  RowBox[{
+   RowBox[{"6", "-", 
+    RowBox[{"5", " ", "e2", " ", "t"}], "+", 
+    RowBox[{"4", " ", "e1", " ", "e3", " ", 
+     SuperscriptBox["t", "2"]}], "-", 
+    RowBox[{"4", " ", "e4", " ", 
+     SuperscriptBox["t", "2"]}], "-", 
+    RowBox[{"3", " ", 
+     SuperscriptBox["e3", "2"], " ", 
+     SuperscriptBox["t", "3"]}], "-", 
+    RowBox[{"3", " ", 
+     SuperscriptBox["e1", "2"], " ", "e4", " ", 
+     SuperscriptBox["t", "3"]}], "+", 
+    RowBox[{"6", " ", "e2", " ", "e4", " ", 
+     SuperscriptBox["t", "3"]}], "+", 
+    RowBox[{"2", " ", "e1", " ", "e3", " ", "e4", " ", 
+     SuperscriptBox["t", "4"]}], "-", 
+    RowBox[{"2", " ", 
+     SuperscriptBox["e4", "2"], " ", 
+     SuperscriptBox["t", "4"]}], "-", 
+    RowBox[{"e2", " ", 
+     SuperscriptBox["e4", "2"], " ", 
+     SuperscriptBox["t", "5"]}]}], ",", "0"}], "}"}]], "Output",
+ CellChangeTimes->{3.473475117010379*^9}]
+}, Open  ]],
+
+Cell[CellGroupData[{
+
+Cell[BoxData[
+ RowBox[{
+  RowBox[{"SymmetricReduction", "[", 
+   RowBox[{
+    RowBox[{"Denominator", "[", 
+     RowBox[{"Sum", "[", 
+      RowBox[{
+       RowBox[{
+        RowBox[{"(", 
+         RowBox[{
+          RowBox[{
+           RowBox[{"u1", "^", "n"}], " ", 
+           RowBox[{"u2", "^", "n"}]}], "+", 
+          RowBox[{
+           RowBox[{"u1", "^", "n"}], " ", 
+           RowBox[{"u3", "^", "n"}]}], "+", 
+          RowBox[{
+           RowBox[{"u1", "^", "n"}], " ", 
+           RowBox[{"u4", "^", "n"}]}], "+", 
+          RowBox[{
+           RowBox[{"u2", "^", "n"}], " ", 
+           RowBox[{"u3", "^", "n"}]}], "+", 
+          RowBox[{
+           RowBox[{"u2", "^", "n"}], " ", 
+           RowBox[{"u4", "^", "n"}]}], "+", 
+          RowBox[{
+           RowBox[{"u3", "^", "n"}], " ", 
+           RowBox[{"u4", "^", "n"}]}]}], ")"}], " ", 
+        RowBox[{"t", "^", "n"}]}], ",", 
+       RowBox[{"{", 
+        RowBox[{"n", ",", "0", ",", "Infinity"}], "}"}]}], "]"}], "]"}], ",", 
+    
+    RowBox[{"{", 
+     RowBox[{"u1", ",", "u2", ",", "u3", ",", "u4"}], "}"}], ",", 
+    RowBox[{"{", 
+     RowBox[{"e1", ",", "e2", ",", "e3", ",", "e4"}], "}"}]}], "]"}], 
+  "\n"}]], "Input"],
+
+Cell[BoxData[
+ RowBox[{"{", 
+  RowBox[{
+   RowBox[{"1", "-", 
+    RowBox[{"e2", " ", "t"}], "+", 
+    RowBox[{"e1", " ", "e3", " ", 
+     SuperscriptBox["t", "2"]}], "-", 
+    RowBox[{"e4", " ", 
+     SuperscriptBox["t", "2"]}], "-", 
+    RowBox[{
+     SuperscriptBox["e3", "2"], " ", 
+     SuperscriptBox["t", "3"]}], "-", 
+    RowBox[{
+     SuperscriptBox["e1", "2"], " ", "e4", " ", 
+     SuperscriptBox["t", "3"]}], "+", 
+    RowBox[{"2", " ", "e2", " ", "e4", " ", 
+     SuperscriptBox["t", "3"]}], "+", 
+    RowBox[{"e1", " ", "e3", " ", "e4", " ", 
+     SuperscriptBox["t", "4"]}], "-", 
+    RowBox[{
+     SuperscriptBox["e4", "2"], " ", 
+     SuperscriptBox["t", "4"]}], "-", 
+    RowBox[{"e2", " ", 
+     SuperscriptBox["e4", "2"], " ", 
+     SuperscriptBox["t", "5"]}], "+", 
+    RowBox[{
+     SuperscriptBox["e4", "3"], " ", 
+     SuperscriptBox["t", "6"]}]}], ",", "0"}], "}"}]], "Output",
+ CellChangeTimes->{3.473475127970399*^9}]
+}, Open  ]],
+
+Cell[CellGroupData[{
+
+Cell[BoxData[
+ RowBox[{"SymmetricReduction", "[", 
+  RowBox[{
+   RowBox[{"Numerator", "[", 
+    RowBox[{"Sum", "[", 
+     RowBox[{
+      RowBox[{
+       RowBox[{"(", 
+        RowBox[{"u1", " ", "u2", " ", "u3", " ", "u4", " ", "t"}], ")"}], "^",
+        "n"}], ",", 
+      RowBox[{"{", 
+       RowBox[{"n", ",", "0", ",", "Infinity"}], "}"}]}], "]"}], "]"}], ",", 
+   RowBox[{"{", 
+    RowBox[{"u1", ",", "u2", ",", "u3", ",", "u4"}], "}"}], ",", 
+   RowBox[{"{", 
+    RowBox[{"e1", ",", "e2", ",", "e3", ",", "e4"}], "}"}]}], "]"}]], "Input"],
+
+Cell[BoxData[
+ RowBox[{"{", 
+  RowBox[{"1", ",", "0"}], "}"}]], "Output",
+ CellChangeTimes->{3.473475160134982*^9}]
+}, Open  ]],
+
+Cell[CellGroupData[{
+
+Cell[BoxData[
+ RowBox[{"SymmetricReduction", "[", 
+  RowBox[{
+   RowBox[{"Denominator", "[", 
+    RowBox[{"Sum", "[", 
+     RowBox[{
+      RowBox[{
+       RowBox[{"(", 
+        RowBox[{"u1", " ", "u2", " ", "u3", " ", "u4", " ", "t"}], ")"}], "^",
+        "n"}], ",", 
+      RowBox[{"{", 
+       RowBox[{"n", ",", "0", ",", "Infinity"}], "}"}]}], "]"}], "]"}], ",", 
+   RowBox[{"{", 
+    RowBox[{"u1", ",", "u2", ",", "u3", ",", "u4"}], "}"}], ",", 
+   RowBox[{"{", 
+    RowBox[{"e1", ",", "e2", ",", "e3", ",", "e4"}], "}"}]}], "]"}]], "Input"],
+
+Cell[BoxData[
+ RowBox[{"{", 
+  RowBox[{
+   RowBox[{"1", "-", 
+    RowBox[{"e4", " ", "t"}]}], ",", "0"}], "}"}]], "Output",
+ CellChangeTimes->{3.473475168891033*^9}]
+}, Open  ]],
+
+Cell[CellGroupData[{
+
+Cell[BoxData[
+ RowBox[{"SymmetricReduction", "[", 
+  RowBox[{
+   RowBox[{"Numerator", "[", 
+    RowBox[{"Sum", "[", 
+     RowBox[{
+      RowBox[{
+       RowBox[{"(", 
+        RowBox[{
+         RowBox[{
+          RowBox[{"u1", "^", "n"}], " ", 
+          RowBox[{"u2", "^", "n"}], " ", 
+          RowBox[{"u3", "^", "n"}]}], "+", 
+         RowBox[{
+          RowBox[{"u1", "^", "n"}], " ", 
+          RowBox[{"u2", "^", "n"}], " ", 
+          RowBox[{"u4", "^", "n"}]}], "+", 
+         RowBox[{
+          RowBox[{"u1", "^", "n"}], " ", 
+          RowBox[{"u3", "^", "n"}], " ", 
+          RowBox[{"u4", "^", "n"}]}], "+", 
+         RowBox[{
+          RowBox[{"u2", "^", "n"}], " ", 
+          RowBox[{"u3", "^", "n"}], " ", 
+          RowBox[{"u4", "^", "n"}]}]}], ")"}], " ", 
+       RowBox[{"t", "^", "n"}]}], ",", 
+      RowBox[{"{", 
+       RowBox[{"n", ",", "0", ",", "Infinity"}], "}"}]}], "]"}], "]"}], ",", 
+   RowBox[{"{", 
+    RowBox[{"u1", ",", "u2", ",", "u3", ",", "u4"}], "}"}], ",", 
+   RowBox[{"{", 
+    RowBox[{"e1", ",", "e2", ",", "e3", ",", "e4"}], "}"}]}], "]"}]], "Input"],
+
+Cell[BoxData[
+ RowBox[{"{", 
+  RowBox[{
+   RowBox[{"4", "-", 
+    RowBox[{"3", " ", "e3", " ", "t"}], "+", 
+    RowBox[{"2", " ", "e2", " ", "e4", " ", 
+     SuperscriptBox["t", "2"]}], "-", 
+    RowBox[{"e1", " ", 
+     SuperscriptBox["e4", "2"], " ", 
+     SuperscriptBox["t", "3"]}]}], ",", "0"}], "}"}]], "Output",
+ CellChangeTimes->{
+  3.47347514041436*^9, {3.473476783530317*^9, 3.473476784124033*^9}}]
+}, Open  ]],
+
+Cell[CellGroupData[{
+
+Cell[BoxData[
+ RowBox[{"SymmetricReduction", "[", 
+  RowBox[{
+   RowBox[{"Denominator", "[", 
+    RowBox[{"Sum", "[", 
+     RowBox[{
+      RowBox[{
+       RowBox[{"(", 
+        RowBox[{
+         RowBox[{
+          RowBox[{"u1", "^", "n"}], " ", 
+          RowBox[{"u2", "^", "n"}], " ", 
+          RowBox[{"u3", "^", "n"}]}], "+", 
+         RowBox[{
+          RowBox[{"u1", "^", "n"}], " ", 
+          RowBox[{"u2", "^", "n"}], " ", 
+          RowBox[{"u4", "^", "n"}]}], "+", 
+         RowBox[{
+          RowBox[{"u1", "^", "n"}], " ", 
+          RowBox[{"u3", "^", "n"}], " ", 
+          RowBox[{"u4", "^", "n"}]}], "+", 
+         RowBox[{
+          RowBox[{"u2", "^", "n"}], " ", 
+          RowBox[{"u3", "^", "n"}], " ", 
+          RowBox[{"u4", "^", "n"}]}]}], ")"}], " ", 
+       RowBox[{"t", "^", "n"}]}], ",", 
+      RowBox[{"{", 
+       RowBox[{"n", ",", "0", ",", "Infinity"}], "}"}]}], "]"}], "]"}], ",", 
+   RowBox[{"{", 
+    RowBox[{"u1", ",", "u2", ",", "u3", ",", "u4"}], "}"}], ",", 
+   RowBox[{"{", 
+    RowBox[{"e1", ",", "e2", ",", "e3", ",", "e4"}], "}"}]}], "]"}]], "Input"],
+
+Cell[BoxData[
+ RowBox[{"{", 
+  RowBox[{
+   RowBox[{"1", "-", 
+    RowBox[{"e3", " ", "t"}], "+", 
+    RowBox[{"e2", " ", "e4", " ", 
+     SuperscriptBox["t", "2"]}], "-", 
+    RowBox[{"e1", " ", 
+     SuperscriptBox["e4", "2"], " ", 
+     SuperscriptBox["t", "3"]}], "+", 
+    RowBox[{
+     SuperscriptBox["e4", "3"], " ", 
+     SuperscriptBox["t", "4"]}]}], ",", "0"}], "}"}]], "Output",
+ CellChangeTimes->{3.473476806329912*^9}]
+}, Open  ]]
+},
+WindowSize->{889, 877},
+WindowMargins->{{Automatic, 51}, {25, Automatic}},
+PrintingPageRange->{Automatic, Automatic},
+PrintingOptions->{"Magnification"->1.,
+"PaperOrientation"->"Portrait",
+"PaperSize"->{611.28, 789.57},
+"PostScriptOutputFile"->"/home/rxu/Research/String/AlbertSchwarz/u4_adam.nb.\
+ps"},
+FrontEndVersion->"7.0 for Linux x86 (32-bit) (November 10, 2008)",
+StyleDefinitions->"Default.nb"
+]
+(* End of Notebook Content *)
+
+(* Internal cache information *)
+(*CellTagsOutline
+CellTagsIndex->{}
+*)
+(*CellTagsIndex
+CellTagsIndex->{}
+*)
+(*NotebookFileOutline
+Notebook[{
+Cell[CellGroupData[{
+Cell[567, 22, 673, 19, 55, "Input"],
+Cell[1243, 43, 311, 9, 33, "Output"]
+}, Open  ]],
+Cell[CellGroupData[{
+Cell[1591, 57, 675, 19, 55, "Input"],
+Cell[2269, 78, 354, 11, 33, "Output"]
+}, Open  ]],
+Cell[CellGroupData[{
+Cell[2660, 94, 1133, 33, 77, "Input"],
+Cell[3796, 129, 923, 25, 33, "Output"]
+}, Open  ]],
+Cell[CellGroupData[{
+Cell[4756, 159, 1194, 36, 99, "Input"],
+Cell[5953, 197, 943, 28, 33, "Output"]
+}, Open  ]],
+Cell[CellGroupData[{
+Cell[6933, 230, 543, 15, 55, "Input"],
+Cell[7479, 247, 115, 3, 31, "Output"]
+}, Open  ]],
+Cell[CellGroupData[{
+Cell[7631, 255, 545, 15, 55, "Input"],
+Cell[8179, 272, 165, 5, 31, "Output"]
+}, Open  ]],
+Cell[CellGroupData[{
+Cell[8381, 282, 1093, 31, 77, "Input"],
+Cell[9477, 315, 408, 11, 33, "Output"]
+}, Open  ]],
+Cell[CellGroupData[{
+Cell[9922, 331, 1095, 31, 77, "Input"],
+Cell[11020, 364, 430, 13, 33, "Output"]
+}, Open  ]]
+}
+]
+*)
+
+(* End of internal cache information *)

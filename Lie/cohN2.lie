@@ -1,0 +1,734 @@
+#Author: Renjun Xu#
+#E-mail: rxu@ucdavis.edu#
+#1. use Macaulay2 to compute Hilber series and enter in dimSeq()#
+#2. use hhh(int ksum,k), to compute the cohomology#
+### ksum=m1+m2+2*n; mmin=m1; if m1>m2 then mmin=m2; fi; k=mmin+n;
+#3. make a conjecture of the cohomology formula based on hhh(int ksum,k)#
+#4. verify the conjecture of step 3 by dimension check with Hilbert series of step 1 using Mathematica, and enter in h_formula()#
+#5. use hgenlist(int max_k) to compute the cohomology generators and verify them with the Macaulay2 numgens and generators#
+#6. make a conjecture of the cohomology gens based on the degrees and the dimensions based on step 5#
+#7. euler char check for H_s^0: altHs(int Ntt,gl,n)
+#Nsusy=2#
+#ChainComplex: Sym^m1(S+) x Sym^m2(S-) x Lambda^n(V)->Sym^{m1+1}(S+) x Sym^{m2+1}(S-) x Lambda^{n-1}(V)->..#
+#relaxed pure spinor#
+#
+##### line break required to define a new function #####
+# NO even number of #
+##### Setting the memory usage #####
+# maxobjects 100000000
+maxobjects 10000000
+maxnodes 399999
+monfil result_coh11redux.log
+#on monitor	 ##cause Segmentation fault on server
+#
+#D=10#
+Nsusy=2
+dimD=10
+dimD_sub=10
+setdefault D5
+s=X[0,0,0,0,1]
+v=X[1,0,0,0,0]
+dimV=dim(v);
+rank=Lie_rank;
+iMax=0;
+ARR=null(0,rank);
+ARR_dim=null(0);
+ARR_amb=null(0);
+#ARR_resolv=null(0);
+RR=null(0,1);
+RR_resolv=null(0,1);
+RR_amb=null(0,1);
+ARR_seg=null(0,1);
+RR_map=null(0,1);
+#lenR=n_cols(RR)
+lenR=0;
+h_last=poly_null(rank);#the cohomology (in polynomial form) last computed with current params hhh()
+#
+##### calculate content of superfields #####
+#ChainComplex component: r(m1,m2,n) = Sym^m1(S+) \otimes Sym^m2(S-) \otimes Wedge^n(V) #
+r(int m1,m2,n)=
+{
+if n<0 then poly_null(rank) else
+        if m1<0 || m2<0 then poly_null(rank) else
+                if n==0 then tensor(sym_tensor(m1,s),sym_tensor(m2,s)) else
+                        tensor(tensor(sym_tensor(m1,s),sym_tensor(m2,s)),alt_tensor(n,v))
+                fi;
+        fi;
+fi;
+}
+##### set negative multiplicities to zero #####
+pos_pol(pol p)=
+{loc q=p;
+for i=1 to length(p) do
+        if coef(p,i)<0 then q=q-p[i];
+        fi;
+od;
+q}
+#
+dim_pol(pol p)=
+{
+	print(p);print("dim="+dim(p));
+	for i=1 to length(p) do
+		print("dim("+coef(p,i)+expon(p,i)+")="+dim(p[i]));
+	od;
+}
+##### subtract multiplicities propagating from the left: r(m1-1,m2-1,n+1)->r(m1,m2,n) ######
+left(int m1,m2,n)=
+{
+loc t=poly_null(rank);
+loc n0=0;
+loc mmin=m1;
+loc ksum=m1+m2+2*n;
+if m1>m2 then
+	mmin=m2;
+fi;
+if mmin<1 then
+        r(m1,m2,n);
+else
+        loc k=mmin+n;
+        if k<dimV then n0=k else
+                if k>=dimV then n0=dimV
+                fi;
+        fi;
+        t=r(ksum-2*n0,0,n0);
+        for i=n0-1 downto n do
+                t=pos_pol(r(ksum-k-i,k-i,i)-t);
+        od;
+        t
+fi
+}
+##### subtract multiplicities propagating to the right: r(m1,m2,n)->r(m1+1,m2+1,n-1) #####
+right(int m1,m2,n)=
+{
+loc t=poly_null(rank);
+loc ksum=m1+m2+2*n;
+loc mmin=m1;
+if m1>m2 then mmin=m2; fi;
+loc k=mmin+n;
+if n-1<0 then
+        r(m1,m2,n);
+else
+        t=r(ksum-k,k,0);
+        for i=1 to n do
+                t=pos_pol(r(ksum-k-i,k-i,i)-t);
+        od;
+        t
+# r(m,n)-Ker(m,n);
+fi
+}
+### positive number only ###
+pos_num(int m)=
+{
+	if m>0 then m 
+	else 0
+	fi;
+}
+##### subtract multiplicities of one representation propagating from the left ######
+left_coef(int n, ilink; vec AA)=
+{
+	loc t=0;
+#	if ilink<n then print("error: ilink<n") else
+	# for vector, use size(AA) NOT length(AA) #
+	if ilink>=n && ilink<=size(AA) then
+		t=AA[ilink];
+		for i=ilink-1 downto n do
+			t=pos_num(AA[i]-t)
+		od;
+	fi;
+	t
+}
+##### subtract multiplicities of one representation propagating from the right ######
+right_coef(int n, ilink; vec AA)=
+{
+	loc t=0;
+#	if ilink>n then print("error: ilink>n") else
+	if n>=ilink && ilink>0 then
+		t=AA[ilink];
+		for i=ilink+1 to n do
+			t=pos_num(AA[i]-t)
+		od;
+	fi;
+	t
+}
+##### calculate candidate cohomologies per differentials#####
+h(int m1,m2,n)=pos_pol(r(m1,m2,n)-left(m1-1,m2-1,n+1)-right(m1+1,m2+1,n-1))
+#hright(int m, n)=pos_pol(r(m,n)-r(m-2,n+1)-right(m+2,n-1))
+### the dimension of cohomologies calculated by Hilbert Series using Macaulay2 ###
+#gl=abs(m1-m2)
+dimSeq(int d,m1,m2,n)=
+{
+loc dimsi=0;
+if d==10 && m1>=0 && m2>=0 then
+		if n==0 then dimsi=(1+m1)*(2+m1)*(3+m1)*(4+m1)*(5+m1)*(6+m1)*(1+m2)*(2+m2)*(3+m2)*(4+m2)*(5+m2)*(6+m2)*(7+m1+m2)*(259459200+188204400*m1+59354028*m1^2+10630508*m1^3+1182769*m1^4+83720*m1^5+3682*m1^6+92*m1^7+m1^8+188204400*m2+130552434*m1*m2+38446177*m1^2*m2+6237357*m1^3*m2+601545*m1^4*m2+34363*m1^5*m2+1070*m1^6*m2+14*m1^7*m2+59354028*m2^2+38446177*m1*m2^2+10264213*m1^2*m2^2+1439530*m1^3*m2^2+111365*m1^4*m2^2+4503*m1^5*m2^2+76*m1^6*m2^2+10630508*m2^3+6237357*m1*m2^3+1439530*m1^2*m2^3+161950*m1^3*m2^3+8795*m1^4*m2^3+184*m1^5*m2^3+1182769*m2^4+601545*m1*m2^4+111365*m1^2*m2^4+8795*m1^3*m2^4+245*m1^4*m2^4+83720*m2^5+34363*m1*m2^5+4503*m1^2*m2^5+184*m1^3*m2^5+3682*m2^6+1070*m1*m2^6+76*m1^2*m2^6+92*m2^7+14*m1*m2^7+m2^8)/941525544960000
+		#s_ 1 need to divide by T1^2, since deg(C)=(0,2)#
+		else if n==1 then dimsi=(1+m1)*(2+m1)*(3+m1)*(4+m1)*(5+m1)*(6+m1)*(1+m2)*(2+m2)*(3+m2)*(4+m2)*(5+m2)*(6+m2)*(7+m1+m2)*(-1235520*m1+509928*m1^2+549038*m1^3+153769*m1^4+21140*m1^5+1582*m1^6+62*m1^7+m1^8-1235520*m2-2090076*m1*m2+106057*m1^2*m2+392427*m1^3*m2+107415*m1^4*m2+12523*m1^5*m2+680*m1^6*m2+14*m1^7*m2+509928*m2^2+106057*m1*m2^2+373423*m1^2*m2^2+178660*m1^3*m2^2+32195*m1^4*m2^2+2553*m1^5*m2^2+76*m1^6*m2^2+549038*m2^3+392427*m1*m2^3+178660*m1^2*m2^3+41830*m1^3*m2^3+4505*m1^4*m2^3+184*m1^5*m2^3+153769*m2^4+107415*m1*m2^4+32195*m1^2*m2^4+4505*m1^3*m2^4+245*m1^4*m2^4+21140*m2^5+12523*m1*m2^5+2553*m1^2*m2^5+184*m1^3*m2^5+1582*m2^6+680*m1*m2^6+76*m1^2*m2^6+62*m2^7+14*m1*m2^7+m2^8)/941525544960000
+		else dimsi=0
+			fi;
+		fi;
+	fi;
+dimsi
+}
+### The cohomologies calculated by hhh(k) ###
+h_formula(int d,k,gl,n)=	 #k=deg(t+)+deg(t-), gl=deg(t+)-deg(t-)
+{
+loc h0=poly_null(rank);
+loc p0=0;
+gl=abs(gl);
+if d==10 && k>=0 && abs(gl)<=k && (k-abs(gl))%2==0 then
+	if n==0 then 
+		for p=0 to (k-gl)/4 do
+			for i=0 to (k-gl)/2-2*p do
+				for j=p to k/2-i-p-((k+1)%2)*((i+(k-gl)/2)%2) do
+					h0=h0+X[j,0,i,0,k-2*j-2*i]
+				od;
+			od;
+		od;
+	else if n==1 then
+		for p=0 to (k-gl)/4 do
+			for i=0 to (k-gl)/2-2*p do
+				p0=p;
+				if p>=1 then p0=p-1;fi;
+				for j=p0 to k/2-i-p-((k+1)%2)*((i+(k-gl)/2)%2)-1 do
+					h0=h0+X[j,0,i,0,k-2-2*j-2*i]
+				od;
+			od;
+		od;
+	fi;fi;
+fi;
+h0
+}
+###split RR into RR_resolv + RR_amb###
+RR_split(int i,j,rightlink)=
+{
+	loc idiff=0;
+	if rightlink==1 then
+		 RR_resolv[i+1,j]=RR[i+1,j];
+		 #ARR_resolv=ARR_resolv+j;
+		else if rightlink==2 then 
+			idiff=RR[i+1,j]-RR[i+2,j];
+			if idiff!=0 then #ARR_resolv=ARR_resolv+j;
+				if idiff>0 then RR_resolv[i+1,j]=idiff
+				else RR_resolv[i+2,j]=-idiff
+				fi;
+			fi;
+			else if rightlink==3 then
+				idiff=RR[i+2,j]-RR[i+1,j]-RR[i+3,j];
+				if idiff>0 then RR_resolv[i+2,j]=idiff; #ARR_resolv=ARR_resolv+j;
+					else if idiff<0 then
+						RR_amb[i+1,j]=RR[i+1,j];
+						RR_amb[i+2,j]=RR[i+2,j];
+						RR_amb[i+3,j]=RR[i+3,j];
+						ARR_amb=ARR_amb+j;
+						fi;
+				fi;
+				else if rightlink>=4 then
+					for t=i+rightlink downto i+1 do
+						RR_amb[t,j]=RR[t,j];
+					od;
+						ARR_amb=ARR_amb+j;
+				fi;
+			fi;
+		fi;
+	fi;
+}
+### propagation analysis ###
+RR_prop()=
+{
+###split RR into RR_resolv + RR_amb###
+	loc rightlink=0;
+	for j=1 to lenR do
+		i=ARR_seg[1,j];
+		rightlink=0;
+		while i>=ARR_seg[2,j] && ARR_seg[1,j]>0 do
+			if RR[i,j] then rightlink=rightlink+1; fi;
+			if RR[i,j] && i==ARR_seg[2,j] then
+				RR_split(i-1,j,rightlink);
+				rightlink=0;
+			fi;
+			if rightlink && !RR[i,j] then
+#DEBUG:
+#				print("i:"+i+", j:"+j+", rightlink="+rightlink);
+				RR_split(i,j,rightlink);
+				rightlink=0;
+			fi;
+			i=i-1;
+		od;
+	od;
+}
+### the coefficients of each representation in Sym^m1(S+)\otimes Sym^m2(S-)\otimes \Wedge^nV represented by a single matrix ###
+sum_r(int ksum,k)=
+{
+	loc sumR=poly_null(rank);
+	loc ir=poly_null(rank);
+	loc iA=[];
+#	RR=null(0,1);
+	ARR=null(0,rank);
+	ARR_amb=null(0);
+#	ARR_resolv=null(0);
+	lenR=0;
+#	lenRR[i+1]:=length(r(ksum-k-i,k-i,i))#
+	loc lenRR=null(0);
+	loc A_index=0;
+#	loc iMax=k;
+#	if k>dimV then iMax=dimV; fi;
+  for i=0 to iMax do
+  	ir=r(ksum-k-i,k-i,i);
+### SUSY condition ###
+ 	if k<=dimV then
+ 		if i==iMax-1 then ir=pos_pol(ir-r(ksum-k-iMax,k-iMax,iMax)) else
+ 			if i==iMax then ir=pos_pol(ir-r(ksum-k-(iMax-1),k-(iMax-1),iMax-1));fi;
+ 	fi;fi;
+  	sumR=sumR+ir;
+  	lenRR=lenRR+length(ir);
+  od;
+  ARR=support(sumR);
+  lenR=length(sumR);
+  RR=null(iMax+1,lenR);
+  RR_resolv=null(iMax+1,lenR);
+  RR_amb=null(iMax+1,lenR);
+	RR_map=null(iMax+1,lenR);#The representations of i-th component, to speed the loop
+  ARR_seg=null(2,lenR);#The "start" and "end" positions of each representation in the chain complex
+	ARR_dim=null(lenR);
+  for i=1 to lenR do
+#  	iA=expon(sumR,i);
+#  	ARR=ARR+iA;
+#DEBUG:integer too big
+#		print("i="+i);
+  	ARR_dim[i]=dim(ARR[i]);
+  od;
+  for i=iMax downto 0 do
+  	ir=r(ksum-k-i,k-i,i);
+### SUSY condition ###
+ 	if k<=dimV then
+ 		if i==iMax then ir=pos_pol(ir-r(ksum-k-(iMax-1),k-(iMax-1),iMax-1)) else
+ 			if i==iMax-1 then ir=pos_pol(ir-r(ksum-k-iMax,k-iMax,iMax));fi;
+ 	fi;fi;
+  	for j=1 to lenRR[i+1] do
+  		A_index=row_index(ARR,expon(ir,j),1,lenR);
+  		RR[i+1,A_index]=coef(ir,j);
+  		RR_map[i+1,A_index]=A_index;
+  		if !ARR_seg[1,A_index] then ARR_seg[1,A_index]=i+1;ARR_seg[2,A_index]=i+1;
+  			else ARR_seg[2,A_index]=i+1
+  		fi;
+  	od;
+  od;
+#  print(ARR);
+#  RR
+RR_prop();
+}
+### check the dimension of cohomologies with Macaulay2 to resolve the ambiguity ###
+dimcheck(int ksum,k)=
+{
+	loc h_dim=null(iMax+1);
+	loc dimdiff=null(iMax+1);
+	for i=0 to iMax do
+#		h_dim[i+1]=h_dim[i+1]+ARR_dim*RR_resolv[i+1];
+### check the dimension of cohomologies with Macaulay2 to resolve the ambiguity ###
+#		dimdiff[i+1]=dimSeq(dimD,ksum-k-i,k-i,i)-h_dim[i+1];
+		dimdiff[i+1]=dimSeq(dimD,ksum-k-i,k-i,i)-ARR_dim*RR_resolv[i+1];
+#DEBUG:#
+#				print("h_dim["+(i+1)+"]:"+(h_dim[i+1])+"!="+(dimSeq(dimD,ksum-k-i,k-i,i))+"?");
+	od;
+	dimdiff
+}
+### h_resolv ###
+h_resolv(int ksum,k)=
+{
+	loc h0=poly_null(rank); 
+	loc j0=0;
+	loc RRmap=null(0);
+		for i=0 to iMax do
+			h0=poly_null(rank); 
+			if RR_resolv[i+1]!=null(lenR) then
+				RRmap=vec_mat(unique(mat_vec(RR_map[i+1],1)));
+				if RRmap[1] then j0=1 else j0=2;fi;
+#DEBUG:
+#				print("RRmap:");print(RRmap);
+#				print("j0="+j0);
+#				for j=1 to lenR do
+				for j=j0 to size(RRmap) do
+					h0=h0+RR_resolv[i+1,RRmap[j]] X ARR[RRmap[j]];
+#					h0=h0+RR_resolv[i+1,j] X ARR[j];
+				od;
+				print("The cohomologies found when SO("+dimD+") is restricted to its subgroup SO("+dimD_sub+")*SO("+(dimD-dimD_sub)+"), and Nsusy="+Nsusy+":");
+	      print("H^"+i+","+(ksum-2*i)+","+(ksum-2*k)+"=");#H^{deg(C),deg(t+)+deg(t-),deg(t+)-deg(t-)}
+	      print(h0);#deg(t+)+deg(t-)=ksum-2*deg(C), deg(t+)-deg(t-)=ksum-2*k
+		  #h_last=h0;##store h0 to the global variable for other usage
+#DEBUG:		  verify whether the conjectured h_formula() is valid
+#			if h0!=h_formula(dimD,ksum-2*i,ksum-2*k,i) then
+#				print("inconsistent h_formula("+dimD+","+(ksum-2*i)+","+(ksum-2*k)+","+i+")-h0=");
+#				print(h_formula(dimD,ksum-2*i,ksum-2*k,i)-h0);
+#				print("inconsistent h_formula("+dimD+","+(ksum-2*i)+","+(ksum-2*k)+","+i+")=");
+#				print(h_formula(dimD,ksum-2*i,ksum-2*k,i));
+#			else print("h_formula() conjuecture is consistent!");
+#			fi;
+	     fi;
+   od;
+	 if ARR_amb!=null(0) then
+			print("All of the ambiguous terms can be resolved.");
+			print("ARR_amb=");print(ARR_amb);
+			#print("RR_amb=");print(RR_amb);
+		else 
+			print("No ambiguity found.");
+	 fi;
+}
+### the cohomologies ###
+hhh(int ksum,k)=
+{
+	loc iMax=k;
+	if k>=dimV then iMax=dimV; fi;
+	loc iamb_max=iMax+1;
+	loc iamb_min=1;
+	sum_r(ksum,k);
+	loc dimdiff=null(iMax+1);
+###	loc dimdiff_sort=null(0);
+###	loc i0=0;
+#DEBUG:
+#	print("RR_resolv=");print(RR_resolv);
+	dimdiff=dimcheck(ksum,k);
+#	if dimdiff==null(iMax+1) && RR_amb==null(iMax+1,lenR) then
+	if dimdiff==null(iMax+1) then
+		h_resolv(ksum,k);
+  else 
+  	print("dimdiff=");print(dimdiff);
+  	# Try to resolve ambiguity to some simple cases #
+###  		dimdiff_sort=sort(dimdiff);
+### 			if dimdiff_sort-1!=null(iMax) && k<=dimV then
+###  		if dimdiff[iMax+1]==0 then
+# 				 i=iamb_max;
+  			while iamb_max>=2 && dimdiff[iamb_max]==0 do
+#DEBUG:
+#					print("iamb_max="+iamb_max+", ARR_amb=");print(ARR_amb);print("RR_amb=");print(RR_amb);
+  			 	RR[iamb_max-1]=RR[iamb_max-1]-RR_amb[iamb_max];
+  			 	RR[iamb_max]=RR[iamb_max]-RR_amb[iamb_max];
+  			 	#RR_amb[iamb_max-1]=RR_amb[iamb_max-1]-RR_amb[iamb_max];
+  			 	#RR_amb[iamb_max]=null(lenR);
+  			 	iamb_max=iamb_max-1;
+#DEBUG:  	
+#				 	print("RR["+i+"]:");print(RR[i]);
+#  			 	i=i-1;
+  			 	RR_amb=null(iMax+1,lenR);#recomputed based on RR by RR_prop
+					ARR_amb=null(0);#recomputed based on RR by RR_prop
+  	 			RR_prop();
+					dimdiff=dimcheck(ksum,k);
+  	 		od;
+#  	 		i=iamb_min;
+  			while iamb_min<iamb_max && dimdiff[iamb_min]==0 do
+#DEBUG:
+#					print("iamb_min="+iamb_min+", ARR_amb=");print(ARR_amb);print("RR_amb=");print(RR_amb);
+  			 	RR[iamb_min+1]=RR[iamb_min+1]-RR_amb[iamb_min];
+  			 	RR[iamb_min]=RR[iamb_min]-RR_amb[iamb_min];
+  			 	#RR_amb[iamb_min+1]=RR_amb[iamb_min+1]-RR_amb[iamb_min];
+  			 	#RR_amb[iamb_min]=null(lenR);
+  			 	iamb_min=iamb_min+1;
+#  			 	i=i+1;
+					RR_amb=null(iMax+1,lenR);#recomputed based on RR by RR_prop
+					ARR_amb=null(0);#recomputed based on RR by RR_prop
+  	 			RR_prop();
+					dimdiff=dimcheck(ksum,k);
+  	 		od;
+###  			dimdiff_sort=sort(dimdiff);
+###  	 fi;
+###  	if dimdiff_sort-1==null(iMax) then
+###  		i0=row_index(mat_vec(dimdiff,1),[dimdiff_sort[1]],1,iMax+1);
+### 			for i=iMax+1 downto i0+1 do
+###  		 RR[i-1]=RR[i-1]-RR_amb[i];
+###  		 RR[i]=RR[i]-RR_amb[i];
+###  		 RR_amb[i-1]=RR_amb[i-1]-RR_amb[i];
+###  		 RR_amb[i]=null(lenR);
+###  	 	od;
+### 			for i=1 to i0-1 do
+###  		 RR[i+1]=RR[i+1]-RR_amb[i];
+###  		 RR[i]=RR[i]-RR_amb[i];
+###  		 RR_amb[i+1]=RR_amb[i+1]-RR_amb[i];
+###  		 RR_amb[i]=null(lenR);
+###  	 	od;
+###  	 	RR_prop();
+###			dimdiff=dimcheck(k);  	 	
+###  	fi;
+		if dimdiff==null(iMax+1) then
+				h_resolv(ksum,k);
+  	else
+  			print("Ambiguity found.");print("dimdiff=");print(dimdiff);print("ARR_amb=");print(ARR_amb);print("RR_amb=");print(RR_amb);
+  			print("Currently resolved cohomologies are");
+  			h_resolv(ksum,k);
+  			print("Please copy the following code to Mathematica (version>=8) to resolve the multiplicities of the remaining cohomologies in RR_amb: [a_i,j]");
+  			loc eqs="";
+  			loc cond="";
+  			loc tmax=size(ARR_amb);
+#  			loc ARRR_amb=null(tmax,rank);
+  			loc ARR_amb_alt=null(tmax);
+#  			loc Numtype="{"+"Number"+(rank-1)*",Number"+"}";
+#  			loc ARR_amb_mmtype="{"+Numtype+(tmax-1)*(","+Numtype)+"}";
+  			loc alist="";
+#  			loc alist_replace="";
+  			for t=1 to tmax do
+  				ARR_amb_alt[t]=RR_amb[iamb_max,ARR_amb[t]];
+  			od;
+  			for i=iamb_max downto iamb_min do
+###D=10+1:
+  				if dimD==11 && dimD_sub==10 && (i==1 || i==2) then
+  					if i==2 then eqs=eqs+"+"+dimdiff[i]
+#  					else if i==1 then
+						#possible cohomologies generated by H^4,1
+#							loc h0r=poly_null(rank);
+#							for j=1 to lenR do h0r+=RR_resolv[1,j] X ARR[j];od;
+#							loc p=r(k-4,0);
+#							p=p-pos_pol(p-(r(k,0)-h0r));
+#							loc BD=support(p);
+#							loc lenBD=length(p);
+#							for j=1 to lenBD do
+#								iBD=BD[j];
+#								iBD_dim=dim(iBD);
+#								iBD_coef=coef(p,j);
+#								if iBD_dim<=dimdiff[i] then
+#							  			eqs=eqs+"+"+iBD_dim+"*a"+(i-1)+BD[j];
+#							  			cond=cond+" && 0<=a"+(i-1)+BD[j]+"<="+iBD_coef;
+#							 				if i==iamb_min && j==lenBD then
+#							 						alist=alist+"a"+(i-1)+BD[j];
+#							 				else 
+#													alist=alist+"a"+(i-1)+BD[j]+",";
+#											fi;
+#								fi;
+#							od;
+#						fi;
+					fi;
+					else
+###
+  				for t=1 to tmax do
+  					j=ARR_amb[t];
+#  					ARRR_amb[t]=ARR[j];
+ 					if ARR_dim[j]<=dimdiff[i] then
+ 						if i==iamb_min && t==tmax then
+  							alist=alist+"a["+i+","+j+"]";
+#  							alist_replace=alist_replace+"{"+i+","+j+"}->a["+i+","+j+"]";
+  						else 
+  							alist=alist+"a["+i+","+j+"],";
+#  							alist_replace=alist_replace+"{"+i+","+j+"}->a["+i+","+j+"],";
+						fi;
+  					eqs=eqs+"+"+ARR_dim[j]+"*a["+i+","+t+"]";
+  					cond=cond+" && 0<=a["+i+","+t+"]<="+RR_amb[i,j];
+  					if i>=iamb_min+1 then	ARR_amb_alt[t]=-ARR_amb_alt[t]+RR_amb[i-1,j];fi;
+  					if i>=3 && i>=iamb_min+2 then
+  						cond=cond+" && Sum[(-1)^(k-"+(i-1)+")a[k,"+t+"],{k,"+(i-1)+","+iamb_max+"}]<="+ARR_amb_alt[t]
+  					else if i==iamb_min+1 then
+  						cond=cond+" && Sum[(-1)^(k-"+(i-1)+")a[k,"+t+"],{k,"+(i-1)+","+iamb_max+"}]=="+ARR_amb_alt[t]
+  					fi;fi;
+  				fi;
+  				od;
+  				fi;
+###
+  				if i==iamb_min then
+	  				eqs=eqs+"=="+dimdiff[i];
+	  			else 
+	  				eqs=eqs+"=="+dimdiff[i]+" && ";
+	  			fi;
+  			od;
+#  			print("Reduce["+eqs+cond+"],{"+alist+"},Integers]");
+#  			print("matrixlie[str_]:=StringToStream[StringReplace[str,{""[""..->"""",""]""..->"""","" ""..->"""",""\n""->"""","",""->"" ""}]]");
+  			print("tmax="+tmax);
+  			print("iambmax="+iamb_max);print("iambmin="+iamb_min);
+  			print("xsol=Solve["+eqs+cond+",{"+alist+"},Integers]");
+#  			print("RRamb=Normal[SparseArray[{"+alist_replace+"}, {"+iMax+","+lenR+"}]]/.xsol");
+#  			print("ARRRamb0=""");print(ARRR_amb);print("""");
+#  			print("ARRRamb1=matrixlie[ARRRamb0]");
+#  			print("ARRRamb=Read[ARRRamb1,"+ARR_amb_mmtype+"]");
+#  			print("Close[ARRRamb1]");
+#  			print("Hplus[i_]:=Sum[a[i+1,t] ToString[ARRRamb[[t]]],{t,1,tmax}]");
+#  			for i=iamb_min to iamb_max do
+#  				print("Hplus["+(i-1)+"]/.xsol");
+#  			od;
+  	fi;
+  fi;
+}
+### check if any ambiguity with maximal propagation ###
+###optional code: ambiguitycheck used by function hH(m,n)###
+ambiguitycheck(int m1,m2,n,ii)=
+{
+  # ambiguity[1]=ambiguitycheck, ambiguity[>=2]=hcoef[n+1] #
+	loc ambiguity=null(1);
+	loc ksum=m1+n+m2+n;#two invariant degrees: m1+n, and m2+n
+	loc mmin=m1;
+	if m1>m2 then mmin=m2; fi;
+	loc k=mmin+n;
+	loc iMax=k;
+	if k>=dimV then iMax=dimV; fi;
+	#leftlink, rightlink=index of multiplicity[n+1] #
+	loc leftlink=n+2;
+	loc rightlink=n;
+	loc iAA=0;
+	loc AA=expon(r(m1,m2,n),ii);
+	loc hdiff=0;
+	loc hcoef=coef(r(m1,m2,n),ii);
+	loc mcoef=null(0,1);
+	loc multiplicity=null(iMax+1);
+	# index n begins from 1 NOT 0 #
+	multiplicity[n+1]=hcoef;
+	loc isusy=0;
+  ### Continuously connected to the left ###
+    for i=n+1 to iMax do
+         iAA=r(ksum-k-i,k-i,i)|AA;
+         if iAA then
+         	multiplicity[i+1]=iAA; leftlink=i+1;
+        else break
+        fi;
+    od;
+    for i=n-1 downto 0 do
+         iAA=r(ksum-k-i,k-i,i)|AA;
+         if iAA then
+         	multiplicity[i+1]=iAA; rightlink=i+1;
+        else break
+        fi;
+    od;
+  ### try to resolve the ambiguity by SUSY condition ###
+#  	if leftlink-rightlink>2 && leftlink==iMax && k<=dimV then
+  	if leftlink==iMax+1 && k<=dimV then
+  		multiplicity[iMax]=multiplicity[iMax]-multiplicity[iMax+1];
+  		multiplicity[iMax+1]=0;
+  		#leftlink=iMax;
+#  		isusy=1;
+  	fi;
+  	if n==iMax && k<=dimV then mcoef=[[0]]
+  	else
+  	#if isusy || (leftlink-rightlink>1 && (leftlink<iMax || k>dimV)) then
+  		for i=n downto rightlink do
+  			for j=n+2 to leftlink do
+# 				if !hdiff then
+#  				hdiff=hcoef;
+# 					hcoef=pos_num(multiplicity[n]-left_coef(n+1,j,multiplicity)-right_coef(n-1,i,multiplicity));
+  					mcoef=mcoef+[pos_num(multiplicity[n+1]-left_coef(n+2,j,multiplicity)-right_coef(n,i,multiplicity))];
+#  				hdiff=hcoef-hdiff;
+#  			else
+#  				break
+# 				fi;
+  			od;
+  		od;
+  	fi;
+  		mcoef=unique(mcoef);
+  		ncoef=n_rows(mcoef);
+  	#fi;
+  	if ncoef==1 then ambiguity[1]=0;
+# 	if !hdiff then ambiguity[1]=0; ambiguity[2]=hcoef;
+  	else
+  		ambiguity[1]=1
+  	fi;
+  	for i=1 to ncoef do
+  		ambiguity=ambiguity+mcoef[i,1]
+  	od;
+  ambiguity
+}
+###ambiguitycheck used by function hH(m,n)###
+ambiguitycheck(int m1,m2,n)=
+{
+	loc ambiguity=0;
+	for i=1 to length(r(m1,m2,n)) do
+		if ambiguitycheck(m1,m2,n,i)[1] then
+			ambiguity=1; 
+			break;
+		fi;
+	od;
+	ambiguity
+}
+###optional code above is used for hH(m,n) to guess the cohomologies###
+### The cohomology generators ###
+#hgen(int m, n)=pos_pol(hH(m,n)-tensor(s,hH(m-1,n)))
+hgen_formula(int ksum,k,n)=pos_pol(h_formula(dimD,ksum,k,n)-tensor(s,h_formula(dimD,ksum-1,k-1,n)))
+#hgenright(int m, n)=pos_pol(hright(m,n)-tensor(s,hright(m-1,n)))
+#
+hgenlist(int maxksum,maxk)=
+{
+	loc hgenNum=0;
+	loc iMax=0;
+  print("The cohomology generators beside of the spinor and 1 assuming maximal propagation when D="+dimD_sub+"+"+(dimD-dimD_sub)+", N="+Nsusy+":");
+### The generator h(1,0) is the spinor ###
+# print("H^"+1+","+0+"="); print(h(1,0)); 
+for iksum=2 to maxkusm do
+ for ikk=2 to maxk do
+   #print("k="+ikk+":");
+   iMax=ikk;
+   if ikk>dimV then iMax=dimV; fi;
+   for i=0 to iMax do
+#SWITCH hgen calculation method:
+#1:	      if coef(hgen(iksum,ikk-i,i),1)!=0 then
+	      if coef(hgen_formula(iksum,ikk,i),1)!=0 then
+	         print("H^"+iksum+","+ikk+","+i+"=");
+#1:	         print(hgen(iksum-ikk-i,ikk-i,i)); 
+	         print(hgen_formula(iksum,ikk,i)); 
+	         #print("H^"+ikk+","+i+"="+(hgen(ikk-2*i,i))); 
+	         hgenNum=hgenNum+1;
+	      fi;
+   od;
+ od;
+od;
+if hgenNum==0 then 
+    print("No other cohomology generators!");
+else
+    print(hgenNum+" cohomology generators found, where H^{k,n} corresponding to Sym^{k-2n} S \otimes Wedge^n V");
+ fi;
+print(18*"-");
+}
+hgenlist()=hgenlist(dimD+4,dimD+4)
+# hgenlist()=hgenlist(2*dimV+2)
+### alt_mu=M x altS M=sum_k H^k,n ###
+alt_mu(int d,kMax,n)=
+{
+	loc jmax=0;
+	loc dimS=dim(s);
+	loc altmu=poly_null(rank);
+	loc k=0;
+	for i=0 to kMax do
+		if i<=2*dimS then jmax=i
+		else jmax=2*dimS
+		fi;
+		loc altmu=poly_null(rank);
+		for j=0 to jmax do
+			loc h0=poly_null(rank);
+			k=-(i-j);
+			while k<=i-j do
+				h0=h0+h_formula(d,i-j,k,n);#i-j=deg(t+)+deg(t-) in H^deg(C),i-j,gl
+				k+=2;
+			od;
+			loc s0=poly_null(rank);
+			for k=0 to j do
+				#j=degree of tau from \Lambda^j1(S)\otimes\Lambda^j2(S)
+				s0+=tensor(alt_tensor(k,s),alt_tensor(j-k,s));
+			od;
+			altmu+=(-1)^j*tensor(h0,s0);
+		od;
+		if coef(altmu,1)!=0 then
+			print(dim(altmu)+"T^"+i+": ");
+			print(altmu);
+		fi;
+	od;
+#	for i=1 to length(altmu) do
+#		if altmu2|expon(altmu,i)==coef(altmu,i) then altmu_stable+=altmu[i]
+#		fi;
+#	od;
+#	altmu_stable
+}
+alt_mu(int kMax, n)=alt_mu(dimD,kMax,n)
+### alt_mu=M x altS M=sum_k H^k,n ###
+###euler char check for H_s^0###
+#to compare with Sum_k (H_s^p,q)_k (-1)^k with degrees (q+k) and p fixed#
+#Ntt:=deg(t+)+deg(theta+)+deg(t-)+deg(theta-)#
+#gl:=deg(t+)+deg(theta+)-deg(t-)-deg(theta-)#
+altHs(int d,Ntt,gl,n)=
+{
+	gl=abs(gl);
+	loc alths=poly_null(rank);
+	loc dimS=dim(s);
+	for i=0 to Ntt do
+		loc j=-i;
+		while j<=i do
+			loc a=(Ntt+gl-i-j)/2;
+			loc b=(Ntt-gl-i+j)/2;
+			if a>=0 && b>=0 && a<=dimS && b<=dimS then
+				#Sum_{i=0}^{N} Sum_{j=-i,j=j+2}^{i} H_t^{p,i,j} Lambda^a(theta+) Lambda^j(theta-)#
+				alths+=(-1)^(Ntt-i)*tensor(h_formula(d,i,j,n),tensor(alt_tensor(a,s),alt_tensor(b,s)));
+			fi;
+			j+=2;
+		od;
+	od;
+alths
+}
+altHs(int Ntt,gl,n)=altHs(dimD,Ntt,gl,n)
