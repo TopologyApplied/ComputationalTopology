@@ -1,3 +1,7 @@
+--Author: Renjun Xu
+--E-mail: rxu@ucdavis.edu
+--This projected is licensed under the terms of the MIT license.
+
 D=10;Nspin=16;
 R=QQ[t_1..t_16,s_1..s_16,Degrees=>toList(32:{1,0})];
  --rel=Simplify[Table[Table[Subscript[t,i],{i,1,16}].gamma10d[n].Table[Subscript[t,i],{i,1,16}],{n,1,10}]/2]--

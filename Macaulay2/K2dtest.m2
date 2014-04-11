@@ -1,3 +1,7 @@
+--Author: Renjun Xu
+--E-mail: rxu@ucdavis.edu
+--This projected is licensed under the terms of the MIT license.
+
 needsPackage "DGAlgebras"
 needsPackage "BoijSoederberg"
 R=ZZ/32003[t,u]/(t*u-1)

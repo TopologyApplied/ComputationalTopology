@@ -1,3 +1,7 @@
+--Author: Renjun Xu
+--E-mail: rxu@ucdavis.edu
+--This projected is licensed under the terms of the MIT license.
+
 needsPackage "ChainComplexExtras"
 R = ZZ/10007[t_1..t_16]
 T10left=matrix{{t_1..t_16}}

@@ -1,3 +1,7 @@
+--Author: Renjun Xu
+--E-mail: rxu@ucdavis.edu
+--This projected is licensed under the terms of the MIT license.
+
 t1 = cpuTime()
 D=10
 spindim=16

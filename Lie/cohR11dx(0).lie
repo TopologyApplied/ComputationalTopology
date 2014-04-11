@@ -1,5 +1,9 @@
 #Author: Renjun Xu#
 #E-mail: rxu@ucdavis.edu#
+#This project is licensed under the terms of the MIT license.#
+
+#Author: Renjun Xu#
+#E-mail: rxu@ucdavis.edu#
 #1. use Macaulay2 to compute Hilber series and enter in dimSeq()#
 #2. use hhh(k) to compute the cohomology#
 #3. make a conjecture of the cohomology formula based on hhh(k)#

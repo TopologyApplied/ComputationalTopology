@@ -1,3 +1,7 @@
+--Author: Renjun Xu
+--E-mail: rxu@ucdavis.edu
+--This projected is licensed under the terms of the MIT license.
+
 ofilename="result_brstcoh10d1spindiffbas.txt"
 ofile=ofilename<<""<<endl
 

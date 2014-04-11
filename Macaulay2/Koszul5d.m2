@@ -1,3 +1,7 @@
+--Author: Renjun Xu
+--E-mail: rxu@ucdavis.edu
+--This projected is licensed under the terms of the MIT license.
+
 --ulimit -v unlimited; GC_FREE_SPACE_DIVISOR=12 GC_MAXIMUM_HEAP_SIZE=7000000000 GC_NPROCS=4 GC_MARKERS=4 M2 Koszul5d.m2
 needsPackage "DGAlgebras"
 -- needsPackage "ChainComplexExtras"

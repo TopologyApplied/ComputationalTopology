@@ -1,3 +1,7 @@
+#Author: Renjun Xu#
+#E-mail: rxu@ucdavis.edu#
+#This project is licensed under the terms of the MIT license.#
+
 > p_tensor(2,[0,1],A2)
      1X[0,2] +1X[1,0]
 > p_tensor(3,[0,1],A2)

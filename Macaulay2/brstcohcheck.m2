@@ -1,3 +1,7 @@
+--Author: Renjun Xu
+--E-mail: rxu@ucdavis.edu
+--This projected is licensed under the terms of the MIT license.
+
 ﻿needsPackage "DGAlgebras"
 
 R=QQ[t_1..t_16,MonomialSize=>8,Degrees=>{16:{1,0}}];

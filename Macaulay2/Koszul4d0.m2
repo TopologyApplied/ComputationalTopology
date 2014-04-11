@@ -1,3 +1,7 @@
+--Author: Renjun Xu
+--E-mail: rxu@ucdavis.edu
+--This projected is licensed under the terms of the MIT license.
+
 needsPackage "DGAlgebras"
 -- needsPackage "ChainComplexExtras"
 R = ZZ/10007[t_1..t_4]

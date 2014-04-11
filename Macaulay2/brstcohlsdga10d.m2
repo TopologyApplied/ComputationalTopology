@@ -1,3 +1,7 @@
+--Author: Renjun Xu
+--E-mail: rxu@ucdavis.edu
+--This projected is licensed under the terms of the MIT license.
+
 ﻿needsPackage "DGAlgebras"
 
 --R=ZZ/32003[t_1..t_16,s_1..s_16,Degrees=>{16:{1,0},16:{0,1}},MonomialSize=>8];

@@ -1,3 +1,7 @@
+--Author: Renjun Xu
+--E-mail: rxu@ucdavis.edu
+--This projected is licensed under the terms of the MIT license.
+
 R=QQ[t_1..t_16]
  rel=matrix{{t_16*t_1-t_15*t_4-t_8*t_12+t_9*t_11,
   t_16*t_2-t_15*t_5+t_7*t_12-t_9*t_10,

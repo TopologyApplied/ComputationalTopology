@@ -1,3 +1,7 @@
+--Author: Renjun Xu
+--E-mail: rxu@ucdavis.edu
+--This projected is licensed under the terms of the MIT license.
+
 needsPackage "DGAlgebras"
 -- needsPackage "ChainComplexExtras"
 ofile="result_coh10dSpecSeq.txt"<<""<<endl
